@@ -1,0 +1,49 @@
+<div class="pagelist">
+	<% var size, numRange, current, path, pageCount, pagePrev, pageNext, pageNumPrev, pageNumNext, i, j; %>
+	<% var rowCount = pageList.rowCount; %>
+	<% if (rowCount > 0) { %>
+		<% size = pageList.size; %>
+		<% numRange = pageList.numRange; %>
+		<% current = pageList.current; %>
+		<% path = pageList.path; %>
+		<% pageCount = pageList.pageCount; %>
+		<% pagePrev = current - 1; %>
+		<% pageNext = current + 1; %>
+		<% pageNumPrev = current - numRange; %>
+		<% pageNumNext = pageNext; %>
+		<% i = j = 0; %>
+		<% if (pagePrev > 0) { %>
+			<a href="<%- path %>1" class="pagestart">«</a>
+			<a href="<%- path %><%- pagePrev %>" class="pagestart">‹&nbsp;</a>
+		<% } else { %>
+			<span class="pagestart">«</span>
+			<span>‹&nbsp;</span>
+		<% } %>
+		<% while(i < numRange) { %>
+			<% if (pageNumPrev > 0) { %>
+				<a href="<%- path %><%- pageNumPrev %>"><%- pageNumPrev %></a>
+			<% } %>
+			<% pageNumPrev++; i++; %>
+		<% } %>
+		<span class="active"><%- current %></span>
+		<% while(j < numRange) { %>
+			<% if (pageNumNext <= pageCount) { %>
+				<a href="<%- path %><%- pageNumNext %>"><%- pageNumNext %></a>
+				<% pageNumNext++; %>
+			<% } else { %>
+				<% break; %>
+			<% } %>
+			<% j++ %>
+		<% } %>
+		<% if (pageNext <= pageCount) { %>
+			<a href="<%- path %><%- pageNext %>">&nbsp;›</a>
+			<a href="<%- path %><%- pageCount %>" class="pageend">»</a>
+		<% } else { %>
+			<span>&nbsp;›</span>
+			<span class="pageend">&nbsp;›</span>
+		<% } %>
+		<span class="total"><%- rowCount %>条/共<%- pageCount %>页</span>
+	<% } else { %>
+		无记录
+	<% } %>
+</div>

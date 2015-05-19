@@ -1,0 +1,18 @@
+<aside class="sidebar">
+	<section>
+		<h3>标签云</h3>
+		<ul>
+			<% articleTags.forEach(function (tag) { %>
+			<li><a href="/tag/<%- tag.path %>"><%- tag.name %></a></li>
+			<% }) %>
+		</ul>
+	</section>
+	<section>
+		<h3>友情链接</h3>
+		<ul>
+			<% links.forEach(function (link) { %>
+			<li><a href="<%- link.url %>" title="<%- link.name %>" target="_blank"><%- link.name %></a></li>
+			<% }) %>
+		</ul>
+	</section>
+</aside>

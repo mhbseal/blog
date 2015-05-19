@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>后台管理</title>
+	<!-- 缩放控制 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+	<!-- 删除默认的苹果工具栏和菜单栏 -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" href="/static/styles/main.css" />
+	<!--[if lt IE 9]>
+	<script src="/js/html5.js"></script>
+	<script src="/js/css3-mediaqueries.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<% if (!blogInfo.isLogin) { %>
+	<header class="header">
+		<h1><a href="/" class="logo"><%- blogInfo.title %></a></h1>
+		<div class="icon-menu"></div>
+		<div class="icon-search"></div>
+		<nav id="nav">
+			<a href="/admin/blogInfo" id="home">博客信息</a>
+			<a href="/admin/articleList" id="home">文章</a>
+			<a href="/admin/articleTypeList" id="home">文章类型</a>
+			<a href="/admin/articleTagList" id="home">标签云</a>
+			<a href="/admin/linkList" id="home">友情链接</a>
+		</nav>
+		<div id="search" class="search">
+			<input type="text" placeholder="keywords" class="form-control search_input">
+			<a href="javascript:void(0)" class="btn search_btn">GO</a>
+		</div>
+	</header>
+	<% } %>

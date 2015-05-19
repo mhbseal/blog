@@ -1,0 +1,44 @@
+<% include header %>
+<div class="main" id="articleList">
+	<a href="<%- adminPath %>article" class="btn">新增</a>
+	<div class="ad_table_box">
+		<table class="ad_table">
+			<tr>
+				<th>序号</th>
+				<th>标题</th>
+				<th>作者</th>
+				<th>阅读次数</th>
+				<th>所属类别</th>
+				<th>标签</th>
+				<th>添加时间</th>
+				<th>最后编辑时间</th>
+				<th>已发布</th>
+				<th>操作</th>
+				<th></th>
+			</tr>
+			<% articles.forEach(function(article) { %>
+			<tr>
+				<td><%- article.id %></td>
+				<td><%- article.title %></td>
+				<td><%- article.author %></td>
+				<td><%- article.visits %></td>
+				<td><%- article.type.name %></td>
+				<td>
+					<% article.tags.forEach(function(tag, i) { %>
+						<%- (i !== 0 ? '、' : '') + tag.name %>
+					<% }) %>
+				</td>
+				<td><%- article.createTime %></td>
+				<td><%- article.lastEditTime %></td>
+				<td><%- article.enabled %></td>
+				<td>
+					<a href="<%- adminPath %>article?id=<%- article._id %>">编辑</a>&nbsp;&nbsp;
+					<a href="javascript:void(0)" data-href="<%- adminPath %>article?id=<%- article._id %>" class="js_delete">删除</a>
+				</td>
+			</tr>
+			<% }) %>
+		</table>
+		<% include ../common/pageList %>
+	</div>
+</div>
+<% include footer %>

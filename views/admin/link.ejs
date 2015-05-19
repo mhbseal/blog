@@ -1,0 +1,18 @@
+<% include header %>
+<div class="admin2" id="link">
+	<table class="ad_table2">
+		<tr>
+			<td class="td1">名称：</td>
+			<td><input type="text" id="name" class="form-control" value="<%- xData.name %>" /></td>
+		</tr>
+		<tr>
+			<td class="td1">链接：</td>
+			<td><input type="text" id="url" class="form-control" value="<%- xData.url %>" /></td>
+		</tr>
+		<tr>
+			<td class="td1">&nbsp;</td>
+			<td><a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>" id="submit">确定</a></td>
+		</tr>
+	</table>
+</div>
+<% include footer %>

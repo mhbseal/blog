@@ -1,0 +1,20 @@
+{
+  "name": "blog",
+  "description": "Mo's Blog",
+  "version": "0.1.0",
+  "author": "Mu Haibao<mhbseal@163.com>",
+  "homepage": "http://github.com/mhbseal/blog",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "co-views": "^0.3.0",
+    "ejs": "^2.3.1",
+    "koa": "^0.20.0",
+    "koa-bodyparser": "^2.0.0",
+    "koa-favicon": "^1.2.0",
+    "koa-router": "^4.3.2",
+    "koa-static-cache": "^3.1.1",
+    "mongoose": "^4.0.2"
+  }
+}

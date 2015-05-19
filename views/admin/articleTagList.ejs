@@ -1,0 +1,27 @@
+<% include header %>
+<div class="main" id="articleTagList">
+	<a href="<%- adminPath %>articleTag" class="btn">新增</a>
+	<div class="ad_table_box">
+		<table class="ad_table">
+			<tr>
+				<th>序号</th>
+				<th>名称</th>
+				<th>路径</th>
+				<th>操作</th>
+			</tr>
+			<% xData.forEach(function(tag) { %>
+			<tr>
+				<td><%- tag._id %></td>
+				<td><%- tag.name %></td>
+				<td><%- tag.path %></td>
+				<td>
+					<a href="<%- adminPath %>articleTag?id=<%- tag._id %>">编辑</a>&nbsp;&nbsp;
+					<a href="javascript:void(0)" data-href="<%- adminPath %>articleTag?id=<%- tag._id %>" class="js_delete">删除</a>
+				</td>
+			</tr>
+			<% }) %>
+		</table>
+		<% include ../common/pageList %>
+	</div>
+</div>
+<% include footer %>
