@@ -1,8 +1,8 @@
 <% include header %>
 <div class="main" id="linkList">
 	<a href="<%- adminPath %>link" class="btn">新增</a>
-	<div class="ad_table_box">
-		<table class="ad_table">
+	<div class="table2_wrap">
+		<table class="table2">
 			<tr>
 				<th>序号</th>
 				<th>名称</th>
@@ -21,7 +21,7 @@
 			</tr>
 			<% }) %>
 		</table>
-		<% include ../common/pageList %>
 	</div>
+	<% include ../common/pageList %>
 </div>
 <% include footer %>

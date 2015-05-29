@@ -14,10 +14,10 @@
 		<% i = j = 0; %>
 		<% if (pagePrev > 0) { %>
 			<a href="<%- path %>1" class="pagestart">«</a>
-			<a href="<%- path %><%- pagePrev %>" class="pagestart">‹&nbsp;</a>
+			<a href="<%- path %><%- pagePrev %>" class="pageprev">‹&nbsp;</a>
 		<% } else { %>
 			<span class="pagestart">«</span>
-			<span>‹&nbsp;</span>
+			<span class="pageprev">‹&nbsp;</span>
 		<% } %>
 		<% while(i < numRange) { %>
 			<% if (pageNumPrev > 0) { %>
@@ -36,11 +36,11 @@
 			<% j++ %>
 		<% } %>
 		<% if (pageNext <= pageCount) { %>
-			<a href="<%- path %><%- pageNext %>">&nbsp;›</a>
+			<a href="<%- path %><%- pageNext %>" class="pagenext">&nbsp;›</a>
 			<a href="<%- path %><%- pageCount %>" class="pageend">»</a>
 		<% } else { %>
-			<span>&nbsp;›</span>
-			<span class="pageend">&nbsp;›</span>
+			<span class="pagenext">&nbsp;›</span>
+			<span class="pageend">»</span>
 		<% } %>
 		<span class="total"><%- rowCount %>条/共<%- pageCount %>页</span>
 	<% } else { %>

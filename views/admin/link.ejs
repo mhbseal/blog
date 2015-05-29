@@ -1,17 +1,21 @@
 <% include header %>
-<div class="admin2" id="link">
-	<table class="ad_table2">
+<div class="main" id="link">
+	<table class="table1">
+		<tr>
+			<td class="td1">&nbsp;</td>
+			<td><h2><%- xData._id ? '编辑' : '新增' %></h2></td>
+		</tr>
 		<tr>
 			<td class="td1">名称：</td>
-			<td><input type="text" id="name" class="form-control" value="<%- xData.name %>" /></td>
+			<td><input type="text" name="name" class="form-control" value="<%- xData.name %>" /></td>
 		</tr>
 		<tr>
 			<td class="td1">链接：</td>
-			<td><input type="text" id="url" class="form-control" value="<%- xData.url %>" /></td>
+			<td><input type="text" name="url" class="form-control wd4" value="<%- xData.url %>" /></td>
 		</tr>
 		<tr>
 			<td class="td1">&nbsp;</td>
-			<td><a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>" id="submit">确定</a></td>
+			<td><a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a></td>
 		</tr>
 	</table>
 </div>

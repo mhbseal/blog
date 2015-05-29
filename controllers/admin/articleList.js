@@ -5,15 +5,18 @@ module.exports = function(render) {
 		handler: function* () {
 			var
 				blogInfo, articleTypes, articles, pageList, options,
-				conditions = {};
+				conditions = this.query,
+				currentPage = +conditions.page || 1;
 
+			// 过滤page参数
+			delete conditions.page;
 			// 文章所有type
 			articleTypes = yield M.articleType.find({enabled: true});
 			// 文章列表
 			pageList = { // 文章列表分页
 				size: 10, // 每页数据条数
 				numRange: 4, // 当前页码前后页码范围
-				current: +this.query.page || 1, // 当前页码
+				current: currentPage || 1, // 当前页码
 				path: C.adminPath + 'articleList' + '/?page=', // 链接地址
 				rowCount: 0, // 数据总条数
 				pageCount: 0 // 总页数
@@ -23,7 +26,7 @@ module.exports = function(render) {
 				sort: {_id: -1},
 				skip: (pageList.current - 1) * pageList.size
 			};
-			articles = yield M.article.find(conditions, null, options);
+			articles = yield M.article.find(conditions, null, options).populate('type tags');
 			pageList.rowCount = yield M.article.count(conditions);
 			pageList.pageCount = Math.ceil(pageList.rowCount / pageList.size);
 			// blog信息

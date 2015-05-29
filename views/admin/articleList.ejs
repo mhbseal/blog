@@ -1,8 +1,8 @@
 <% include header %>
-<div class="main" id="articleList">
+<div class="main admin" id="articleList">
 	<a href="<%- adminPath %>article" class="btn">新增</a>
-	<div class="ad_table_box">
-		<table class="ad_table">
+	<div class="table2_wrap">
+		<table class="table2">
 			<tr>
 				<th>序号</th>
 				<th>标题</th>
@@ -10,6 +10,7 @@
 				<th>阅读次数</th>
 				<th>所属类别</th>
 				<th>标签</th>
+				<th>留言数</th>
 				<th>添加时间</th>
 				<th>最后编辑时间</th>
 				<th>已发布</th>
@@ -28,6 +29,7 @@
 						<%- (i !== 0 ? '、' : '') + tag.name %>
 					<% }) %>
 				</td>
+				<td><a href="<%- adminPath %>commentList?articleId=<%- article._id %>"><%- article.commentCount %></a></td>
 				<td><%- article.createTime %></td>
 				<td><%- article.lastEditTime %></td>
 				<td><%- article.enabled %></td>
@@ -38,7 +40,7 @@
 			</tr>
 			<% }) %>
 		</table>
-		<% include ../common/pageList %>
 	</div>
+	<% include ../common/pageList %>
 </div>
 <% include footer %>

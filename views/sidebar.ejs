@@ -1,11 +1,16 @@
 <aside class="sidebar">
 	<section>
+		<h3>搜索</h3>
+		<div id="search" class="search">
+			<input type="text" placeholder="关键字" class="form-control" value="<%- blogInfo.keyword %>">
+			<a href="javascript:void(0)" class="btn">GO</a>
+		</div>
+	</section>
+	<section>
 		<h3>标签云</h3>
-		<ul>
 			<% articleTags.forEach(function (tag) { %>
-			<li><a href="/tag/<%- tag.path %>"><%- tag.name %></a></li>
+			<a href="/tag/<%- tag.path %>" class="label" style="background: <%- '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6) %>"><%- tag.name %></a>
 			<% }) %>
-		</ul>
 	</section>
 	<section>
 		<h3>友情链接</h3>

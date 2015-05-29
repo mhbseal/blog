@@ -1,13 +1,17 @@
 <% include header %>
-<div class="admin2" id="login">
-	<table class="ad_table2">
+<div class="main" id="login">
+	<table class="table1">
+		<tr>
+			<td class="td1">&nbsp;</td>
+			<td><h2>登陆</h2></td>
+		</tr>
 		<tr>
 			<td class="td1">账号：</td>
-			<td><input type="text" id="name" class="form-control" /></td>
+			<td><input type="text" id="name" class="form-control" value="<%- admin.name %>" /></td>
 		</tr>
 		<tr>
 			<td class="td1">密码：</td>
-			<td><input type="password" id="password" class="form-control" /></td>
+			<td><input type="password" id="password" class="form-control" value="<%- admin.password ? '******' : '' %>" /></td>
 		</tr>
 		<tr>
 			<td class="td1">&nbsp;</td>

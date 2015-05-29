@@ -10,11 +10,14 @@ module.exports = function(render) {
 					// 文章所有type
 					articleTypes = yield M.articleType.find({enabled: true}),
 					// 文章内容
-					article = id ? yield M.article.findOne({_id: id}) : {},
+					article = id ? yield M.article.findOne({_id: id}).populate('type tags') : {},
 					// blog信息
 					blogInfo = yield M.blogInfo.findOne(),
 					// 标签
 					articleTags = yield M.articleTag.find();
+
+				// 是否调用编辑器
+				blogInfo.useEditor = true;
 
 				// 模板渲染
 				this.body = yield render(C.adminPath + 'article', {

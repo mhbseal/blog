@@ -1,7 +1,7 @@
 module.exports = function(render) {
 	return {
 		method: ['get', 'post', 'put', 'del'],
-		path: C.adminPath + ':x(link|articleType|articleTag)',
+		path: C.adminPath + ':x(link|articleType|articleTag|admin|comment|user)',
 		handler: {
 			get: function* () {
 				var
@@ -22,13 +22,21 @@ module.exports = function(render) {
 				}
 			},
 			put: function* () { // 更新
+				var
+					x = this.params.x,
+					body = this.request.body;
+				if (x === 'admin') body.password = F.encrypt(body.password);
 				this.body = {
-					msg: (yield M[this.params.x].findOneAndUpdate({_id:  this.query.id}, this.request.body)) ? '更新成功' : '更新失败'
+					msg: (yield M[x].findOneAndUpdate({_id:  this.query.id}, body)) ? '更新成功' : '更新失败'
 				}
 			},
 			post: function* () { // 新增
+				var
+					x = this.params.x,
+					body = this.request.body;
+				if (x === 'admin') body.password = F.encrypt(body.password);
 				this.body = {
-					msg: (yield M[this.params.x].create(this.request.body)) ? '新增成功' : '新增失败'
+					msg: (yield M[x].create(body)) ? '新增成功' : '新增失败'
 				}
 			}
 		}

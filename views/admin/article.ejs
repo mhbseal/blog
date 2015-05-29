@@ -1,20 +1,24 @@
 <% include header %>
-<div class="admin2" id="article">
-	<table class="ad_table2">
+<div class="main admin" id="article">
+	<table class="table1">
+		<tr>
+			<td class="td1">&nbsp;</td>
+			<td><h2><%- article._id ? '编辑' : '新增' %></h2></td>
+		</tr>
 		<tr>
 			<td class="td1">标题：</td>
-			<td><input type="text" id="title" class="form-control" value="<%- article.title %>" /></td>
+			<td><input type="text" name="title" class="form-control wd4" value="<%- article.title %>" /></td>
 		</tr>
 		<tr>
 			<td class="td1">作者：</td>
-			<td><input type="text" id="author" class="form-control" value="<%- article.author %>" /></td>
+			<td><input type="text" name="author" class="form-control" value="<%- article.author %>" /></td>
 		</tr>
 		<tr>
 			<td class="td1">所属类别：</td>
 			<td>
-				<select id="type" class="form-control">
+				<select name="type" class="form-control">
 					<% articleTypes.forEach(function(v) { %>
-					<option data-obj="true" value='{"name": "<%- v.name %>", "path": "<%- v.path %>"}'><%- v.name %></option>
+					<option value="<%- v._id %>"><%- v.name %></option>
 					<% }) %>
 				</select>
 			</td>
@@ -22,9 +26,9 @@
 		<tr>
 			<td class="td1">标签：</td>
 			<td>
-				<select id="tags" class="form-control">
+				<select name="tags" class="form-control">
 					<% articleTags.forEach(function(v) { %>
-					<option data-obj="true" value='{"name": "<%- v.name %>", "path": "<%- v.path %>"}'><%- v.name %></option>
+					<option value="<%- v._id %>"><%- v.name %></option>
 					<% }) %>
 				</select>
 			</td>
@@ -32,23 +36,27 @@
 		<tr>
 			<td class="td1">是否启用：</td>
 			<td>
-				<select id="enabled" class="form-control">
-					<option value="1" selected="selected">是</option>
+				<select name="enabled" class="form-control">
+					<option value="1">是</option>
 					<option value="0">否</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<td class="td1">简介：</td>
-			<td><textarea id="introduction" class="form-control"><%- article.introduction %></textarea></td>
+			<td>
+				<script type="text/plain" id="introduction" style="width: 900px; height: 140px;"><%- article.introduction %></script>
+			</td>
 		</tr>
 		<tr>
 			<td class="td1">内容：</td>
-			<td><textarea id="content" class="form-control"><%- article.content %></textarea></td>
+			<td>
+			<script type="text/plain" id="content" style="width: 900px;"><%- article.content %></script>
+			</td>
 		</tr>
 		<tr>
 			<td class="td1">&nbsp;</td>
-			<td><a href="javascript:void(0)" class="btn" data-id="<%- article._id %>" id="submit">确定</a></td>
+			<td><a href="javascript:void(0)" class="btn" data-id="<%- article._id %>">确定</a></td>
 		</tr>
 	</table>
 </div>

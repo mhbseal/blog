@@ -10,19 +10,16 @@
 	<script src="/static/scripts/css3-mediaqueries.min.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body class="index">
 	<header class="header">
-		<h1><a href="/" class="logo"><%- blogInfo.title %></a></h1>
-		<div class="icon-menu"></div>
-		<div class="icon-search"></div>
-		<nav id="nav">
-			<a href="/" id="home">主页</a>
-			<% articleTypes.forEach(function(v) { %>
-			<a href="/<%- v.path %>"><%- v.name %></a>
-			<% }) %>
-		</nav>
-		<div id="search" class="search">
-			<input type="text" placeholder="keywords" class="form-control search_input">
-			<a href="javascript:void(0)" class="btn search_btn">GO</a>
+		<div class="inner">
+			<h1><a href="/" class="logo"><%- blogInfo.title %></a></h1>
+			<div class="icon-menu"></div>
+			<nav id="nav">
+				<a href="/">主页</a>
+				<% articleTypes.forEach(function(v) { %>
+				<a href="/<%- v.path %>"><%- v.name %></a>
+				<% }) %>
+			</nav>
 		</div>
 	</header>

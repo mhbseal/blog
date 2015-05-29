@@ -1,5 +1,6 @@
 	<footer class="footer"><%- blogInfo.copyright %></footer>
 </body>
 <script src="/static/scripts/jquery-1.11.1.min.js"></script>
+<% if (blogInfo.useEditor) { %><% include umeditorFooter %><% } %>
 <script src="/controllers/admin.js"></script>
 </html>

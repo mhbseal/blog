@@ -1,8 +1,7 @@
 <% include docHeader %>
-<title><%- typeName ? typeName + '_' : '' %><%- blogInfo.title %></title>
+<title><%- typeOrTagName ? typeOrTagName + '_' : '' %><%- blogInfo.title %></title>
 <% include header %>
-<div class="main container">
-	<% include sidebar %>
+<div class="main">
 	<section class="contents">
 		<% articles.forEach(function(article) { %>
 		<article class="excerpt">
@@ -28,5 +27,6 @@
 		<% }) %>
 		<% include common/pageList %>
 	</section>
+	<% include sidebar %>
 </div>
 <% include footer %>

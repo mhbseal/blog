@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (Schema) {
 	return {
 		title: String,
 		author: String,
@@ -7,14 +7,12 @@ module.exports = function () {
 			default: 0
 		},
 		type: {
-			level: Number,
-			parent: String,
-			name: String,
-			path: String
+			type: Schema.Types.ObjectId,
+			ref: 'articleType'
 		},
 		tags: [{
-			path: String,
-			name: String
+			type: Schema.Types.ObjectId,
+			ref: 'articleTag'
 		}],
 		createTime: Date,
 		lastEditTime: Date,
