@@ -1,0 +1,29 @@
+<% include header %>
+<div class="main" id="adminList">
+	<a href="<%- adminPath %>admin" class="btn">新增</a>
+	<div class="table2_wrap">
+		<table class="table2">
+			<tr>
+				<th>序号</th>
+				<th>账号</th>
+				<th>邮箱</th>
+				<th>密码</th>
+				<th>操作</th>
+			</tr>
+			<% xData.forEach(function(admin, i) { %>
+			<tr>
+				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
+				<td><%- admin.name %></td>
+				<td><%- admin.email %></td>
+				<td>******</td>
+				<td>
+					<a href="<%- adminPath %>admin?id=<%- admin._id %>">编辑</a>&nbsp;&nbsp;
+					<a href="javascript:void(0)" data-href="<%- adminPath %>admin?id=<%- admin._id %>" class="js_delete">删除</a>
+				</td>
+			</tr>
+			<% }) %>
+		</table>
+	</div>
+	<% include ../common/pageList %>
+</div>
+<% include footer %>

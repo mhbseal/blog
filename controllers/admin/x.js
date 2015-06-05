@@ -1,17 +1,20 @@
 module.exports = function(render) {
 	return {
 		method: ['get', 'post', 'put', 'del'],
-		path: C.adminPath + ':x(link|articleType|articleTag|admin|comment|user)',
+		path: C.adminPath + ':x(link|articleType|articleTag|admin|comment|user|singlePage)',
 		handler: {
 			get: function* () {
 				var
 					x = this.params.x,
 					id = this.query.id,
-					blogInfo = yield M.blogInfo.findOne(),
+					blogInfo = (yield M.blogInfo.findOne()) || {},
 					xData = id ? yield M[x].findOne({_id: id}) : {};
 
+				// 是否调用编辑器
+				blogInfo.useEditor = true;
+
 				// 模板渲染
-				this.body = yield render(C.adminPath + x, {
+				this.body = yield render('/admin/' + x, {
 					blogInfo: blogInfo,
 					xData: xData
 				});
@@ -34,7 +37,11 @@ module.exports = function(render) {
 				var
 					x = this.params.x,
 					body = this.request.body;
-				if (x === 'admin') body.password = F.encrypt(body.password);
+
+				if (x === 'admin') {
+					body.password = F.encrypt(body.password);
+					body.img = '/upload/img/mo.jpg';
+				}
 				this.body = {
 					msg: (yield M[x].create(body)) ? '新增成功' : '新增失败'
 				}

@@ -30,13 +30,13 @@ module.exports = function(render) {
 			pageList.rowCount = yield M.article.count(conditions);
 			pageList.pageCount = Math.ceil(pageList.rowCount / pageList.size);
 			// blog信息
-			blogInfo = yield M.blogInfo.findOne();
+			blogInfo = (yield M.blogInfo.findOne()) || {};
 			// 遍历文章，从评论的表中取相应的评论总数
 			for (var article of articles) {
-				article.commentCount = yield M.comment.count({articleId: article._id});
+				article.commentCount = yield M.comment.count({'article.id': article._id});
 			}
 			// 模板渲染
-			this.body = yield render(C.adminPath + 'articleList', {
+			this.body = yield render('/admin/articleList', {
 				articleTypes: articleTypes,
 				blogInfo: blogInfo,
 				articles: articles,

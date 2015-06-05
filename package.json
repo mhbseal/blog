@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "description": "Mo's Blog",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Mu Haibao<mhbseal@163.com>",
   "homepage": "http://github.com/mhbseal/blog",
   "scripts": {
@@ -17,6 +17,7 @@
     "koa-router": "^4.3.2",
     "koa-session": "^3.1.0",
     "koa-static": "^1.4.9",
-    "mongoose": "^4.0.2"
+    "mongoose": "^4.0.2",
+    "requirejs": "^2.1.18"
   }
 }

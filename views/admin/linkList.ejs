@@ -9,9 +9,9 @@
 				<th>链接</th>
 				<th>操作</th>
 			</tr>
-			<% xData.forEach(function(link) { %>
+			<% xData.forEach(function(link, i) { %>
 			<tr>
-				<td><%- link._id %></td>
+				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
 				<td><%- link.name %></td>
 				<td><%- link.url %></td>
 				<td>

@@ -10,9 +10,9 @@
 				<th>是否启用</th>
 				<th>操作</th>
 			</tr>
-			<% xData.forEach(function(type) { %>
+			<% xData.forEach(function(type, i) { %>
 			<tr>
-				<td><%- type._id %></td>
+				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
 				<td><%- type.name %></td>
 				<td><%- type.path %></td>
 				<td><%- type.enabled %></td>

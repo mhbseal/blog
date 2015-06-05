@@ -7,24 +7,27 @@
 		</tr>
 		<tr>
 			<td class="td1">名称：</td>
-			<td><input type="text" name="name" class="form-control" value="<%- xData.name %>" /></td>
+			<td><input type="text" name="name" class="form-control" value="<%- xData.name %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['名称不能为空！']}) %> /></td>
 		</tr>
 		<tr>
 			<td class="td1">路径：</td>
-			<td><input type="text" name="path" class="form-control" value="<%- xData.path %>" /></td>
+			<td><input type="text" name="path" class="form-control" value="<%- xData.path %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['路径不能为空！']}) %> /></td>
 		</tr>
 		<tr>
 			<td class="td1">是否启用：</td>
 			<td>
 				<select name="enabled" class="form-control">
-					<option value="1" selected="selected">是</option>
-					<option value="0">否</option>
+					<option value="1">是</option>
+					<option value="0" <%- xData.enabled === false ? 'selected' : '' %>>否</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<td class="td1">&nbsp;</td>
-			<td><a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a></td>
+			<td>
+				<a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a>&nbsp;&nbsp;
+				<span class="alert alert-warning js_alert"></span>
+			</td>
 		</tr>
 	</table>
 </div>

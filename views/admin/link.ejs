@@ -7,15 +7,18 @@
 		</tr>
 		<tr>
 			<td class="td1">名称：</td>
-			<td><input type="text" name="name" class="form-control" value="<%- xData.name %>" /></td>
+			<td><input type="text" name="name" class="form-control" value="<%- xData.name %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['名称不能为空！']}) %> /></td>
 		</tr>
 		<tr>
 			<td class="td1">链接：</td>
-			<td><input type="text" name="url" class="form-control wd4" value="<%- xData.url %>" /></td>
+			<td><input type="text" name="url" class="form-control wd4" value="<%- xData.url %>" data-validate=<%- JSON.stringify({rules: ['isRequired', 'isUrl'], msgs: ['链接不能为空！', '链接格式错误！']}) %> /></td>
 		</tr>
 		<tr>
 			<td class="td1">&nbsp;</td>
-			<td><a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a></td>
+			<td>
+				<a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a>&nbsp;&nbsp;
+				<span class="alert alert-warning js_alert"></span>
+			</td>
 		</tr>
 	</table>
 </div>

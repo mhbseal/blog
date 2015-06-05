@@ -1,11 +1,9 @@
 module.exports = function (Schema) {
 	return {
 		article: {
-			type: Schema.Types.ObjectId,
-			ref: 'article'
+			id: Schema.Types.ObjectId,
+			typePath: String
 		},
-		name: String,
-		email: String,
 		user: {
 			type: Schema.Types.ObjectId,
 			ref: 'user'
@@ -14,7 +12,8 @@ module.exports = function (Schema) {
 			type: Schema.Types.ObjectId,
 			ref: 'admin'
 		},
-		time: Date,
-		content: String
+		time: String,
+		content: String,
+		enabled: Boolean
 	}
 }

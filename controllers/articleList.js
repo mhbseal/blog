@@ -1,12 +1,13 @@
 module.exports = function(render) {
 	return {
 		method: 'get',
-		path: [new RegExp('^\\/((?!tag|comment|' + C.adminPath + ')\\w+)?$'), '/tag/:tagPath'], // 首页、type列表页、tag列表页、搜索
+		path: ['/article/:typePath', '/tag/:tagPath', '/search', '/'], // 首页、type列表页、tag列表页、搜索
 		handler: function* () {
 			var
-				blogInfo, articleTypes, articles, typeOrTagName, pageList, options, links,  articleTags, pageListPath, rKeyword,
-				typePath = this.captures[0],
-				tagPath = this.params.tagPath,
+				blogInfo, articleTypes, articles, typeOrTagName, pageList, options, links,  articleTags, pageListPath, rKeyword, typeId, tagId,
+				params = this.params,
+				typePath = params.typePath,
+				tagPath = params.tagPath,
 				keyword = this.query.kw,
 				typePaths = [],
 				tagPaths = [],
@@ -21,36 +22,36 @@ module.exports = function(render) {
 				// 循环所有tag,来校验路由,和模板渲染做准备
 				articleTags.forEach(function(v) {
 					tagPaths.push(v.path);
-					if (v.path === tagPath) typeOrTagName = v.name + '_Tag'
+					if (v.path === tagPath) {
+						typeOrTagName = v.name + '_Tag';
+						tagId = v._id;
+					}
 				});
 				// 校验路由tagPath是否存在
 				if (!~tagPaths.indexOf(tagPath)) return this.body = yield render('404', {msg: '找不到相应的文章标签'});
 				// 文章查询条件
-				conditions['tags'] = {
-					$elemMatch: {
-						path: tagPath
-					}
-				};
+				conditions['tags'] = {$all: tagId};
 				pageListPath = '/tag/' + tagPath + '?page=';
-			} else if (typePath === 'search') { // 搜索
+			} else if (keyword != null) { // 搜索
 				rKeyword = new RegExp(keyword, 'i');
 				conditions['$or'] = [{'title': rKeyword}, {'introduction': rKeyword}, {'content': rKeyword}, {'type.name': rKeyword}, {'tags.name': rKeyword}];
-				pageListPath = '/' + typePath + '?kw=' + keyword + '&page=';
-			} else { // type分类列表
+				pageListPath = '/search' + '?kw=' + keyword + '&page=';
+			} else if (typePath) { // type分类列表
 				// 循环文章所有type,来校验路由,和模板渲染做准备
 				articleTypes.forEach(function(v) {
 					typePaths.push(v.path);
-					if (v.path === typePath) typeOrTagName = v.name
+					if (v.path === typePath) {
+						typeOrTagName = v.name;
+						typeId = v._id;
+					}
 				});
-				if (typePath) { // 非首页
-					// 校验路由typePath是否存在
-					if (!~typePaths.indexOf(typePath)) return this.body = yield render('404', {msg: '找不到相应的文章类型'});
-					// 文章查询条件
-					conditions['type.path'] = typePath;
-					pageListPath = '/' + typePath + '?page=';
-				} else {
-					pageListPath = '?page=';
-				}
+				// 校验路由typePath是否存在
+				if (!~typePaths.indexOf(typePath)) return this.body = yield render('404', {msg: '找不到相应的文章类型'});
+				// 文章查询条件
+				conditions['type'] = typeId;
+				pageListPath = '/article/' + typePath + '?page=';
+			} else { // 主页
+				pageListPath = '/?page=';
 			}
 
 			// 文章列表
@@ -72,7 +73,7 @@ module.exports = function(render) {
 			pageList.rowCount = yield M.article.count(conditions);
 			pageList.pageCount = Math.ceil(pageList.rowCount/pageList.size);
 			// blog信息
-			blogInfo = yield M.blogInfo.findOne();
+			blogInfo = (yield M.blogInfo.findOne()) || {};
 			// 这里把搜索的关键字字段挂在blogInfo下
 			blogInfo.keyword = keyword
 			// 友情链接
@@ -81,7 +82,7 @@ module.exports = function(render) {
 			articleTags = articleTags || (yield M.articleTag.find());
 			// 遍历文章，从评论的表中取相应的评论总数
 			for (var article of articles) {
-				article.commentCount = yield M.comment.count({articleId: article._id});
+				article.commentCount = yield M.comment.count({'article.id': article._id});
 			}
 			// 模板渲染
 			this.body = yield render('articleList', {

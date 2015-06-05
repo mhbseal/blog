@@ -1,0 +1,31 @@
+<% include header %>
+<div class="main" id="singlePage">
+	<table class="table1">
+		<tr>
+			<td class="td1">&nbsp;</td>
+			<td><h2><%- xData._id ? '编辑' : '新增' %></h2></td>
+		</tr>
+		<tr>
+			<td class="td1">名称：</td>
+			<td><input type="text" name="title" class="form-control" value="<%- xData.title %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['名称不能为空！']}) %> /></td>
+		</tr>
+		<tr>
+			<td class="td1">路径：</td>
+			<td><input type="text" name="path" class="form-control wd4" value="<%- xData.path %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['路径不能为空！']}) %> /></td>
+		</tr>
+		<tr>
+			<td class="td1">内容：</td>
+			<td>
+				<script type="text/plain" id="content" style="width: 900px;"><%- xData.content %></script>
+			</td>
+		</tr>
+		<tr>
+			<td class="td1">&nbsp;</td>
+			<td>
+				<a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a>&nbsp;&nbsp;
+				<span class="alert alert-warning js_alert"></span>
+			</td>
+		</tr>
+	</table>
+</div>
+<% include footer %>

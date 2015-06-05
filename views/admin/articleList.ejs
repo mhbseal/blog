@@ -17,10 +17,10 @@
 				<th>操作</th>
 				<th></th>
 			</tr>
-			<% articles.forEach(function(article) { %>
+			<% articles.forEach(function(article, i) { %>
 			<tr>
-				<td><%- article.id %></td>
-				<td><%- article.title %></td>
+				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
+				<td><%- article.title.slice(0, 25) + (article.title.length > 25 ? '...' : '') %></td>
 				<td><%- article.author %></td>
 				<td><%- article.visits %></td>
 				<td><%- article.type.name %></td>
@@ -29,9 +29,9 @@
 						<%- (i !== 0 ? '、' : '') + tag.name %>
 					<% }) %>
 				</td>
-				<td><a href="<%- adminPath %>commentList?articleId=<%- article._id %>"><%- article.commentCount %></a></td>
-				<td><%- article.createTime %></td>
-				<td><%- article.lastEditTime %></td>
+				<td><a href="<%- adminPath %>commentList?article.id=<%- article._id %>"><%- article.commentCount %></a></td>
+				<td><%- article.createTime.slice(0, 10) %></td>
+				<td><%- article.lastEditTime.slice(0, 10) %></td>
 				<td><%- article.enabled %></td>
 				<td>
 					<a href="<%- adminPath %>article?id=<%- article._id %>">编辑</a>&nbsp;&nbsp;

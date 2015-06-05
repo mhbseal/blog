@@ -1,0 +1,28 @@
+<% include header %>
+<div class="main" id="commentList">
+	<div class="table2_wrap">
+		<table class="table2">
+			<tr>
+				<th>序号</th>
+				<th>邮箱</th>
+				<th>时间</th>
+				<th>内容</th>
+				<th>操作</th>
+			</tr>
+			<% xData.forEach(function(comment, i) { %>
+			<tr>
+				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
+				<td><%- comment.user && comment.user.email || comment.admin && comment.admin.email %></td>
+				<td><%- comment.time %></td>
+				<td><%- comment.content.slice(0, 40) + (comment.content.length > 40 ? '...' : '') %></td>
+				<td>
+					<a href="/article/<%- comment.article.typePath %>/<%- comment.article.id %>#comment" target="_blank">回复</a>&nbsp;&nbsp;
+					<a href="javascript:void(0)" data-href="<%- adminPath %>comment?id=<%- comment._id %>" class="js_delete">删除</a>
+				</td>
+			</tr>
+			<% }) %>
+		</table>
+	</div>
+	<% include ../common/pageList %>
+</div>
+<% include footer %>

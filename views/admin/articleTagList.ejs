@@ -9,9 +9,9 @@
 				<th>路径</th>
 				<th>操作</th>
 			</tr>
-			<% xData.forEach(function(tag) { %>
+			<% xData.forEach(function(tag, i) { %>
 			<tr>
-				<td><%- tag._id %></td>
+				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
 				<td><%- tag.name %></td>
 				<td><%- tag.path %></td>
 				<td>

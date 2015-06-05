@@ -7,18 +7,18 @@
 		</tr>
 		<tr>
 			<td class="td1">标题：</td>
-			<td><input type="text" name="title" class="form-control wd4" value="<%- article.title %>" /></td>
+			<td><input type="text" name="title" class="form-control wd4" value="<%- article.title %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['标题不能为空！']}) %> /></td>
 		</tr>
 		<tr>
 			<td class="td1">作者：</td>
-			<td><input type="text" name="author" class="form-control" value="<%- article.author %>" /></td>
+			<td><input type="text" name="author" class="form-control" value="<%- article.author %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['作者不能为空！']}) %> /></td>
 		</tr>
 		<tr>
 			<td class="td1">所属类别：</td>
 			<td>
 				<select name="type" class="form-control">
 					<% articleTypes.forEach(function(v) { %>
-					<option value="<%- v._id %>"><%- v.name %></option>
+					<option value="<%- v._id %>" <%- String(v._id) === String(article.type) ? 'selected' : '' %>><%- v.name %></option>
 					<% }) %>
 				</select>
 			</td>
@@ -26,11 +26,9 @@
 		<tr>
 			<td class="td1">标签：</td>
 			<td>
-				<select name="tags" class="form-control">
-					<% articleTags.forEach(function(v) { %>
-					<option value="<%- v._id %>"><%- v.name %></option>
-					<% }) %>
-				</select>
+				<% articleTags.forEach(function(v) { %>
+				<input name="tags" type="checkbox" value="<%- v._id %>" <%- article.tags && ~article.tags.indexOf(v._id) ? 'checked' : '' %> /><%- v.name %>
+				<% }) %>
 			</td>
 		</tr>
 		<tr>
@@ -38,7 +36,7 @@
 			<td>
 				<select name="enabled" class="form-control">
 					<option value="1">是</option>
-					<option value="0">否</option>
+					<option value="0" <%- article.enabled === false ? 'selected' : '' %>>否</option>
 				</select>
 			</td>
 		</tr>
@@ -51,12 +49,15 @@
 		<tr>
 			<td class="td1">内容：</td>
 			<td>
-			<script type="text/plain" id="content" style="width: 900px;"><%- article.content %></script>
+				<script type="text/plain" id="content" style="width: 900px;"><%- article.content %></script>
 			</td>
 		</tr>
 		<tr>
 			<td class="td1">&nbsp;</td>
-			<td><a href="javascript:void(0)" class="btn" data-id="<%- article._id %>">确定</a></td>
+			<td>
+				<a href="javascript:void(0)" class="btn" data-id="<%- article._id %>">确定</a>&nbsp;&nbsp;
+				<span class="alert alert-warning js_alert"></span>
+			</td>
 		</tr>
 	</table>
 </div>

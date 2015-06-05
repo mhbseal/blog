@@ -10,9 +10,9 @@ module.exports = function(render) {
 					// 文章所有type
 					articleTypes = yield M.articleType.find({enabled: true}),
 					// 文章内容
-					article = id ? yield M.article.findOne({_id: id}).populate('type tags') : {},
+					article = id ? yield M.article.findOne({_id: id}) : {},
 					// blog信息
-					blogInfo = yield M.blogInfo.findOne(),
+					blogInfo = (yield M.blogInfo.findOne()) || {},
 					// 标签
 					articleTags = yield M.articleTag.find();
 
@@ -20,7 +20,7 @@ module.exports = function(render) {
 				blogInfo.useEditor = true;
 
 				// 模板渲染
-				this.body = yield render(C.adminPath + 'article', {
+				this.body = yield render('/admin/article', {
 					articleTypes: articleTypes,
 					blogInfo: blogInfo,
 					article : article,
@@ -33,11 +33,17 @@ module.exports = function(render) {
 				}
 			},
 			put: function* () { // 更新
+				var body = this.request.body;
+				body.lastEditTime = F.date.format('YYYY-MM-DD HH:mm:ss');
+
 				this.body = {
 					msg: (yield M.article.findOneAndUpdate({_id:  this.query.id}, this.request.body)) ? '更新成功' : '更新失败'
 				}
 			},
 			post: function* () { // 新增
+				var body = this.request.body;
+				body.createTime = body.lastEditTime = F.date.format('YYYY-MM-DD HH:mm:ss');
+
 				this.body = {
 					msg: (yield M.article.create(this.request.body)) ? '新增成功' : '新增失败'
 				}

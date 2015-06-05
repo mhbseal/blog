@@ -35,10 +35,15 @@ render = views(C.dir.view, {
 })
 // 静态文件
 app.use(serve(C.dir.resource));
-app.use(favicon(path.join(C.dir.resource + 'static/images/favicon.ico')));
+app.use(favicon(path.join(C.dir.resource, 'static/images/favicon.ico')));
 
 require(path.join(C.dir.model, C.exceptDir))(); // model初始化入口
 require(path.join(C.dir.controller, C.exceptDir))(app, render); // router初始化入口
+
+//404页面
+app.use(function * pageNotFound() {
+	this.body = yield render('404', {msg: '没有找到相关内容'})
+});
 
 // 监听端口
 app.listen(C.port);

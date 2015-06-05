@@ -7,23 +7,26 @@
 		</tr>
 		<tr>
 			<td class="td1">标题：</td>
-			<td><input type="text" name="title" class="form-control wd3" value="<%- blogInfo.title %>" /></td>
+			<td><input type="text" name="title" class="form-control wd3" value="<%- blogInfo.title %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['标题不能为空！']}) %> /></td>
 		</tr>
 		<tr>
 			<td class="td1">关键词：</td>
-			<td><textarea name="keywords" class="form-control wd6 hg1"><%- blogInfo.keywords %></textarea></td>
+			<td><textarea name="keywords" class="form-control wd6 hg1" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['关键词不能为空！']}) %>><%- blogInfo.keywords %></textarea></td>
 		</tr>
 		<tr>
 			<td class="td1">描述：</td>
-			<td><textarea name="description" class="form-control wd6 hg1"><%- blogInfo.description %></textarea></td>
+			<td><textarea name="description" class="form-control wd6 hg1" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['描述不能为空！']}) %>><%- blogInfo.description %></textarea></td>
 		</tr>
 		<tr>
 			<td class="td1">版权：</td>
-			<td><textarea name="copyright" class="form-control wd6 hg1"><%- blogInfo.copyright %></textarea></td>
+			<td><textarea name="copyright" class="form-control wd6 hg1" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['版权不能为空！']}) %>><%- blogInfo.copyright %></textarea></td>
 		</tr>
 		<tr>
 			<td class="td1">&nbsp;</td>
-			<td><a href="javascript:void(0)" class="btn" data-id="<%- blogInfo._id %>">确定</a></td>
+			<td>
+				<a href="javascript:void(0)" class="btn" data-id="<%- blogInfo._id %>">确定</a>&nbsp;&nbsp;
+				<span class="alert alert-warning js_alert"></span>
+			</td>
 		</tr>
 	</table>
 </div>

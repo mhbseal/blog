@@ -14,8 +14,8 @@ module.exports = function (Schema) {
 			type: Schema.Types.ObjectId,
 			ref: 'articleTag'
 		}],
-		createTime: Date,
-		lastEditTime: Date,
+		createTime: String,
+		lastEditTime: String,
 		enabled: Boolean,
 		introduction: String,
 		content: String

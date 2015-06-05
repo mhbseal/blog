@@ -1,7 +1,7 @@
 module.exports = function(render) {
 	return {
 		method: 'get',
-		path: C.adminPath + ':x(link|articleType|articleTag|admin|comment|user)List',
+		path: C.adminPath + ':x(link|articleType|articleTag|admin|comment|user|singlePage)List',
 		handler: function* () {
 			var
 				blogInfo, xData, pageList, options,
@@ -25,19 +25,23 @@ module.exports = function(render) {
 				sort: {_id: -1},
 				skip: (pageList.current - 1) * pageList.size
 			};
-			xData = yield M[x].find(conditions, null, options);
+			if (x === 'comment') { // commentList需要联查
+				xData = yield M[x].find(conditions, null, options).populate('admin user');
+			} else {
+				xData = yield M[x].find(conditions, null, options);
+			}
 			pageList.rowCount = yield M[x].count(conditions);
 			pageList.pageCount = Math.ceil(pageList.rowCount / pageList.size);
 			// 如果是userList需要commentCount字段
 			if (x === 'user') {
 				for (var user of xData) {
-					user.commentCount = yield M.comment.count({userId: user._id});
+					user.commentCount = yield M.comment.count({user: user._id});
 				}
 			}
 			// blog信息
-			blogInfo = yield M.blogInfo.findOne();
+			blogInfo = (yield M.blogInfo.findOne()) || {};
 			// 模板渲染
-			this.body = yield render(C.adminPath + x + 'List', {
+			this.body = yield render('/admin/' + x + 'List', {
 				blogInfo: blogInfo,
 				xData: xData,
 				pageList: pageList,
