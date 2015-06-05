@@ -1,2 +1,7 @@
 /node_modules
 /.idea
+/resource/demo
+/resource/upload
+
+# sass编译map
+*.map
