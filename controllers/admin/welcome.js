@@ -6,7 +6,7 @@ module.exports = function(render) {
 			var blogInfo = (yield M.blogInfo.findOne()) || {};
 			this.body = yield render('/admin/welcome', {
 				blogInfo: blogInfo,
-				admin: this.session.admin
+				admin: this.session.admin || {}
 			});
 		}
 	}

@@ -193,6 +193,9 @@ select.form-control {
         text-decoration: none;
         border-bottom-color: #d9534f; }
 
+.header_down {
+  box-shadow: 0 0 10px #ccc; }
+
 a.logo {
   float: left;
   display: block;
@@ -417,6 +420,8 @@ a.label {
 
 .admin, .admin .header, .admin .footer {
   min-width: 1000px; }
+.admin .header nav a {
+  padding: 0 15px; }
 .admin a.logo {
   width: 250px;
   font-size: 24px; }

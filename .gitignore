@@ -1,7 +1,9 @@
 /node_modules
 /.idea
+/resource/api
 /resource/demo
 /resource/upload
+/resource/fe/static/scripts/umeditor
 
 # sass编译map
 *.map

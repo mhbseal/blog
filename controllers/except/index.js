@@ -7,7 +7,7 @@ module.exports = function(app, render) {
 	function checkLogin(folderName) {
 		return function* (next) {
 			// 目录名名C.adminPath,请求的path与C.adminPath匹配,且session校验不通过,也就是说访问后台必须验证是否登陆
-			if (folderName && folderName.indexOf(C.adminPath) && new RegExp('^' + C.adminPath + '(?!login)', 'i').test(this.path) && !this.session.admin) {
+			if (folderName && folderName.indexOf(C.adminPath) && !new RegExp('^' + C.adminPath + 'login', 'i').test(this.path) && !this.session.admin) {
 				this.redirect(C.adminPath + "login");
 			} else {
 				yield next;

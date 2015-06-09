@@ -96,4 +96,18 @@ $(function() {
 	$nav.prev().click(function() {
 		$nav.toggleClass('active');
 	})
+	// header效果
+	var
+		$win = $(window),
+		timer;
+	$win.scroll(function() {
+		clearTimeout(timer);
+		timer = setTimeout(function() {
+			if ($win.scrollTop() > 0) {
+				$('.header').addClass('header_down');
+			} else {
+				$('.header').removeClass('header_down');
+			}
+		}, 200)
+	})
 })

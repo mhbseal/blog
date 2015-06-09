@@ -12,10 +12,10 @@ module.exports = function() {
 			parts = parse(this); // 来自github koa example
 			this.type = 'text/html; charset=utf-8'; // umeditor只接受'text/html'
 			if (part = yield parts) {
-				name = Date.now() + '_' + part.filename;
+				name = F.date.format('YYYY-MM-DD-HH-mm-ss-') + part.filename;
 				stream = fs.createWriteStream(path.join(C.dir.upload, 'article', name));
 				part.pipe(stream);
-				body = '{"url": "/upload/' + name + '", "title": "' + name + '", "state": "SUCCESS" }';
+				body = '{"url": "/upload/article/' + name + '", "title": "' + name + '", "state": "SUCCESS" }';
 			} else {
 				body = '{"url": "", "title": "", "state": "EORROR" }';
 			}
