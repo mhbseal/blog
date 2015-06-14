@@ -17,7 +17,7 @@ var
  * M 数据model
  * F 方法
  */
-global.C = require('./config')(app);
+global.C = require('./config')();
 global.M = {};
 global.F = require(path.join(C.dir.controller, C.exceptDir, 'funcs'));
 

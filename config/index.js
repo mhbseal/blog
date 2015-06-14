@@ -1,34 +1,18 @@
-module.exports = function(app) {
+module.exports = function() {
 	var
 		path = require('path'),
 		root = path.dirname(__dirname),
-		resourceDir = path.join(root, 'resource'),
-		db, config;
+		resourceDir = path.join(root, 'resource');
 
-	// 这里判断根目录路径是否包含'workspace',不包含则认为是生产环境
-	if (!~__dirname.indexOf('workspace')) app.env = 'production';
-	// 数据库配置
-	if (app.env === 'development') { // 开发环境
-		db = {
-			uri: 'mongodb://localhost:27017/blog',
-			opts: {
-				user: '',
-				pass: ''
-			}
-		}
-	} else { // 生产环境
-		db = {
-			uri: 'mongodb://localhost:27017/blog',
-			opts: {
-				user: '',
-				pass: ''
-			}
-		}
-	}
-
-	config = {
+	return {
 		secret: ["Mo's Blog"], // session 秘钥
-		db: db, // 数据库配置
+		db: { // 数据库配置
+			uri: 'mongodb://localhost:27017/blog',
+			opts: {
+				user: '',
+				pass: ''
+			}
+		},
 		port: 3000, // 程序端口
 		dir: { // 目录配置
 			root: root,
@@ -40,8 +24,8 @@ module.exports = function(app) {
 			upload: path.join(resourceDir, 'upload')
 		},
 		adminPath: '/admin/', // 后台路径
+		uploadFixUrl: 'http://localhost:3000', // 上传文件修正路径，上传文件是根据当前domain生成的静态路径，所以这里修正固定唯一一个地址好点
 		exceptDir: 'except' // model 和 controller 中read dir排除的目录名称
 	};
 
-	return config;
 };

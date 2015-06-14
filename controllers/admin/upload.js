@@ -15,7 +15,7 @@ module.exports = function() {
 				name = F.date.format('YYYY-MM-DD-HH-mm-ss-') + part.filename;
 				stream = fs.createWriteStream(path.join(C.dir.upload, 'article', name));
 				part.pipe(stream);
-				body = '{"url": "/upload/article/' + name + '", "title": "' + name + '", "state": "SUCCESS" }';
+				body = '{"url": "' + C.uploadFixUrl + '/upload/article/' + name + '", "title": "' + name + '", "state": "SUCCESS" }';
 			} else {
 				body = '{"url": "", "title": "", "state": "EORROR" }';
 			}
