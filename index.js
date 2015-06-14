@@ -4,7 +4,7 @@ var
 	fs = require('fs'),
 	bodyParser = require('koa-bodyparser'),
 	favicon = require('koa-favicon'),
-	serve = require('koa-static'),
+  staticCache = require('koa-static-cache'),
 	router = require('koa-router'),
 	session = require('koa-session'),
 	app = koa(),
@@ -34,8 +34,11 @@ render = views(C.dir.view, {
 	default: 'ejs'
 })
 // 静态文件
-app.use(serve(C.dir.resource));
-app.use(favicon(path.join(C.dir.resource, 'static/images/favicon.ico')));
+app.use(staticCache(C.dir.resource, {
+  maxage: 60 * 60 * 24 * 365,
+  gzip: true
+}));
+app.use(favicon(path.join(C.dir.resource, 'fe/static/images/favicon.ico')));
 
 require(path.join(C.dir.model, C.exceptDir))(); // model初始化入口
 require(path.join(C.dir.controller, C.exceptDir))(app, render); // router初始化入口
