@@ -7,8 +7,9 @@
 /resource/upload
 /resource/fe/static/scripts/umeditor
 
-# 配置，生产代码由github中转，这里屏蔽掉
+# 配置，改动时需要打开
 /config/index.js
+/config/index.server.js
 
 # sass编译map
 *.map
