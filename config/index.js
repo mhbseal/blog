@@ -7,9 +7,9 @@ module.exports = function(app) {
 
 	// 这里判断根目录路径是否包含'workspace',不包含则认为是生产环境
 	if (!~__dirname.indexOf('workspace')) app.env = 'production';
-
+	// 数据库配置
 	if (app.env === 'development') { // 开发环境
-		db = { // 数据库配置
+		db = {
 			uri: 'mongodb://localhost:27017/blog',
 			opts: {
 				user: '',
@@ -18,7 +18,11 @@ module.exports = function(app) {
 		}
 	} else { // 生产环境
 		db = {
-
+			uri: 'mongodb://localhost:27017/blog',
+			opts: {
+				user: '',
+				pass: ''
+			}
 		}
 	}
 
@@ -37,7 +41,7 @@ module.exports = function(app) {
 		},
 		adminPath: '/admin/', // 后台路径
 		exceptDir: 'except' // model 和 controller 中read dir排除的目录名称
-	}
+	};
 
 	return config;
-}
+};
