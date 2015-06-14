@@ -7,9 +7,8 @@
 /resource/upload
 /resource/fe/static/scripts/umeditor
 
-# 配置，改动时需要打开
-/config/index.js
-/config/index.server.js
+# 生产配置
+/config/server.js
 
 # sass编译map
 *.map
