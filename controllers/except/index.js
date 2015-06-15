@@ -17,7 +17,7 @@ module.exports = function(app, render) {
 	// 遍历所有router
 	function eachFiles(dir, folderName) {
 		fs.readdirSync(dir).forEach(function (name) {
-			if (/\.js$/.test(name)) {
+			if (path.extname(name) !== '') {
 				var router = require(path.join(dir, name))(render);
 				if (router) {
 					if (Array.isArray(router.method)) { // 如果controller.js中method为数组，则循环
@@ -28,7 +28,7 @@ module.exports = function(app, render) {
 						app[router.method](router.path, checkLogin(folderName), router.handler);
 					}
 				}
-			} else if(name !== C.exceptDir) { // 如果是文件夹并且不等于排除目录，则递归继续往下找
+			} else if(name !== C.exceptDir && name !== ".DS_Store") { // 如果是文件夹并且不等于排除目录，则递归继续往下找(".DS_Storeo"为mac缓存，老是自动生成，这里特殊处理)
 				eachFiles(path.join(dir, name), name);
 			}
 		})

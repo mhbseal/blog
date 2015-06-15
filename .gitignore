@@ -10,5 +10,8 @@
 # 生产配置
 /config/server.js
 
+# resource
+/resource.zip
+
 # sass编译map
 *.map
