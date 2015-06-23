@@ -10,6 +10,9 @@
 # 生产配置
 /config/server.js
 
+# mac cache
+.DS_Store
+
 # resource
 /resource.zip
 
