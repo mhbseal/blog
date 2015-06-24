@@ -1,7 +1,7 @@
 /node_modules
 
 webstorm配置
-/.idea
+.idea
 
 ＃ 一些和blog代码无关的静态资源
 /resource/api
