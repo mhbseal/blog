@@ -15,8 +15,5 @@ webstorm配置
 # mac cache
 .DS_Store
 
-# resource
-/resource.zip
-
 # sass编译map
 *.map
