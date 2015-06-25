@@ -51,11 +51,11 @@
       <table id="form">
         <tr>
           <td>昵称：</td>
-          <td><input type="text" name="name" class="form-control" value="<%- commenter.name %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['昵称不能为空！']}) %>/></td>
+          <td><input type="text" name="name" class="form-control" value="<%- commenter.name %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['昵称不能为空！']}) %> /></td>
         </tr>
         <tr>
           <td>邮箱：</td>
-          <td><input type="text" name="email" class="form-control" value="<%- commenter.email %>" data-validate=<%- JSON.stringify({rules: ['isRequired', 'isEmail'], msgs: ['邮箱不能为空！', '邮箱格式不正确！']}) %>/></td>
+          <td><input type="text" name="email" class="form-control" value="<%- commenter.email %>" data-validate=<%- JSON.stringify({rules: ['isRequired', 'isEmail'], msgs: ['邮箱不能为空！', '邮箱格式不正确！']}) %> /></td>
         </tr>
         <tr>
           <td>内容：</td>

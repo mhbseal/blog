@@ -7,21 +7,18 @@
     </tr>
     <tr>
       <td class="td1">标题：</td>
-      <td><input type="text" name="title" class="form-control wd4" value="<%- article.title %>"
-                 data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['标题不能为空！']}) %>/></td>
+      <td><input type="text" name="title" class="form-control wd4" value="<%- article.title %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['标题不能为空！']}) %> /></td>
     </tr>
     <tr>
       <td class="td1">作者：</td>
-      <td><input type="text" name="author" class="form-control" value="<%- article.author %>"
-                 data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['作者不能为空！']}) %>/></td>
+      <td><input type="text" name="author" class="form-control" value="<%- article.author %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['作者不能为空！']}) %> /></td>
     </tr>
     <tr>
       <td class="td1">所属类别：</td>
       <td>
         <select name="type" class="form-control">
           <% articleTypes.forEach(function(v) { %>
-          <option
-            value="<%- v._id %>" <%- String(v._id) === String(article.type) ? 'selected' : '' %>><%- v.name %></option>
+          <option value="<%- v._id %>" <%- String(v._id) === String(article.type) ? 'selected' : '' %>><%- v.name %></option>
           <% }) %>
         </select>
       </td>
@@ -30,8 +27,7 @@
       <td class="td1">标签：</td>
       <td>
         <% articleTags.forEach(function(v) { %>
-        <input name="tags" type="checkbox"
-               value="<%- v._id %>" <%- article.tags && ~article.tags.indexOf(v._id) ? 'checked' : '' %> /><%- v.name %>
+        <input name="tags" type="checkbox" value="<%- v._id %>" <%- article.tags && ~article.tags.indexOf(v._id) ? 'checked' : '' %> /><%- v.name %>
         <% }) %>
       </td>
     </tr>
@@ -47,8 +43,7 @@
     <tr>
       <td class="td1">简介：</td>
       <td>
-        <script type="text/plain" id="introduction"
-                style="width: 900px; height: 140px;"><%- article.introduction %></script>
+        <script type="text/plain" id="introduction" style="width: 900px; height: 140px;"><%- article.introduction %></script>
       </td>
     </tr>
     <tr>
