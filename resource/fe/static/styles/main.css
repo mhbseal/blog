@@ -56,9 +56,11 @@ input::-moz-focus-inner {
 .clear {
   clear: both; }
 
-.clearfix:before, .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   display: table;
   content: ""; }
+
 .clearfix:after {
   clear: both; }
 
@@ -188,7 +190,8 @@ select.form-control {
       padding: 0 20px;
       color: #428bca;
       border-bottom: 2px solid transparent; }
-      .header nav a:hover, .header nav a.active {
+      .header nav a:hover,
+      .header nav a.active {
         color: #d9534f;
         text-decoration: none;
         border-bottom-color: #d9534f; }
@@ -243,11 +246,13 @@ a.logo {
 .detail footer span {
   margin-right: 20px;
   color: #666; }
+
 .excerpt header i,
 .excerpt footer i,
 .detail header i,
 .detail footer i {
   margin-right: 5px; }
+
 .excerpt header a.more,
 .excerpt footer a.more,
 .detail header a.more,
@@ -375,13 +380,14 @@ a.label {
   color: #468847; }
 
 @font-face {
-  font-family: "icomoon";
+  font-family: 'icomoon';
   src: url("../fonts/icomoon.eot");
   src: url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf") format("truetype"), url("../fonts/icomoon.woff") format("woff"), url("../fonts/icomoon.svg#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
+
 [class*="icon-"] {
-  font-family: "icomoon";
+  font-family: 'icomoon';
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -392,41 +398,45 @@ a.label {
   -moz-osx-font-smoothing: grayscale; }
 
 .icon-menu:before {
-  content: ""; }
+  content: "\e601"; }
 
 .icon-pencil:before {
-  content: ""; }
+  content: "\e605"; }
 
 .icon-user3:before {
-  content: ""; }
+  content: "\e609"; }
 
 .icon-clock2:before {
-  content: ""; }
+  content: "\e603"; }
 
 .icon-tags:before {
-  content: ""; }
+  content: "\e600"; }
 
 .icon-comments:before {
-  content: ""; }
+  content: "\e606"; }
 
 .icon-eye:before {
-  content: ""; }
+  content: "\e607"; }
 
 .icon-forward:before {
-  content: ""; }
+  content: "\e608"; }
 
 .icon-search:before {
-  content: ""; }
+  content: "\e602"; }
 
 .admin, .admin .header, .admin .footer {
   min-width: 1000px; }
+
 .admin .header nav a {
   padding: 0 15px; }
+
 .admin a.logo {
   width: 250px;
   font-size: 24px; }
+
 .admin .main {
   padding: 30px 0 80px; }
+
 .admin .footer {
   position: fixed;
   bottom: 0;
@@ -478,19 +488,25 @@ pre {
 table.t1 td, table.t1 th {
   padding: 5px 10px;
   border: 1px solid #DDD; }
+
 table.t1 th {
   background: #F7F7F7;
   text-align: left; }
 
+.edui-editor-body .edui-body-container {
+  font-family: "微软雅黑", "Microsoft YaHei", "宋体", SimSun, Tahoma, Arial, Helvetica, sans-serif !important; }
+
 @media screen and (max-width: 1199px) and (min-width: 992px) {
   .index .contents {
     padding-left: 10px; } }
+
 @media screen and (max-width: 991px) and (min-width: 768px) {
   .index .main {
     padding: 30px 0; }
   .index .contents {
     padding-left: 10px;
     padding-right: 300px; } }
+
 @media screen and (max-width: 767px) and (min-width: 481px) {
   .index .main {
     margin-top: 42px;
@@ -528,6 +544,7 @@ table.t1 th {
     display: none; }
   .index .comment textarea {
     width: 225px; } }
+
 @media screen and (max-width: 480px) {
   .index .main {
     margin-top: 42px;

@@ -1,5 +1,4 @@
-﻿@charset "utf-8"
-
+﻿node-sass 编译
 
 // 变量
 // ------------
@@ -23,6 +22,9 @@ $screen-lg:                  1200px
 
 $link-color:            $primary
 $link-hover-color:      darken($link-color, 15%)
+
+// 字体
+$font-family: "微软雅黑", "Microsoft YaHei", "宋体", SimSun, Tahoma, Arial, Helvetica, sans-serif
 
 
 // 混入
@@ -52,7 +54,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 	padding: 0
 body
 	min-width: 320px
-	font-family: "微软雅黑", "Microsoft YaHei", "宋体", SimSun, Tahoma, Arial, Helvetica, sans-serif
+	font-family: $font-family
 	font-size: 14px
 	line-height: 1.5
 	color: #333
@@ -481,6 +483,12 @@ table.t1
 	th
 		background: #F7F7F7
 		text-align: left
+
+
+// umeditor 矫正
+// ------------
+.edui-editor-body .edui-body-container
+  font-family: $font-family !important
 
 
 // Responsive
