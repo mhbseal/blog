@@ -1,27 +1,29 @@
 <% include header %>
 <div class="main" id="linkList">
-	<a href="<%- adminPath %>singlePage" class="btn">新增</a>
-	<div class="table2_wrap">
-		<table class="table2">
-			<tr>
-				<th>序号</th>
-				<th>名称</th>
-				<th>路径</th>
-				<th>操作</th>
-			</tr>
-			<% xData.forEach(function(singlePage, i) { %>
-			<tr>
-				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
-				<td><%- singlePage.title %></td>
-				<td><%- singlePage.path %></td>
-				<td>
-					<a href="<%- adminPath %>singlePage?id=<%- singlePage._id %>">编辑</a>&nbsp;&nbsp;
-					<a href="javascript:void(0)" data-href="<%- adminPath %>singlePage?id=<%- singlePage._id %>" class="js_delete">删除</a>
-				</td>
-			</tr>
-			<% }) %>
-		</table>
-	</div>
-	<% include ../common/pageList %>
+  <a href="<%- adminPath %>singlePage" class="btn">新增</a>
+
+  <div class="table2_wrap">
+    <table class="table2">
+      <tr>
+        <th>序号</th>
+        <th>名称</th>
+        <th>路径</th>
+        <th>操作</th>
+      </tr>
+      <% xData.forEach(function(singlePage, i) { %>
+      <tr>
+        <td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
+        <td><%- singlePage.title %></td>
+        <td><%- singlePage.path %></td>
+        <td>
+          <a href="<%- adminPath %>singlePage?id=<%- singlePage._id %>">编辑</a>&nbsp;&nbsp;
+          <a href="javascript:void(0)" data-href="<%- adminPath %>singlePage?id=<%- singlePage._id %>"
+             class="js_delete">删除</a>
+        </td>
+      </tr>
+      <% }) %>
+    </table>
+  </div>
+  <% include ../common/pageList %>
 </div>
 <% include footer %>

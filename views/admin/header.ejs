@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>后台管理</title>
-	<!-- 缩放控制 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-	<!-- 删除默认的苹果工具栏和菜单栏 -->
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="/fe/static/styles/main.css" />
-	<!--[if lt IE 9]>
-	<script src="/fe/js/html5.js"></script>
-	<script src="/fe/js/css3-mediaqueries.min.js"></script>
-	<![endif]-->
+  <title>后台管理</title>
+  <!-- 缩放控制 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+  <!-- 删除默认的苹果工具栏和菜单栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" href="/fe/static/styles/main.css"/>
+  <!--[if lt IE 9]>
+  <script src="/fe/js/html5.js"></script>
+  <script src="/fe/js/css3-mediaqueries.min.js"></script>
+  <![endif]-->
 </head>
 <body class="admin">
-	<header class="header">
-		<div class="inner">
-			<h1><a href="<%- C.adminPath %>" class="logo"><%- blogInfo.title %> 后台管理</a></h1>
-			<div class="icon-menu"></div>
-			<nav id="nav">
-				<a href="<%- C.adminPath %>blogInfo">博客信息</a>
-				<a href="<%- C.adminPath %>articleList">文章</a>
-				<a href="<%- C.adminPath %>articleTypeList">文章类型</a>
-				<a href="<%- C.adminPath %>articleTagList">标签云</a>
-				<a href="<%- C.adminPath %>commentList">评论</a>
-				<a href="<%- C.adminPath %>singlePageList">单页面</a>
-				<a href="<%- C.adminPath %>userList">用户</a>
-				<a href="<%- C.adminPath %>adminList">管理员</a>
-				<a href="<%- C.adminPath %>linkList">友情链接</a>
-			</nav>
-		</div>
-	</header>
+<header class="header">
+  <div class="inner">
+    <h1><a href="<%- C.adminPath %>" class="logo"><%- blogInfo.title %> 后台管理</a></h1>
+
+    <div class="icon-menu"></div>
+    <nav id="nav">
+      <a href="<%- C.adminPath %>blogInfo">博客信息</a>
+      <a href="<%- C.adminPath %>articleList">文章</a>
+      <a href="<%- C.adminPath %>articleTypeList">文章类型</a>
+      <a href="<%- C.adminPath %>articleTagList">标签云</a>
+      <a href="<%- C.adminPath %>commentList">评论</a>
+      <a href="<%- C.adminPath %>singlePageList">单页面</a>
+      <a href="<%- C.adminPath %>userList">用户</a>
+      <a href="<%- C.adminPath %>adminList">管理员</a>
+      <a href="<%- C.adminPath %>linkList">友情链接</a>
+    </nav>
+  </div>
+</header>

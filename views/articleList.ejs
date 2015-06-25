@@ -2,33 +2,37 @@
 <title><%- typeOrTagName ? typeOrTagName + '_' : '' %><%- blogInfo.title %></title>
 <% include header %>
 <div class="main">
-	<section class="contents">
-		<% articles.forEach(function(article) { %>
-		<article class="excerpt">
-			<header>
-				<span class="icon-pencil"></span>
-				<h2><a href="/article/<%- article.type.path %>/<%- article.id %>" title="<%- article.title %>"><%- article.title %></a></h2>
-				<div>
-					<span><i class="icon-user3"></i><%- article.author %></span>
-					<span><i class="icon-clock2"></i><%- article.createTime.slice(0, 10) %></span>
-					<span><i class="icon-eye"></i><%- article.visits %></span>
-					<span><i class="icon-comments"></i><%- article.commentCount %></span>
-				</div>
-			</header>
-			<section class="info"><%- article.introduction %></section>
-			<footer>
+  <section class="contents">
+    <% articles.forEach(function(article) { %>
+    <article class="excerpt">
+      <header>
+        <span class="icon-pencil"></span>
+
+        <h2><a href="/article/<%- article.type.path %>/<%- article.id %>"
+               title="<%- article.title %>"><%- article.title %></a></h2>
+
+        <div>
+          <span><i class="icon-user3"></i><%- article.author %></span>
+          <span><i class="icon-clock2"></i><%- article.createTime.slice(0, 10) %></span>
+          <span><i class="icon-eye"></i><%- article.visits %></span>
+          <span><i class="icon-comments"></i><%- article.commentCount %></span>
+        </div>
+      </header>
+      <section class="info"><%- article.introduction %></section>
+      <footer>
 				<span>
 					<i class="icon-tags"></i>
-					<% article.tags.forEach(function (tag) { %>
-						<a href="/tag/<%- tag.path %>"><%- tag.name %></a>
-					<% }) %>
-				</span>
-				<a href="/article/<%- article.type.path %>/<%- article.id %>" title="<%- article.title %>" class="more"><i class="icon-forward"></i> more</a>
-			</footer>
-		</article>
-		<% }) %>
-		<% include common/pageList %>
-	</section>
-	<% include sidebar %>
+          <% article.tags.forEach(function (tag) { %>
+          <a href="/tag/<%- tag.path %>"><%- tag.name %></a>
+          <% }) %>
+        </span>
+        <a href="/article/<%- article.type.path %>/<%- article.id %>" title="<%- article.title %>" class="more"><i
+            class="icon-forward"></i> more</a>
+      </footer>
+    </article>
+    <% }) %>
+    <% include common/pageList %>
+  </section>
+  <% include sidebar %>
 </div>
 <% include footer %>

@@ -1,29 +1,35 @@
 <% include header %>
 <div class="main admin" id="admin">
-	<table class="table1">
-		<tr>
-			<td class="td1">&nbsp;</td>
-			<td><h2><%- xData._id ? '编辑' : '新增' %></h2></td>
-		</tr>
-		<tr>
-			<td class="td1">账号：</td>
-			<td><input type="text" name="name" class="form-control" value="<%- xData.name %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['账号不能为空！']}) %> /></td>
-		</tr>
-		<tr>
-			<td class="td1">邮箱：</td>
-			<td><input type="text" name="email" class="form-control" value="<%- xData.email %>" data-validate=<%- JSON.stringify({rules: ['isRequired', 'isEmail'], msgs: ['邮箱不能为空！', '邮箱格式不正确！']}) %> /></td>
-		</tr>
-		<tr>
-			<td class="td1">密码：</td>
-			<td><input type="password" name="password" class="form-control" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['密码不能为空']}) %> /></td>
-		</tr>
-		<tr>
-			<td class="td1">&nbsp;</td>
-			<td>
-				<a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a>&nbsp;&nbsp;
-				<span class="alert alert-warning js_alert"></span>
-			</td>
-		</tr>
-	</table>
+  <table class="table1">
+    <tr>
+      <td class="td1">&nbsp;</td>
+      <td><h2><%- xData._id ? '编辑' : '新增' %></h2></td>
+    </tr>
+    <tr>
+      <td class="td1">账号：</td>
+      <td><input type="text" name="name" class="form-control" value="<%- xData.name %>"
+                 data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['账号不能为空！']}) %>/></td>
+    </tr>
+    <tr>
+      <td class="td1">邮箱：</td>
+      <td><input type="text" name="email" class="form-control" value="<%- xData.email %>"
+                 data-validate=<%- JSON.stringify({
+                   rules: ['isRequired', 'isEmail'],
+                   msgs: ['邮箱不能为空！', '邮箱格式不正确！']
+                 }) %>/></td>
+    </tr>
+    <tr>
+      <td class="td1">密码：</td>
+      <td><input type="password" name="password" class="form-control"
+                 data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['密码不能为空']}) %>/></td>
+    </tr>
+    <tr>
+      <td class="td1">&nbsp;</td>
+      <td>
+        <a href="javascript:void(0)" class="btn" data-id="<%- xData._id %>">确定</a>&nbsp;&nbsp;
+        <span class="alert alert-warning js_alert"></span>
+      </td>
+    </tr>
+  </table>
 </div>
 <% include footer %>

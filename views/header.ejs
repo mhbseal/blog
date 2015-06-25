@@ -1,27 +1,28 @@
-	<meta name="description" content="<%- blogInfo.description %>" />
-	<meta name="keywords" content="<%- blogInfo.keywords %>" />
-	<!-- 缩放控制 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-	<!-- 删除默认的苹果工具栏和菜单栏 -->
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="/fe/static/styles/main.css" />
-	<!--[if lt IE 9]>
-	<script src="/fe/static/scripts/html5.js"></script>
-	<script src="/fe/static/scripts/css3-mediaqueries.min.js"></script>
-	<![endif]-->
+<meta name="description" content="<%- blogInfo.description %>"/>
+<meta name="keywords" content="<%- blogInfo.keywords %>"/>
+<!-- 缩放控制 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+<!-- 删除默认的苹果工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="stylesheet" href="/fe/static/styles/main.css"/>
+<!--[if lt IE 9]>
+<script src="/fe/static/scripts/html5.js"></script>
+<script src="/fe/static/scripts/css3-mediaqueries.min.js"></script>
+<![endif]-->
 </head>
 <body class="index">
-	<header class="header">
-		<div class="inner">
-			<h1><a href="/" class="logo"><%- blogInfo.title %></a></h1>
-			<div class="icon-menu"></div>
-			<nav id="nav">
-				<a href="/">主页</a>
-				<% articleTypes.forEach(function(v) { %>
-				<a href="/article/<%- v.path %>"><%- v.name %></a>
-				<% }) %>
-				<a href="/singlePage/api">API</a>
-				<a href="/singlePage/about">关于</a>
-			</nav>
-		</div>
-	</header>
+<header class="header">
+  <div class="inner">
+    <h1><a href="/" class="logo"><%- blogInfo.title %></a></h1>
+
+    <div class="icon-menu"></div>
+    <nav id="nav">
+      <a href="/">主页</a>
+      <% articleTypes.forEach(function(v) { %>
+      <a href="/article/<%- v.path %>"><%- v.name %></a>
+      <% }) %>
+      <a href="/singlePage/api">API</a>
+      <a href="/singlePage/about">关于</a>
+    </nav>
+  </div>
+</header>

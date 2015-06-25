@@ -1,27 +1,27 @@
 <% include header %>
 <div class="main" id="adminList">
-	<div class="table2_wrap">
-		<table class="table2">
-			<tr>
-				<th>序号</th>
-				<th>昵称</th>
-				<th>邮箱</th>
-				<th>评论数</th>
-				<th>操作</th>
-			</tr>
-			<% xData.forEach(function(user, i) { %>
-			<tr>
-				<td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
-				<td><%- user.name %></td>
-				<td><%- user.email %></td>
-				<td><a href="<%- adminPath %>commentList?userId=<%- user._id %>"><%- user.commentCount %></a></td>
-				<td>
-					<a href="javascript:void(0)" data-href="<%- adminPath %>user?id=<%- user._id %>" class="js_delete">删除</a>
-				</td>
-			</tr>
-			<% }) %>
-		</table>
-	</div>
-	<% include ../common/pageList %>
+  <div class="table2_wrap">
+    <table class="table2">
+      <tr>
+        <th>序号</th>
+        <th>昵称</th>
+        <th>邮箱</th>
+        <th>评论数</th>
+        <th>操作</th>
+      </tr>
+      <% xData.forEach(function(user, i) { %>
+      <tr>
+        <td><%- (pageList.current - 1) * pageList.size + i + 1 %></td>
+        <td><%- user.name %></td>
+        <td><%- user.email %></td>
+        <td><a href="<%- adminPath %>commentList?userId=<%- user._id %>"><%- user.commentCount %></a></td>
+        <td>
+          <a href="javascript:void(0)" data-href="<%- adminPath %>user?id=<%- user._id %>" class="js_delete">删除</a>
+        </td>
+      </tr>
+      <% }) %>
+    </table>
+  </div>
+  <% include ../common/pageList %>
 </div>
 <% include footer %>

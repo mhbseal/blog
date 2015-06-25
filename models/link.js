@@ -1,6 +1,6 @@
 module.exports = function () {
-	return {
-		name: String,
-		url: String
-	}
+  return {
+    name: String,
+    url: String
+  }
 }

@@ -1,7 +1,7 @@
 module.exports = function () {
-	return {
-		img: String,
-		name: String,
-		email: String
-	}
+  return {
+    img: String,
+    name: String,
+    email: String
+  }
 }
