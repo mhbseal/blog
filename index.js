@@ -47,8 +47,7 @@ require(path.join(C.dir.controller, C.exceptDir))(app, render); // router初始�
 app.use(function * pageNotFound() {
     this.body = yield render('404', {msg: '没有找到相关内容'})
   }
-)
-;
+);
 
 // 监听端口
 app.listen(C.port);

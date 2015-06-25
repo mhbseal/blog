@@ -7,10 +7,7 @@
     <article class="excerpt">
       <header>
         <span class="icon-pencil"></span>
-
-        <h2><a href="/article/<%- article.type.path %>/<%- article.id %>"
-               title="<%- article.title %>"><%- article.title %></a></h2>
-
+        <h2><a href="/article/<%- article.type.path %>/<%- article.id %>" title="<%- article.title %>"><%- article.title %></a></h2>
         <div>
           <span><i class="icon-user3"></i><%- article.author %></span>
           <span><i class="icon-clock2"></i><%- article.createTime.slice(0, 10) %></span>
@@ -26,8 +23,7 @@
           <a href="/tag/<%- tag.path %>"><%- tag.name %></a>
           <% }) %>
         </span>
-        <a href="/article/<%- article.type.path %>/<%- article.id %>" title="<%- article.title %>" class="more"><i
-            class="icon-forward"></i> more</a>
+        <a href="/article/<%- article.type.path %>/<%- article.id %>" title="<%- article.title %>" class="more"><i class="icon-forward"></i> more</a>
       </footer>
     </article>
     <% }) %>

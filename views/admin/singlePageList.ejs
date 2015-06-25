@@ -1,7 +1,6 @@
 <% include header %>
 <div class="main" id="linkList">
   <a href="<%- adminPath %>singlePage" class="btn">新增</a>
-
   <div class="table2_wrap">
     <table class="table2">
       <tr>
@@ -17,8 +16,7 @@
         <td><%- singlePage.path %></td>
         <td>
           <a href="<%- adminPath %>singlePage?id=<%- singlePage._id %>">编辑</a>&nbsp;&nbsp;
-          <a href="javascript:void(0)" data-href="<%- adminPath %>singlePage?id=<%- singlePage._id %>"
-             class="js_delete">删除</a>
+          <a href="javascript:void(0)" data-href="<%- adminPath %>singlePage?id=<%- singlePage._id %>" class="js_delete">删除</a>
         </td>
       </tr>
       <% }) %>

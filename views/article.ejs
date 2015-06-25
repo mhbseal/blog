@@ -34,12 +34,8 @@
       </footer>
     </article>
     <section id="comment" class="comment">
-      <h3 <% if (!comments.length) { %>style="display: none"
-        <% } %>
-        >留言列表</h3>
-      <ul <% if (!comments.length) { %>style="display: none"
-        <% } %>
-        >
+      <h3 <% if (!comments.length) { %>style="display: none"<% } %>>留言列表</h3>
+      <ul <% if (!comments.length) { %>style="display: none"<% } %>>
         <% comments.forEach(function (comment) { %>
         <li>
           <div class="info">
@@ -55,31 +51,20 @@
       <table id="form">
         <tr>
           <td>昵称：</td>
-          <td><input type="text" name="name" class="form-control" value="<%- commenter.name %>"
-                     data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['昵称不能为空！']}) %>/></td>
+          <td><input type="text" name="name" class="form-control" value="<%- commenter.name %>" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['昵称不能为空！']}) %>/></td>
         </tr>
         <tr>
           <td>邮箱：</td>
-          <td><input type="text" name="email" class="form-control" value="<%- commenter.email %>"
-                     data-validate=<%- JSON.stringify({
-                       rules: ['isRequired', 'isEmail'],
-                       msgs: ['邮箱不能为空！', '邮箱格式不正确！']
-                     }) %>/></td>
+          <td><input type="text" name="email" class="form-control" value="<%- commenter.email %>" data-validate=<%- JSON.stringify({rules: ['isRequired', 'isEmail'], msgs: ['邮箱不能为空！', '邮箱格式不正确！']}) %>/></td>
         </tr>
         <tr>
           <td>内容：</td>
-          <td><textarea name="content" class="form-control" data-validate=<%- JSON.stringify({
-              rules: ['isRequired'],
-              msgs: ['内容不能为空！']
-            }) %>></textarea></td>
+          <td><textarea name="content" class="form-control" data-validate=<%- JSON.stringify({rules: ['isRequired'], msgs: ['内容不能为空！']}) %>></textarea></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td>
-            <a href="#comment" class="btn js_submit" data-article=<%- JSON.stringify({
-              id: article._id,
-              typePath: article.type.path
-            }) %>>发表评论</a>&nbsp;&nbsp;
+            <a href="#comment" class="btn js_submit" data-article=<%- JSON.stringify({id: article._id, typePath: article.type.path}) %>>发表评论</a>&nbsp;&nbsp;
             <span class="alert alert-warning js_alert"></span>
           </td>
         </tr>
