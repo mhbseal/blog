@@ -3,9 +3,12 @@
   "description": "Mo's Blog",
   "version": "0.2.0",
   "author": "Mu Haibao<mhbseal@163.com>",
-  "homepage": "http://github.com/mhbseal/blog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhbseal/blog"
+  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node --harmony index.js"
   },
   "dependencies": {
     "co-busboy": "^1.3.0",
