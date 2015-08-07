@@ -8,9 +8,21 @@
     "url": "https://github.com/mhbseal/blog"
   },
   "scripts": {
+    "start.noauth": "node --harmony app.js noauth",
     "start": "node --harmony app.js",
-    "start.prod": "NODE_ENV=production node --harmony app.js",
-    "start.prod.win": "set NODE_ENV=production & node --harmony app.js"
+    "start.dev": "node-dev --harmony app.js",
+    "pm2.start": "NODE_ENV=production pm2 start app.js --name blog --node-args='--harmony' --watch",
+    "pm2.reload": "NODE_ENV=production pm2 reload app.js --name blog --node-args='--harmony' --watch",
+    "nginx.start": "/usr/local/nginx/sbin/nginx",
+    "nginx.reload": "/usr/local/nginx/sbin/nginx -s reload",
+    "chmod": "chmod -R +x bin",
+    "mongod.dev": "bin/mongod.dev.sh",
+    "mongodump.dev": "bin/mongodump.dev.sh",
+    "mongorestore.dev": "bin/mongorestore.dev.sh",
+    "mongod.prod": "bin/mongod.prod.sh",
+    "mongodump.prod": "bin/mongodump.prod.sh",
+    "mongorestore.prod": "bin/mongorestore.prod.sh",
+    "dev": "npm run mongod.dev & npm run start.dev"
   },
   "dependencies": {
     "body-parser": "^1.13.3",

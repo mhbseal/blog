@@ -16,12 +16,14 @@ module.exports = function (app) {
   }
 
   // 后台检验是否登陆
-  app.all([C.adminPath, C.adminPath + '*'], function (req, res, next) {
-    if (!req.session.admin && req.path != C.adminPath + 'login') {
-      res.redirect(C.adminPath + 'login');
-    }
-    next();
-  });
+  if (!~process.argv.indexOf('noauth')) {
+    app.all([C.adminPath, C.adminPath + '*'], function (req, res, next) {
+      if (!req.session.admin && req.path != C.adminPath + 'login') {
+        res.redirect(C.adminPath + 'login');
+      }
+      next();
+    });
+  }
 
   // 遍历所有router
   eachFiles(C.dir.controller);

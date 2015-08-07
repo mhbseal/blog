@@ -1,20 +1,22 @@
-/node_modules
-
-# webstorm配置
-.idea
-
-# 一些和blog代码无关的静态资源
+# github ignore
 /resource/api
 /resource/demo
 /resource/upload
 /resource/fe/static/scripts/umeditor
-
-# 隐私
 /config/prod.js
-/db
+/data
+
+# 包
+/node_modules
+
+# webstorm配置
+.idea
 
 # mac cache
 .DS_Store
 
 # sass编译map
 *.map
+
+# npm
+npm-debug.log
