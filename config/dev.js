@@ -25,7 +25,7 @@ var
     },
     adminPath: '/admin/', // 后台路径
     uploadPath: '/upload/', // 上传文件路径
-    uploadFixUrl: 'http://localhost:3000', // 上传文件web访问修正路径
+    uploadFixUrl: '', // 上传文件web访问修正路径
     exceptFolder: 'except' // model 和 controller 中read dir排除的目录名称
   };
 
