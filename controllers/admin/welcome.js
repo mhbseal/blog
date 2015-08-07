@@ -1,13 +1,13 @@
-module.exports = function (render) {
-  return {
-    method: 'get',
-    path: C.adminPath,
-    handler: function* () {
-      var blogInfo = (yield M.blogInfo.findOne()) || {};
-      this.body = yield render('/admin/welcome', {
-        blogInfo: blogInfo,
-        admin: this.session.admin || {}
-      });
-    }
-  }
+module.exports = function (app, co) {
+  app // 欢迎页
+    .route(C.adminPath)
+    .get(function (req, res) {
+      co(function *() {
+        var blogInfo = (yield M.blogInfo.findOne()) || {};
+        res.render('admin/welcome', {
+          blogInfo: blogInfo,
+          admin: req.session.admin || {}
+        });
+      })
+    })
 };

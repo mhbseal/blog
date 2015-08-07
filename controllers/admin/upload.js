@@ -1,28 +1,30 @@
-module.exports = function () {
-  return {
-    method: 'all',
-    path: C.adminPath + 'upload',
-    handler: function* () {
-      var
-        fs = require('fs'),
-        path = require('path'),
-        parse = require('co-busboy'),
-        parts, part, name, stream, body;
-
-      parts = parse(this); // 来自github koa example
-      this.type = 'text/html; charset=utf-8'; // umeditor只接受'text/html'
-      if (part = yield parts) {
-        name = F.date.format('YYYY-MM-DD-HH-mm-ss-') + part.filename;
-        stream = fs.createWriteStream(path.join(C.dir.upload, 'article', name));
-        part.pipe(stream);
-        body = '{"url": "' + C.uploadFixUrl + '/upload/article/' + name + '", "title": "' + name + '", "state": "SUCCESS" }';
-      } else {
-        body = '{"url": "", "title": "", "state": "EORROR" }';
+module.exports = function (app, co) {
+  var
+    fs = require('fs'),
+    path = require('path'),
+    multer  = require('multer'),
+    uploadPath = path.join(C.uploadPath, 'article'),
+    storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, path.join(C.dir.resource, uploadPath))
+      },
+      filename: function (req, file, cb) {
+        cb(null, file.originalname + '-' + F.date.format('YYYY-MM-DD-HH-mm-ss'))
       }
-      this.type = 'text/html; charset=utf-8'; // umeditor只接受'text/html'
-      this.body = body;
-    }
-  }
+    }),
+    upload = multer({ storage: storage});
+
+  app // 上传,这里single参数要注意，需和前台form中的fieldName相同
+    .post(C.adminPath + 'upload', upload.single('upfile'), function (req, res) {
+      co(function *() {
+        var fileName = req.file.filename;
+        res.send(JSON.stringify({ // umeditor只接受Content-Type: 'text/html'
+          url: C.uploadFixUrl + uploadPath + '/' + fileName,
+          title: fileName,
+          state: "SUCCESS"
+        }));
+      })
+    })
 };
 
 

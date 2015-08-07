@@ -1,16 +1,17 @@
 /node_modules
 
-webstorm配置
+# webstorm配置
 .idea
 
-＃ 一些和blog代码无关的静态资源
+# 一些和blog代码无关的静态资源
 /resource/api
 /resource/demo
 /resource/upload
 /resource/fe/static/scripts/umeditor
 
-# 生产配置
-/config/server.js
+# 隐私
+/config/prod.js
+/db
 
 # mac cache
 .DS_Store

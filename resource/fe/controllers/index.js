@@ -72,7 +72,8 @@ $(function () {
     $.ajax({
       type: 'post',
       url: '/comment',
-      data: data,
+      data: JSON.stringify(data),
+      contentType: 'application/json',
       success: function (data) {
         if (data.status === 'success') {
           var
