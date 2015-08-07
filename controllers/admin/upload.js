@@ -9,7 +9,8 @@ module.exports = function (app, co) {
         cb(null, path.join(C.dir.resource, uploadPath))
       },
       filename: function (req, file, cb) {
-        cb(null, file.originalname + '-' + F.date.format('YYYY-MM-DD-HH-mm-ss'))
+        var name = file.originalname.match(/([\s\S]+)\.([\s\S]+)/);
+        cb(null, name[1] + '-' + F.date.format('YYYY-MM-DD-HH-mm-ss') + '.' + name[2])
       }
     }),
     upload = multer({ storage: storage});
