@@ -20,9 +20,7 @@
     http://localhost:3000/admin // 后台地址
 
 2.初次运行程序用免登陆模式，进后台设置管理员账号密码
-
 3.后台编辑器采用ueditor，地址 http://ueditor.baidu.com/website/download.html ，下载后对应blog目录为/blog/resource/fe/static/scripts/umeditor
-
 4.如果需要ueditor支持支持文件上传，则需修改config文件umeditor.config.js中的2个参数
 
     imageUrl: "upload" // 文件上传
@@ -31,17 +29,13 @@
 
 ### 更新日志
 
-##### == 0.3.0 ==
-
-2015-08-07  
+##### == 0.3.0（2015-08-07） ==
 基于express+co+mongoose，又重写了blog（代码量不是很大），并对代码结构进行了优化，why？see 0.2.0
 
 + 后台免登陆
 + blog说明
 
-##### == 0.2.0 ==
-
-2015-06-09  
+##### == 0.2.0（2015-06-09） ==
 基于koa+mongoose，重写了blog，新增了n多功能，并优化了代码，换的目的是体验一下TJ大神的co，用起来确实很nice，但是目前看来和express相比，koa不是很活跃，另外middleware这块...
 
 + 后台权限
@@ -54,9 +48,7 @@
 + 标签云
 + 友情链接
 
-##### == 0.1.0 ==
-
-2013-10-15  
+##### == 0.1.0（2013-10-15） ==
 基于express+mongoose，最简单文章发布系统。
 
 + 文章发布
