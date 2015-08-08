@@ -4,7 +4,6 @@
 /resource/upload
 /resource/fe/static/scripts/umeditor
 /config/prod.js
-/data
 /bin/scp.dev.sh
 
 # 包
@@ -21,3 +20,6 @@
 
 # npm
 npm-debug.log
+
+# data
+/data
