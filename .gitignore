@@ -5,6 +5,7 @@
 /resource/fe/static/scripts/umeditor
 /config/prod.js
 /data
+/bin/scp.dev.sh
 
 # 包
 /node_modules

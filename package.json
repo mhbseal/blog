@@ -11,6 +11,7 @@
     "start.noauth": "node --harmony app.js noauth",
     "start": "node --harmony app.js",
     "start.dev": "node-dev --harmony app.js",
+    "dev": "npm run mongod.dev & npm run start.dev",
     "pm2.start": "NODE_ENV=production pm2 start app.js --name blog --node-args='--harmony' --watch",
     "pm2.reload": "NODE_ENV=production pm2 reload app.js --name blog --node-args='--harmony' --watch",
     "nginx.start": "/usr/local/nginx/sbin/nginx",
@@ -22,7 +23,11 @@
     "mongod.prod": "bin/mongod.prod.sh",
     "mongodump.prod": "bin/mongodump.prod.sh",
     "mongorestore.prod": "bin/mongorestore.prod.sh",
-    "dev": "npm run mongod.dev & npm run start.dev"
+    "tar.dev": "bin/tar.dev.sh",
+    "tar.prod": "bin/tar.prod.sh",
+    "scp.dev": "bin/scp.dev.sh",
+    "data.dev": "npm run scp.dev && npm run tar.dev",
+    "data.prod": "npm run mongodump.prod && npm run tar.prod"
   },
   "dependencies": {
     "body-parser": "^1.13.3",
