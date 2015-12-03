@@ -8,7 +8,8 @@ var
       keys: ["Mo's Blog"]
     },
     db: { // 数据库配置
-      uri: 'mongodb://localhost:27017/blog',
+      //uri: 'mongodb://localhost:27017/blog',
+      uri: 'mongodb://192.168.56.101:27017/blog',
       opts: {
         user: '',
         pass: ''
