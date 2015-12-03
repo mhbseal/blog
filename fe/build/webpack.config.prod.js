@@ -1,6 +1,12 @@
+// for github
+var adminPath;
+try {
+  adminPath = require('../src/config/prod').adminPath;
+} catch(e) {};
+
 var
   G = {
-    ADMINPATH: require('../src/config/prod').adminPath,
+    ADMINPATH: adminPath || require('../src/config/dev').adminPath,
     __CLIENT__: true,
     __SERVER__: false,
     __DEVELOPMENT__: false,

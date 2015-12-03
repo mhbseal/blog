@@ -21,7 +21,9 @@ npm-debug.log
 /resource/api
 /resource/demo
 /resource/upload
+/resource/static/dist
 /be/config/prod.js
 /fe/src/config/prod.js
 /bin/scp.dev.sh
+webpack-assets.json
 
