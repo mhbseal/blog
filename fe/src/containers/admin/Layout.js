@@ -45,7 +45,7 @@ export default class Layout extends Component {
             </div>
           </header>
           {this.props.children}
-          <footer className="footer">{blogInfo.copyright}</footer>
+          <footer className="footer" dangerouslySetInnerHTML={{__html: blogInfo.copyright}}></footer>
         </div>
       )
     } else {

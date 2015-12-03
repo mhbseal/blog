@@ -92,7 +92,7 @@ export default class Layout extends Component {
               </section>
             </aside>
           </div>
-          <footer className="footer">{blogInfo.copyright}</footer>
+          <footer className="footer" dangerouslySetInnerHTML={{__html: blogInfo.copyright}}></footer>
         </div>
       )
     } else {
