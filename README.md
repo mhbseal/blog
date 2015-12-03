@@ -9,23 +9,23 @@
 
 ### 运行
     
-    git clone https://github.com/mhbseal/blog // 仓库
-    cd blog && npm install // 安装（可能有点慢）
-    npm run dev // 启动
-    npm run dev.noauth // 启动（初次运行，用此模式，可免登陆进入后台）
+    git clone https://github.com/mhbseal/blog  // 仓库
+    cd blog && npm install  // 安装（可能有点慢）
+    npm run dev  // 启动
+    npm run dev.noauth  // 启动（初次运行，用此模式，可免登陆进入后台）
     
 ### 说明
 
 1.访问地址
 
-    http://localhost:3004 // 前台地址
-    http://localhost:3004/admin/welcome // 后台地址
+    http://localhost:3004  // 前台地址
+    http://localhost:3004/admin/  // 后台地址
       
 2.几个config文件
 
-    /be/config/ //后端配置文件（数据库、session等）
-    /be/src/config/ // 前端配置文件（后台访问目录路径）
-    /env.config.js // 2个server的host和port
+    /be/config/  //后端配置文件（数据库、session等）
+    /be/src/config/  // 前端配置文件（后台访问目录路径）
+    /env.config.js  // 2个server的host和port
 
 ### 更新日志
 
