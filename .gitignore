@@ -1,11 +1,3 @@
-# github ignore
-/resource/api
-/resource/demo
-/resource/upload
-/resource/fe/static/scripts/umeditor
-/config/prod.js
-/bin/scp.dev.sh
-
 # 包
 /node_modules
 
@@ -22,4 +14,14 @@
 npm-debug.log
 
 # data
-/data
+/be/data
+
+# github ignore
+/resource/test
+/resource/api
+/resource/demo
+/resource/upload
+/be/config/prod.js
+/fe/src/config/prod.js
+/bin/scp.dev.sh
+

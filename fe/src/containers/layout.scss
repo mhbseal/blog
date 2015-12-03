@@ -1,0 +1,855 @@
+// 变量
+// ------------
+
+// 5种颜色
+
+$primary: #428bca;
+$success: #5cb85c;
+$warning: #f0ad4e;
+$danger: #d9534f;
+$info: #5bc0de;
+
+// 屏幕尺寸
+
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+
+// 链接颜色
+
+$link-color: $primary;
+$link-hover-color: darken($link-color, 15%);
+
+// 字体
+$font-family: "微软雅黑", "Microsoft YaHei", "宋体", SimSun, Tahoma, Arial, Helvetica, sans-serif;
+
+// 混入
+// ------------
+
+// box-shadows
+
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+// transition
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+// reset
+// ------------
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, input, select, textarea label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 320px;
+  font-family: $font-family;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  -webkit-text-size-adjust: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+input,
+select,
+textarea {
+  font-size: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  outline: none;
+}
+
+img {
+  vertical-align: middle;
+  border: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.tr {
+  text-align: right;
+}
+
+.none {
+  display: none;
+}
+
+// form
+// ------------
+
+.form-control {
+  display: inline-block;
+  height: 20px;
+  padding: 5px 5px;
+  color: #666;
+  vertical-align: middle;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075));
+  @include transition(border linear .2s, box-shadow linear .2s);
+  &:focus {
+    border-color: rgba(82, 168, 236, .8);
+    outline: 0;
+    @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(82, 168, 236, .6));
+  }
+}
+
+select.form-control {
+  height: 32px;
+}
+
+.wd1 {
+  width: 100px;
+}
+
+.wd2 {
+  width: 200px;
+}
+
+.wd3 {
+  width: 300px;
+}
+
+.wd4 {
+  width: 400px;
+}
+
+.wd5 {
+  width: 500px;
+}
+
+.wd6 {
+  width: 600px;
+}
+
+.hg1 {
+  height: 76px;
+}
+
+.btn {
+  display: inline-block;
+  height: 30px;
+  padding: 0 8px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  @include transition(background linear .2s);
+  &:hover {
+    background: #EBEBEB;
+    text-decoration: none;
+  }
+}
+
+// pagelist
+// ------------
+
+.pagelist {
+  width: 100%;
+  padding-left: 1px;
+  overflow: hidden;
+  span,
+  a {
+    display: inline-block;
+    height: 30px;
+    margin-left: -1px;
+    padding: 0 10px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    float: left;
+  }
+  .pagestart {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  .pageend {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+  span {
+    cursor: not-allowed;
+  }
+  .active,
+  a:hover {
+    position: relative;
+    border-color: $primary;
+    background: $primary;
+    color: #fff;
+    text-decoration: none;
+  }
+  .total {
+    border: none;
+    cursor: auto;
+    float: right;
+  }
+}
+
+// common
+// ------------
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-bottom: 2px solid $primary;
+  background: #fff;
+  z-index: 1000;
+  .inner {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  nav {
+    float: right;
+    a {
+      display: inline-block;
+      font-size: 16px;
+      height: 60px;
+      padding: 0 20px;
+      color: $primary;
+      border-bottom: 2px solid transparent;
+      &:hover,
+      &.active {
+        color: $danger;
+        text-decoration: none;
+        border-bottom-color: $danger;
+      }
+    }
+  }
+}
+
+.header_down {
+  box-shadow: 0 0 10px #ccc;
+}
+
+a.logo {
+  float: left;
+  display: block;
+  width: 220px;
+  height: 60px;
+  color: #fff;
+  background: $primary;
+  text-align: center;
+  font-size: 36px;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.icon-menu {
+  display: none;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 62px auto 0;
+  padding: 50px 0;
+  overflow: hidden;
+}
+
+.contents {
+  float: left;
+  padding-right: 320px;
+}
+
+.excerpt {
+  margin-bottom: 50px;
+  header {
+    margin-bottom: 20px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+}
+
+.detail header {
+  margin-bottom: 30px;
+  h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    line-height: 1;
+  }
+}
+
+.excerpt header,
+.excerpt footer,
+.detail header,
+.detail footer {
+  span {
+    margin-right: 20px;
+    color: #666;
+    i {
+      color: #666;
+    }
+  }
+  i {
+    margin-right: 5px;
+  }
+  a.more {
+    float: right;
+    span {
+      margin-right: 0;
+      color: $primary;
+    }
+  }
+}
+
+.excerpt .icon-forward {
+  margin: 0
+}
+
+.excerpt .icon-pencil {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  background: $info;
+  color: #fff;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.excerpt .info {
+  margin-bottom: 15px;
+  line-height: 1.8;
+  img {
+    max-width: 100%;
+  }
+}
+
+.detail .info {
+  margin-bottom: 20px;
+  img {
+    max-width: 100%;
+  }
+}
+
+.comment {
+  padding-top: 30px;
+  h3 {
+    margin-bottom: 10px;
+  }
+  ul {
+    margin-bottom: 15px;
+    li {
+      margin-top: 15px;
+      overflow: hidden;
+    }
+  }
+  .info {
+    overflow: hidden;
+  }
+  img {
+    float: left;
+    margin: 0 15px 15px 0;
+    width: 44px;
+    height: 44px;
+  }
+  .content {
+    float: left;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  table td {
+    padding: 5px;
+  }
+  textarea {
+    width: 380px;
+    height: 76px;
+  }
+}
+
+.sidebar {
+  float: right;
+  width: 270px;
+  margin-left: -270px;
+}
+
+.sidebar section {
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.sidebar h3 {
+ margin-bottom: 20px;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.search {
+  display: inline-block;
+  vertical-align: middle;
+  input {
+    float: left;
+    width: 200px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .btn {
+    float: left;
+    padding: 0 5px;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+a.label {
+  padding: 0.3em 0.6em 0.4em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  word-break: keep-all;
+  border-radius: 0.25em;
+  float: left;
+  margin: 0 5px 5px 0;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.footer {
+  width: 100%;
+  padding: 15px 0;
+  border-top: 1px rgb(153, 153, 153) solid;
+  text-align: center;
+  background: #fff;
+}
+
+.alert {
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-info {
+  background-color: #d9edf7;
+  border-color: #c4e3f3;
+  color: #3a87ad;
+}
+
+.alert-warning {
+  background-color: #fcf8e3;
+  border-color: #faf2cc;
+  color: #c09853;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d0e9c6;
+  color: #468847;
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  border-color: #ebcccc;
+  color: #b94a48;
+}
+
+
+// font
+// ------------
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('/static/fonts/icomoon.eot');
+  src: url('/static/fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('/static/fonts/icomoon.ttf') format('truetype'), url('/static/fonts/icomoon.woff') format('woff'), url('/static/fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class*="icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+  content: "\e601";
+}
+
+.icon-pencil:before {
+  content: "\e605";
+}
+
+.icon-user3:before {
+  content: "\e609";
+}
+
+.icon-clock2:before {
+  content: "\e603";
+}
+
+.icon-tags:before {
+  content: "\e600";
+}
+
+.icon-comments:before {
+  content: "\e606";
+}
+
+.icon-eye:before {
+  content: "\e607";
+}
+
+.icon-forward:before {
+  content: "\e608";
+}
+
+.icon-search:before {
+  content: "\e602";
+}
+
+// admin
+// ------------
+
+.admin {
+  &, .header, .footer {
+    min-width: 1000px;
+  }
+  .header nav a {
+    padding: 0 15px;
+  }
+  a.logo {
+    width: 250px;
+    font-size: 24px;
+  }
+  .main {
+    padding: 30px 0 80px;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+  }
+}
+
+.table2_wrap {
+  margin: 15px 0;
+  overflow-x: auto;
+}
+
+.table2 {
+  width: 100%;
+  border-top: 1px solid #ccc;
+  th, td {
+    white-space: nowrap;
+    word-break: keep-all;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+  th {
+    text-align: left;
+  }
+}
+
+.table1 td {
+  padding: 5px;
+  &.td1 {
+    text-align: right;
+  }
+}
+
+.welcome {
+  text-align: center;
+  margin-top: 150px;
+}
+
+// 前台编辑器中显示的内容
+// ------------
+
+pre {
+  font-size: 1em;
+  line-height: 1.5;
+  padding: 10px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  @include transition(border linear .2s, box-shadow linear .2s);
+  &:hover {
+    border-color: rgba(82, 168, 236, .8);
+    @include box-shadow(0 0 8px rgba(82, 168, 236, .6));
+  }
+}
+
+table.t1 {
+  td, th {
+    padding: 5px 10px;
+    border: 1px solid #DDD;
+  }
+  th {
+    background: #F7F7F7;
+    text-align: left;
+  }
+}
+
+// umeditor 矫正
+// ------------
+.edui-editor-body .edui-body-container {
+  font-family: $font-family !important;
+}
+
+// Responsive
+// ------------
+
+@media screen and (max-width: $screen-lg - 1) and (min-width: $screen-md) {
+  .index .contents {
+    padding-left: 10px;
+  }
+}
+
+@media screen and (max-width: $screen-md - 1) and (min-width: $screen-sm) {
+  .index {
+    .main {
+      padding: 30px 0;
+    }
+    .contents {
+      padding-left: 10px;
+      padding-right: 300px;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-sm - 1) and (min-width: $screen-xs + 1) {
+  .index {
+    .main {
+      margin-top: 42px;
+      padding: 30px 0 0;
+    }
+    .contents {
+      float: none;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .detail {
+      header {
+        margin-bottom: 15px;
+        h2 {
+          font-size: 20px;
+        }
+      }
+      .info {
+        margin-bottom: 15px;
+      }
+    }
+    .excerpt {
+      margin-bottom: 30px;
+      header,
+      .info {
+        margin-bottom: 10px;
+      }
+    }
+    .sidebar {
+      float: none;
+      margin-left: 0;
+      padding: 30px 10px 0;
+    }
+    .header {
+      height: 40px;
+      line-height: 40px;
+      nav a {
+        height: 40px;
+        padding: 0 10px;
+      }
+    }
+    a.logo {
+      width: 115px;
+      height: 40px;
+      font-size: 20px;
+    }
+    .excerpt .icon-pencil {
+      display: none;
+    }
+    .comment textarea {
+      width: 225px;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-xs) {
+  .index {
+    .main {
+      margin-top: 42px;
+      padding: 30px 0 0;
+    }
+    .contents {
+      float: none;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .detail {
+      header {
+        margin-bottom: 15px;
+        h2 {
+          font-size: 20px;
+        }
+      }
+      .info {
+        margin-bottom: 15px;
+      }
+    }
+    .excerpt {
+      margin-bottom: 30px;
+      header,
+      .info {
+        margin-bottom: 10px;
+      }
+    }
+    .sidebar {
+      float: none;
+      margin-left: 0;
+      padding: 30px 10px 0;
+    }
+    .header {
+      height: 40px;
+      line-height: 40px;
+      nav {
+
+        display: none;
+        position: absolute;
+        top: 42px;
+        right: 0;
+        width: 100px;
+        padding: 8px 0;
+        background: #fff;
+        border-left: 2px solid $primary;
+        border-bottom: 2px solid $primary;
+        z-index: 9999;
+        &.active {
+          display: block;
+        }
+        a {
+          display: block;
+          width: 100%;
+          height: 30px;
+          line-height: 30px;
+          padding: 0;
+          text-align: center;
+          border-width: 0;
+        }
+      }
+      .icon-menu {
+        display: block;
+        float: right;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 25px;
+        color: $primary;
+        cursor: pointer;
+      }
+    }
+    a.logo {
+      width: 115px;
+      height: 40px;
+      font-size: 20px;
+    }
+    .excerpt .icon-pencil {
+      display: none;
+    }
+    .comment textarea {
+      width: 225px;
+    }
+    .pagelist {
+      span, a {
+        display: none;
+      }
+      .pageprev, .pagenext {
+        display: inline-block;
+      }
+      .pageprev {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+      .pagenext {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+    }
+  }
+}
