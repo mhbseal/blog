@@ -11,6 +11,7 @@
     
     git clone https://github.com/mhbseal/blog  // 仓库
     cd blog && npm install  // 安装（可能有点慢）
+    npm run build // 只需要第一次运行,同构工具[webpack-isomorphic-tools]所需
     npm run dev  // 启动(mac下命令,windows貌似不支持node & node,详见package中dev,多行命令吧)
     npm run dev.noauth  // 启动（初次运行，用此模式，可免登陆进入后台）
     
