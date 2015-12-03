@@ -1,7 +1,7 @@
 # Blog
-后端：express + co + mongoose
-前端：react + redux + react-router
-线上地址：http://mhbseal.com
+后端：express + co + mongoose  
+前端：react + redux + react-router  
+线上地址：http://mhbseal.com  
 
 ### 准备
 
