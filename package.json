@@ -33,7 +33,8 @@
     "tar.prod": "bin/tar.prod.sh",
     "scp.dev": "bin/scp.dev.sh",
     "data.dev": "npm run scp.dev && npm run tar.dev && npm run mongorestore.dev",
-    "data.prod": "npm run mongodump.prod && npm run tar.prod"
+    "data.prod": "npm run mongodump.prod && npm run tar.prod",
+    "lint": "eslint ./fe ./be"
   },
   "dependencies": {
     "babel": "^5.8.29",
@@ -68,10 +69,14 @@
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
     "babel-core": "^5.8.34",
+    "babel-eslint": "^4.1.6",
     "babel-loader": "^5.3.3",
     "babel-plugin-react-transform": "^1.1.1",
     "clean-webpack-plugin": "^0.1.4",
     "css-loader": "^0.23.0",
+    "eslint": "^1.10.3",
+    "eslint-loader": "^1.1.1",
+    "eslint-plugin-react": "^3.13.1",
     "extract-text-webpack-plugin": "^0.9.1",
     "json-loader": "^0.5.3",
     "node-sass": "^3.4.2",

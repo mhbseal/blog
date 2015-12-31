@@ -25,7 +25,7 @@
 2.几个config文件
 
     /be/config/  //后端配置文件（数据库、session等）
-    /fe/src/config/  // 前端配置文件（后台访问目录路径）
+    /be/src/config/  // 前端配置文件（后台访问目录路径）
     /env.config.js  // 2个server的host和port
 
 ### 更新日志
