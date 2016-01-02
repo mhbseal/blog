@@ -1,11 +1,17 @@
 # Blog
+
+[![build status](https://img.shields.io/travis/mhbseal/blog/master.svg?style=flat-square)](https://travis-ci.org/mhbseal/blog)
+[![Build Status][travis-image]][travis-url]
+
+### 前言
+
 后端：express + co + mongoose + ...  
 前端：react + redux + react-router + ...  
 线上地址：http://mhbseal.com  
 
 ### 准备
 
-安装 nodejs（>=4.1.1） 和 mongodb(且启动)
+安装 nodejs(>=4.1.1) 和 mongodb(且启动)
 
 ### 运行
     
