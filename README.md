@@ -1,7 +1,6 @@
 # Blog
 
 [![build status](https://img.shields.io/travis/mhbseal/blog/master.svg?style=flat-square)](https://travis-ci.org/mhbseal/blog)
-[![Build Status][travis-image]][travis-url]
 
 ### 前言
 
