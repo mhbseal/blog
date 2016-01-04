@@ -17,7 +17,7 @@ var
   CleanPlugin = require('clean-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin'), // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-  babelConfig = require('./babel.config')(G.__CLIENT__),
+  babelConfig = require('./babel.config')(G.__DEVELOPMENT__, G.__CLIENT__),
   relativeAssetsPath = '../../resource/static/dist';
 
 module.exports = {

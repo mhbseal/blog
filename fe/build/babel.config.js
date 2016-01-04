@@ -15,7 +15,7 @@ module.exports = function (__DEVELOPMENT__, __CLIENT__) {
     }
   }
 
-  if (__CLIENT__) {
+  if (__DEVELOPMENT__ && __CLIENT__) {
     config.extra["react-transform"].transforms.push({
       "transform": "react-transform-hmr",
       "imports": ["react"],

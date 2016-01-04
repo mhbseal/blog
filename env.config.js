@@ -2,18 +2,15 @@ module.exports = {
   dev: {
     apiServer: {
       port: 3003,
-      host: 'localhost',
-      domain: ''
+      host: 'localhost'
     },
     renderServer: {
       port: 3004,
-      host: 'localhost',
-      domain: ''
+      host: 'localhost'
     },
     webpackServer: {
       port: 3005,
-      host: 'localhost',
-      domain: ''
+      host: 'localhost'
     }
   },
   prod: {
