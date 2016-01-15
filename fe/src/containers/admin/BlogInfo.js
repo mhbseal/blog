@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
-import { pushState } from 'redux-router';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as blogInfoActions from '../../redux/modules/admin/blogInfo';
 import State from './State';
+import { pushState } from 'redux-router';
 
 function fetchData(getState, dispatch, location) {
   return dispatch(blogInfoActions.load());
@@ -16,7 +16,7 @@ function fetchData(getState, dispatch, location) {
 @connectData(fetchData)
 @connect(
   state => ({
-    _blogInfo: state.adminBlogInfo
+    blogInfo: state.adminBlogInfo
   }),
   { ...blogInfoActions, pushState }
 )
@@ -27,8 +27,8 @@ export default class BlogInfo extends Component {
   }
   render() {
     let
-      _blogInfo = this.props._blogInfo,
-      {blogInfo, logined} = _blogInfo.loadData.data;
+      blogInfoProps = this.props.blogInfo,
+      {blogInfo, logined} = blogInfoProps.data.data;
 
     if (logined) {
       return (
@@ -59,7 +59,7 @@ export default class BlogInfo extends Component {
               <td className="td1">&nbsp;</td>
               <td>
                 <a href="javascript:void(0)" className="btn" onClick={this.handleSubmit.bind(this, blogInfo._id)}>确定</a>&nbsp;&nbsp;
-                <Alert data={_blogInfo.editData} loading={_blogInfo.editing} error={_blogInfo.editError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert}/>
+                <Alert data={blogInfoProps.editData} loading={blogInfoProps.editing} error={blogInfoProps.editError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert}/>
               </td>
             </tr>
             </tbody>
@@ -96,9 +96,9 @@ export default class BlogInfo extends Component {
     // 提交
     if (data) {
       if (id) {
-        editOver(props.update({id}, data), this);
+        editOver(props.update({params: {id}, data}), this);
       } else {
-        editOver(props.create(data), this);
+        editOver(props.create({data}), this);
       }
     }
   }

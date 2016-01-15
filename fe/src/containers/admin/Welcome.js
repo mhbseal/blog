@@ -19,16 +19,17 @@ export default class Welcome extends Component {
   render() {
     let auth = this.props.auth;
 
-    if (auth.loadData && auth.loadData.data) {
+    if (auth.data && auth.data.data) {
+      let name = auth.data.data.admin.name;
       return (
         <div className="main">
           <div className="welcome">
-            <h1>欢迎{auth.loadData.data.admin.name ? ' ' + auth.loadData.data.admin.name + '!' : <span>! <Link to={ADMINPATH + 'login'}>请登陆</Link></span>}</h1>
+            <h1>欢迎{name ? ' ' + name + '!' : <span>! <Link to={ADMINPATH + 'login'}>请登陆</Link></span>}</h1>
           </div>
         </div>
       )
     } else {
-      return <State data={auth.loadData} loading={auth.loading} error={auth.loadError} />
+      return <State {...auth} />
     }
   }
 }

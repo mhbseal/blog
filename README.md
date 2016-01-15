@@ -10,7 +10,7 @@
 
 ### 准备
 
-安装 nodejs(>=4.1.1) 和 mongodb(且启动)
+安装 nodejs(>=4) 和 mongodb(且启动)
 
 ### 运行
     
@@ -25,7 +25,7 @@
 1.访问地址
 
     http://localhost:3004  // 前台地址
-    http://localhost:3004/admin/  // 后台地址
+    http://localhost:3004/admin  // 后台地址
       
 2.几个config文件
 

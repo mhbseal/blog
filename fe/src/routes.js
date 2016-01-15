@@ -34,7 +34,7 @@ export default () => {
         <Route path="article" component={Article} />
         <Route path="singlePage" component={SinglePage} />
       </Route>
-      <Route path={String(ADMINPATH)} component={AdminLayout}>
+      <Route path={String(ADMINPATH).slice(0, -1)} component={AdminLayout}>
         <IndexRoute component={AdminWelcome} />
         <Route path="login" component={AdminLogin} />
         <Route path="admin" component={AdminAdmin} />

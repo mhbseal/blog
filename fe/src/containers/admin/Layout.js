@@ -15,15 +15,15 @@ function fetchData(getState, dispatch) {
 
 @connectData(fetchData)
 @connect(
-  state => ({_blogInfo: state.adminBlogInfo})
+  state => ({blogInfo: state.adminBlogInfo})
 )
 export default class Layout extends Component {
   render() {
-    let _blogInfo = this.props._blogInfo;
+    let blogInfoProps = this.props.blogInfo;
 
-    if (_blogInfo.loadData && _blogInfo.loadData.data) {
+    if (blogInfoProps.data && blogInfoProps.data.data) {
       let
-        {blogInfo} = _blogInfo.loadData.data;
+        {blogInfo} = blogInfoProps.data.data;
       return (
         <div className="admin">
           <DocumentMeta title='后台管理'/>

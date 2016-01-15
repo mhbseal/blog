@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { load } from '../../redux/modules/admin/list';
-import * as detailActions from '../../redux/modules/admin/detail';
+import { load } from '../../redux/modules/admin/linkList';
+import { del } from '../../redux/modules/admin/link';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
@@ -10,16 +10,16 @@ import State from './State';
 import { deleteOver } from '../../utils/actionOver';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load({...location.query, x: 'link'}));
+  return dispatch(load({params: {...location.query, x: 'link'}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    list: state.adminList,
-    detail: state.adminDetail
+    list: state.adminLinkList,
+    detail: state.adminLink
   }),
-  { ...detailActions, load }
+  { del, load }
 )
 export default class LinkList extends Component {
   state = {
@@ -72,6 +72,6 @@ export default class LinkList extends Component {
     }
   }
   handleDelete(id) {
-    deleteOver(this.props.del({x: 'link', id}), this, 'link');
+    deleteOver(this.props.del({params: {x: 'link', id}}), this, 'link');
   }
 };

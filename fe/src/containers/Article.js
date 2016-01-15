@@ -6,11 +6,11 @@ import { load, insertComment } from '../redux/modules/article';
 import connectData from '../helpers/connectData';
 import Alert from '../components/Alert';
 import formatForm from '../utils/formatForm';
-import { create } from '../redux/modules/comment';
+import { create as createComment } from '../redux/modules/comment';
 import State from './State';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load(location.query));
+  return dispatch(load({params: location.query}));
 }
 
 @connectData(fetchData)
@@ -20,7 +20,7 @@ function fetchData(getState, dispatch, location) {
     layout: state.layout,
     comment: state.comment
   }),
-  { create, insertComment }
+  { createComment, insertComment }
 )
 
 export default class Article extends Component {
@@ -30,14 +30,13 @@ export default class Article extends Component {
   render() {
     let
       props = this.props,
-      _article = props.article,
-      {blogInfo} = props.layout.data,
+      articleProps = props.article,
       comment = props.comment || {};
 
-    if (_article.data && _article.data.data) {
+    if (articleProps.data && articleProps.data.data) {
       let
         {blogInfo} = props.layout.data.data,
-        {article, comments, commenter} = _article.data.data;
+        {article, comments, commenter} = articleProps.data.data;
 
       return (
         <section className="contents">
@@ -110,7 +109,7 @@ export default class Article extends Component {
         </section>
       )
     } else {
-      return <State {..._article} />
+      return <State {...articleProps} />
     }
   }
   handleSubmit(article) {
@@ -134,7 +133,8 @@ export default class Article extends Component {
 
     // 提交
     if (data) {
-      props.create({...data, article}).then((data) => {
+      data = {...data, article};
+      props.createComment({ data }).then((data) => {
         if (data.result.status === 'success') {
           this.refs.content.value = '';
           props.insertComment(data.result.data);

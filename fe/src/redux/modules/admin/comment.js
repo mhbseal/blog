@@ -1,9 +1,9 @@
 import createCURD from '../../../helpers/createCURD';
 
-const { methods: { load }, createReducer } = createCURD('admin/articleList', 'R');
+const { methods: { create, update, load, del }, createReducer } = createCURD('admin/detail', 'CURD', 'comment');
 
 export default function reducer(state = {}, action = {}) {
   return createReducer(state, action) || state;
 }
 
-export { load }
+export { create, update, load, del }

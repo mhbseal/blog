@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
-import { pushState } from 'redux-router';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
-import * as detailActions from '../../redux/modules/admin/detail';
+import * as detailActions from '../../redux/modules/admin/articleType';
 import State from './State';
+import { pushState } from 'redux-router';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(detailActions.load({x: 'articleType', id: location.query.id}));
+  return dispatch(detailActions.load({params: {x: 'articleType', id: location.query.id}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    detail: state.adminDetail
+    detail: state.adminArticleType
   }),
   { ...detailActions, pushState }
 )
@@ -28,8 +28,8 @@ export default class ArticleType extends Component {
     let
       detail = this.props.detail;
 
-    if (detail.loadData && detail.loadData.data) {
-      let {xData} = detail.loadData.data;
+    if (detail.data && detail.data.data) {
+      let {xData} = detail.data.data;
       return (
         <div className="main">
           <table className="table1">
@@ -67,7 +67,7 @@ export default class ArticleType extends Component {
         </div>
       )
     } else {
-      return <State data={detail.loadData} loading={detail.loading} error={detail.loadError} />
+      return <State {...detail} />
     }
   }
   handleSubmit(id) {
@@ -88,9 +88,9 @@ export default class ArticleType extends Component {
     // 提交
     if (data) {
       if (id) {
-        editOver(props.update({x: 'articleType', id}, data), this, ADMINPATH + 'articleTypeList');
+        editOver(props.update({params: {x: 'articleType', id}, data}), this, ADMINPATH + 'articleTypeList');
       } else {
-        editOver(props.create({x: 'articleType'}, data), this, ADMINPATH + 'articleTypeList');
+        editOver(props.create({params: {x: 'articleType'}, data}), this, ADMINPATH + 'articleTypeList');
       }
     }
   }

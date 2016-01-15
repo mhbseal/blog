@@ -3,24 +3,23 @@ import DocumentMeta from 'react-document-meta';
 import { connect } from 'react-redux';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
-import { pushState } from 'redux-router';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
-import * as detailActions from '../../redux/modules/admin/detail';
+import * as detailActions from '../../redux/modules/admin/singlePage';
 import State from './State';
 import m from '../../utils/moReactUtils';
+import { pushState } from 'redux-router';
 
 let contentEditor;
 
 function fetchData(getState, dispatch, location) {
-  debugger;
-  return dispatch(detailActions.load({x: 'singlePage', id: location.query.id}));
+  return dispatch(detailActions.load({params: {x: 'singlePage', id: location.query.id}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    detail: state.adminDetail
+    detail: state.adminSinglePage
   }),
   { ...detailActions, pushState }
 )
@@ -33,7 +32,7 @@ export default class singlePage extends Component {
     let
       detail = this.props.detail;
     // 引入umeditor
-    if (detail.loadData && detail.loadData.data && detail.loadData.data.useEditor) {
+    if (detail.data && detail.data.data && detail.data.data.useEditor) {
       m.createStyle('/static/scripts/umeditor/themes/default/css/umeditor.css');
       m.createScript('/static/scripts/umeditor/third-party/jquery.min.js', function() {
         m.createScript('/static/scripts/umeditor/umeditor.config.js', function() {
@@ -50,8 +49,8 @@ export default class singlePage extends Component {
     let
       detail = this.props.detail;
 
-    if (detail.loadData && detail.loadData.data) {
-      let {xData} = detail.loadData.data;
+    if (detail.data && detail.data.data) {
+      let {xData} = detail.data.data;
       return (
         <div className="main">
           <DocumentMeta script={{}}/>
@@ -85,7 +84,7 @@ export default class singlePage extends Component {
         </div>
       )
     } else {
-      return <State data={detail.loadData} loading={detail.loading} error={detail.loadError} />
+      return <State {...detail} />
     }
   }
   handleSubmit(id) {
@@ -107,9 +106,9 @@ export default class singlePage extends Component {
     if (data) {
       data.content = contentEditor.getContent();
       if (id) {
-        editOver(props.update({x: 'singlePage', id}, data), this, ADMINPATH + 'singlePageList');
+        editOver(props.update({params: {x: 'singlePage', id}, data}), this, ADMINPATH + 'singlePageList');
       } else {
-        editOver(props.create({x: 'singlePage'}, data), this, ADMINPATH + 'singlePageList');
+        editOver(props.create({params: {x: 'singlePage'}, data}), this, ADMINPATH + 'singlePageList');
       }
     }
   }

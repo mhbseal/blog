@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { load } from '../../redux/modules/admin/list';
-import * as detailActions from '../../redux/modules/admin/detail';
+import { load } from '../../redux/modules/admin/articleTagList';
+import { del } from '../../redux/modules/admin/articleTag';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
@@ -10,16 +10,16 @@ import State from './State';
 import { deleteOver } from '../../utils/actionOver';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load({...location.query, x: 'articleTag'}));
+  return dispatch(load({params: {...location.query, x: 'articleTag'}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    list: state.adminList,
-    detail: state.adminDetail
+    list: state.adminArticleTagList,
+    detail: state.adminArticleTag
   }),
-  { ...detailActions, load }
+  { del, load }
 )
 export default class ArticleTagList extends Component {
   state = {
@@ -64,7 +64,7 @@ export default class ArticleTagList extends Component {
               </tbody>
             </table>
           </div>
-          <PageList {...{...pageList, path: ADMINPATH + 'articleTagList'}} />
+          <PageList {...pageList} path={ADMINPATH + 'articleTagList'} />
         </div>
       )
     } else {
@@ -72,6 +72,6 @@ export default class ArticleTagList extends Component {
     }
   }
   handleDelete(id) {
-    deleteOver(this.props.del({x: 'articleTag', id}), this, 'articleTag');
+    deleteOver(this.props.del({params: {x: 'articleTag', id}}), this, 'articleTag');
   }
 };

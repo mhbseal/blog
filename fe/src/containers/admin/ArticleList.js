@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { load } from '../../redux/modules/admin/articleList';
-import * as articleActions from '../../redux/modules/admin/article';
+import { del } from '../../redux/modules/admin/article';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
@@ -10,7 +10,7 @@ import State from './State';
 import { deleteOver } from '../../utils/actionOver';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load(location.query));
+  return dispatch(load({params: {...location.query}}));
 }
 
 @connectData(fetchData)
@@ -19,7 +19,7 @@ function fetchData(getState, dispatch, location) {
     articleList: state.adminArticleList,
     article: state.adminArticle
   }),
-  { ...articleActions, load }
+  { del, load }
 )
 export default class ArticleList extends Component {
   state = {
@@ -83,7 +83,7 @@ export default class ArticleList extends Component {
               </tbody>
             </table>
           </div>
-          <PageList {...{...pageList, path: ADMINPATH + 'articleList'}} />
+          <PageList {...pageList} path={ADMINPATH + 'articleList'} />
         </div>
       )
     } else {
@@ -91,6 +91,6 @@ export default class ArticleList extends Component {
     }
   }
   handleDelete(id) {
-    deleteOver(this.props.del({id}), this);
+    deleteOver(this.props.del({params: {id}}), this);
   }
 };

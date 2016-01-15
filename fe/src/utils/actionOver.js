@@ -20,7 +20,7 @@ export function deleteOver (promise, parent, x) {
 
   promise.then(() => {
     parent.setState({showAlert: true});
-    parent.props.load(params);
+    parent.props.load({params});
   }, () => {
     parent.setState({showAlert: true});
   });
