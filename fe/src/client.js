@@ -5,7 +5,6 @@ import 'babel/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import createHistory from 'history/lib/createBrowserHistory';
-import useScroll from 'scroll-behavior/lib/useStandardScroll';
 import configureStore from './redux/configureStore';
 import ApiClient from './helpers/ApiClient';
 import { Provider } from 'react-redux';
@@ -16,12 +15,8 @@ import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
 
 const client = new ApiClient();
 
-// Three different types of scroll behavior available.
-// Documented here: https://github.com/rackt/scroll-behavior
-const scrollablehistory = useScroll(createHistory);
-
 const dest = document.getElementById('app');
-const store = configureStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), scrollablehistory, client, window.__data);
+const store = configureStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, client, window.__data);
 
 const component = (
   <ReduxRouter routes={getRoutes(store)} />

@@ -25,7 +25,7 @@ module.exports = {
   context: path.resolve(__dirname, '../..'),
   entry: {
     app: './fe/src/client.js',
-    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-router', 'classnames', 'superagent', 'scroll-behavior']
+    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-router', 'classnames', 'superagent']
   },
   output: {
     path: path.resolve(__dirname, relativeAssetsPath),
