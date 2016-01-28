@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
-import { pushState } from 'redux-router';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as articleActions from '../../redux/modules/admin/article';
 import State from './State';
 import m from '../../utils/moReactUtils';
+import { pushState } from 'redux-router';
 
 let contentEditor, introEditor;
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(articleActions.load({id: location.query.id}));
+  return dispatch(articleActions.load({params: {id: location.query.id}}));
 }
 
 @connectData(fetchData)
@@ -31,7 +31,7 @@ export default class Article extends Component {
     let
       article = this.props.article;
     // 引入umeditor
-    if (article.loadData && article.loadData.data) {
+    if (article.data && article.data.data) {
       m.createStyle('/static/scripts/umeditor/themes/default/css/umeditor.css');
       m.createScript('/static/scripts/umeditor/third-party/jquery.min.js', function() {
         m.createScript('/static/scripts/umeditor/umeditor.config.js', function() {
@@ -47,10 +47,10 @@ export default class Article extends Component {
   }
   render() {
     let
-      _article = this.props.article;
+      articleProps = this.props.article;
 
-    if (_article.loadData && _article.loadData.data) {
-      let {article, articleTypes, articleTags} = _article.loadData.data;
+    if (articleProps.data && articleProps.data.data) {
+      let {article, articleTypes, articleTags} = articleProps.data.data;
       return (
         <div className="main">
           <table className="table1">
@@ -106,7 +106,7 @@ export default class Article extends Component {
               <td className="td1">&nbsp;</td>
               <td>
                 <a href="javascript:void(0)" className="btn" onClick={this.handleSubmit.bind(this, article._id)}>确定</a>&nbsp;&nbsp;
-                <Alert data={_article.editData} loading={_article.editing} error={_article.editError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert} />
+                <Alert data={articleProps.editData} loading={articleProps.editing} error={articleProps.editError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert} />
               </td>
             </tr>
             </tbody>
@@ -114,7 +114,7 @@ export default class Article extends Component {
         </div>
       )
     } else {
-      return <State data={_article.loadData} loading={_article.loading} error={_article.loadError} />
+      return <State {...articleProps} />
     }
   }
   handleSubmit(id) {
@@ -128,8 +128,10 @@ export default class Article extends Component {
           name: 'author',
           rules: ['isRequired'],
           msgs: ['作者不能为空！']
-        }, {
-          name: 'type'
+        },{
+          name: 'type',
+          rules: ['isRequired'],
+          msgs: ['类别不能为空']
         }, {
           names: 'tags'
         }, {
@@ -143,9 +145,9 @@ export default class Article extends Component {
       data.introduction = introEditor.getContent();
       data.content = contentEditor.getContent();
       if (id) {
-        editOver(props.update({id}, data), this, ADMINPATH + 'articleList');
+        editOver(props.update({params: {id}, data}), this, ADMINPATH + 'articleList');
       } else {
-        editOver(props.create(data), this, ADMINPATH + 'articleList');
+        editOver(props.create({data}), this, ADMINPATH + 'articleList');
       }
     }
   }

@@ -1,11 +1,16 @@
 # Blog
+
+[![build status](https://img.shields.io/travis/mhbseal/blog/master.svg?style=flat-square)](https://travis-ci.org/mhbseal/blog)
+
+### 前言
+
 后端：express + co + mongoose + ...  
 前端：react + redux + react-router + ...  
 线上地址：http://mhbseal.com  
 
 ### 准备
 
-安装 nodejs（>=4.1.1） 和 mongodb(且启动)
+安装 nodejs(>=4) 和 mongodb(且启动)
 
 ### 运行
     
@@ -20,12 +25,12 @@
 1.访问地址
 
     http://localhost:3004  // 前台地址
-    http://localhost:3004/admin/  // 后台地址
+    http://localhost:3004/admin  // 后台地址
       
 2.几个config文件
 
     /be/config/  //后端配置文件（数据库、session等）
-    /be/src/config/  // 前端配置文件（后台访问目录路径）
+    /fe/src/config/  // 前端配置文件（后台访问目录路径）
     /env.config.js  // 2个server的host和port
 
 ### 更新日志

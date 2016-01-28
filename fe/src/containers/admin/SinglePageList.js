@@ -1,24 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { load } from '../../redux/modules/admin/list';
-import * as detailActions from '../../redux/modules/admin/detail';
+import { load } from '../../redux/modules/admin/singlePageList';
+import { del } from '../../redux/modules/admin/singlePage';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
 import State from './State';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load({...location.query, x: 'singlePage'}));
+  return dispatch(load({params: {...location.query, x: 'singlePage'}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    list: state.adminList,
-    detail: state.adminDetail
+    list: state.adminSinglePageList,
+    detail: state.adminSinglePage
   }),
-  { ...detailActions, load }
+  { del, load }
 )
 export default class SinglePageList extends Component {
   state = {
@@ -63,7 +63,7 @@ export default class SinglePageList extends Component {
               </tbody>
             </table>
           </div>
-          <PageList {...{...pageList, path: ADMINPATH + 'singlePageList'}} />
+          <PageList {...pageList} path={ADMINPATH + 'singlePageList'} />
         </div>
       )
     } else {
@@ -73,9 +73,9 @@ export default class SinglePageList extends Component {
   handleDelete(id) {
     let props = this.props;
 
-    props.del({x: 'singlePage', id}).then(() => {
+    props.del({params: {x: 'singlePage', id}}).then(() => {
       this.setState({showAlert: true});
-      props.load({...props.location.query, x: 'singlePage'});
+      props.load({params: {...props.location.query, x: 'singlePage'}});
     }, () => {
       this.setState({showAlert: true});
     });

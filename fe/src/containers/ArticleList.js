@@ -8,7 +8,7 @@ import PageList from '../components/PageList';
 import State from './State';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load(location.query));
+  return dispatch(load({params: location.query}));
 }
 
 @connectData(fetchData)
@@ -58,7 +58,7 @@ export default class ArticleList extends Component {
               </article>
             )
           })}
-          <PageList {...{...pageList, path: '/'}} />
+          <PageList {...pageList} path='/' />
         </section>
       )
     } else {

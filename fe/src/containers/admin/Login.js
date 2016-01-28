@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
-import { pushState } from 'redux-router';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as authActions from '../../redux/modules/admin/auth';
 import State from './State';
+import { pushState } from 'redux-router';
 
 function fetchData(getState, dispatch) {
   return dispatch(authActions.load());
@@ -28,8 +28,8 @@ export default class Login extends Component {
     let
       auth = this.props.auth;
 
-    if (auth.loadData && auth.loadData.data) {
-      let {admin} = auth.loadData.data;
+    if (auth.data && auth.data.data) {
+      let {admin} = auth.data.data;
       return (
         <div className="main">
           <table className="table1">
@@ -58,7 +58,7 @@ export default class Login extends Component {
         </div>
       )
     } else {
-      return <State data={auth.loadData} loading={auth.loading} error={auth.loadError} />
+      return <State {...auth} />
     }
   }
   handleSubmit() {

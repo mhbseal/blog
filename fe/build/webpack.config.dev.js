@@ -27,7 +27,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel?' + JSON.stringify(babelConfig)},
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelConfig), 'eslint']},
       { test: /\.json$/, loader: 'json'},
       { test: /\.less$/, loader: 'style!css!autoprefixer!less'},
       { test: /\.scss$/, loader: 'style!css!autoprefixer!sass'}

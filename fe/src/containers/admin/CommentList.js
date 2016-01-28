@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { load } from '../../redux/modules/admin/list';
-import * as detailActions from '../../redux/modules/admin/detail';
+import { load } from '../../redux/modules/admin/commentList';
+import { del } from '../../redux/modules/admin/comment';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
@@ -10,16 +10,16 @@ import State from './State';
 import { deleteOver } from '../../utils/actionOver';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load({...location.query, x: 'comment'}));
+  return dispatch(load({params: {...location.query, x: 'comment'}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    list: state.adminList,
-    detail: state.adminDetail
+    list: state.adminCommentList,
+    detail: state.adminComment
   }),
-  { ...detailActions, load }
+  { del, load }
 )
 export default class CommentList extends Component {
   state = {
@@ -65,7 +65,7 @@ export default class CommentList extends Component {
               </tbody>
             </table>
           </div>
-          <PageList {...{...pageList, path: ADMINPATH + 'commentList'}} />
+          <PageList {...pageList} path={ADMINPATH + 'commentList'} />
         </div>
       )
     } else {
@@ -73,6 +73,6 @@ export default class CommentList extends Component {
     }
   }
   handleDelete(id) {
-    deleteOver(this.props.del({x: 'comment', id}), this, 'comment');
+    deleteOver(this.props.del({params: {x: 'comment', id}}), this, 'comment');
   }
 };

@@ -1,24 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { load } from '../../redux/modules/admin/list';
-import * as detailActions from '../../redux/modules/admin/detail';
+import { load } from '../../redux/modules/admin/userList';
+import { del } from '../../redux/modules/admin/user';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
 import State from './State';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load({...location.query, x: 'user'}));
+  return dispatch(load({params: {...location.query, x: 'user'}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    list: state.adminList,
-    detail: state.adminDetail
+    list: state.adminUserList,
+    detail: state.adminUser
   }),
-  { ...detailActions, load }
+  { del, load }
 )
 export default class UserList extends Component {
   state = {
@@ -63,7 +63,7 @@ export default class UserList extends Component {
               </tbody>
             </table>
           </div>
-          <PageList {...{...pageList, path: ADMINPATH + 'userList'}} />
+          <PageList {...pageList} path={ADMINPATH + 'userList'} />
         </div>
       )
     } else {
@@ -73,9 +73,9 @@ export default class UserList extends Component {
   handleDelete(id) {
     let props = this.props;
 
-    props.del({x: 'user', id}).then(() => {
+    props.del({params: {x: 'user', id}}).then(() => {
       this.setState({showAlert: true});
-      props.load({...props.location.query, x: 'user'});
+      props.load({params: {...props.location.query, x: 'user'}});
     }, () => {
       this.setState({showAlert: true});
     });

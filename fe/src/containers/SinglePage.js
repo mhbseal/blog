@@ -6,7 +6,7 @@ import connectData from '../helpers/connectData';
 import State from './State';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(load(location.query));
+  return dispatch(load({params: location.query}));
 }
 
 @connectData(fetchData)
@@ -20,12 +20,12 @@ export default class singlePage extends Component {
   render() {
     let
       props = this.props,
-      _singlePage = props.singlePage;
+      singlePageProps = props.singlePage;
 
-    if (_singlePage.data && _singlePage.data.data) {
+    if (singlePageProps.data && singlePageProps.data.data) {
       let
         {blogInfo} = props.layout.data.data,
-        singlePage = _singlePage.data.data;
+        singlePage = singlePageProps.data.data;
 
       return (
         <section className="contents">
@@ -39,7 +39,7 @@ export default class singlePage extends Component {
         </section>
       )
     } else {
-      return <State {..._singlePage} />
+      return <State {...singlePageProps} />
     }
   }
 }

@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import connectData from '../../helpers/connectData';
 import Alert from '../../components/Alert';
-import { pushState } from 'redux-router';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
-import * as detailActions from '../../redux/modules/admin/detail';
+import * as detailActions from '../../redux/modules/admin/link';
 import State from './State';
+import { pushState } from 'redux-router';
 
 function fetchData(getState, dispatch, location) {
-  return dispatch(detailActions.load({x: 'link', id: location.query.id}));
+  return dispatch(detailActions.load({params: {x: 'link', id: location.query.id}}));
 }
 
 @connectData(fetchData)
 @connect(
   state => ({
-    detail: state.adminDetail
+    detail: state.adminLink
   }),
   { ...detailActions, pushState }
 )
@@ -28,8 +28,8 @@ export default class Link extends Component {
     let
       detail = this.props.detail;
 
-    if (detail.loadData && detail.loadData.data) {
-      let {xData} = detail.loadData.data;
+    if (detail.data && detail.data.data) {
+      let {xData} = detail.data.data;
       return (
         <div className="main">
           <table className="table1">
@@ -58,7 +58,7 @@ export default class Link extends Component {
         </div>
       )
     } else {
-      return <State data={detail.loadData} loading={detail.loading} error={detail.loadError} />
+      return <State {...detail} />
     }
   }
   handleSubmit(id) {
@@ -79,9 +79,9 @@ export default class Link extends Component {
     // 提交
     if (data) {
       if (id) {
-        editOver(props.update({x: 'link', id}, data), this, ADMINPATH + 'linkList');
+        editOver(props.update({params: {x: 'link', id}, data}), this, ADMINPATH + 'linkList');
       } else {
-        editOver(props.create({x: 'link'}, data), this, ADMINPATH + 'linkList');
+        editOver(props.create({params: {x: 'link'}, data}), this, ADMINPATH + 'linkList');
       }
     }
   }

@@ -17,7 +17,7 @@ var
   CleanPlugin = require('clean-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin'), // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-  babelConfig = require('./babel.config')(G.__CLIENT__),
+  babelConfig = require('./babel.config')(G.__DEVELOPMENT__, G.__CLIENT__),
   relativeAssetsPath = '../../resource/static/dist';
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
   context: path.resolve(__dirname, '../..'),
   entry: {
     app: './fe/src/client.js',
-    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-router', 'classnames', 'superagent', 'scroll-behavior']
+    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-router', 'classnames', 'superagent']
   },
   output: {
     path: path.resolve(__dirname, relativeAssetsPath),
