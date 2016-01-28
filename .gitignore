@@ -16,7 +16,6 @@ npm-debug.log
 # data
 /be/data
 
-/env.config.js
 
 # github ignore
 /resource/test
