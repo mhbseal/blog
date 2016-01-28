@@ -81,6 +81,8 @@ export default class ArticleType extends Component {
           name: 'path',
           rules: ['isRequired'],
           msgs: ['路径不能为空！']
+        },{
+            name: 'enabled'
         }
       ]),
       props = this.props;

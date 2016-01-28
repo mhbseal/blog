@@ -128,8 +128,10 @@ export default class Article extends Component {
           name: 'author',
           rules: ['isRequired'],
           msgs: ['作者不能为空！']
-        }, {
-          name: 'type'
+        },{
+          name: 'type',
+          rules: ['isRequired'],
+          msgs: ['类别不能为空']
         }, {
           names: 'tags'
         }, {
