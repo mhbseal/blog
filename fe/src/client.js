@@ -5,7 +5,7 @@ import 'babel/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import createHistory from 'history/lib/createBrowserHistory';
-import configureStore from './redux/configureStore';
+import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import { Provider } from 'react-redux';
 import {reduxReactRouter, ReduxRouter} from 'redux-router';
@@ -16,7 +16,7 @@ import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
 const client = new ApiClient();
 
 const dest = document.getElementById('app');
-const store = configureStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, client, window.__data);
+const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, client, window.__data);
 
 const component = (
   <ReduxRouter routes={getRoutes(store)} />

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import createMiddleware from './middleware/clientMiddleware';
 import transitionMiddleware from './middleware/transitionMiddleware';
 import reducers from './modules/reducers';
@@ -14,9 +14,9 @@ export default function configureStore(reduxReactRouter, getRoutes, createHistor
       applyMiddleware(...middleware),
       DevTools.instrument(),
       persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-    )(createStore);
+    )(_createStore);
   } else {
-    finalCreateStore = applyMiddleware(...middleware)(createStore);
+    finalCreateStore = applyMiddleware(...middleware)(_createStore);
   }
 
   const store = reduxReactRouter({ getRoutes, createHistory })(finalCreateStore)(reducers, data);
