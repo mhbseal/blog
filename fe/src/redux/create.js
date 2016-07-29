@@ -3,7 +3,8 @@ import createMiddleware from './middleware/clientMiddleware';
 import transitionMiddleware from './middleware/transitionMiddleware';
 import reducers from './modules/reducers';
 
-export default function configureStore(reduxReactRouter, getRoutes, createHistory, client, data) {
+export default function createStore(reduxReactRouter, getRoutes, createHistory, client, data) {
+  // Sync dispatched route actions to the history
   const middleware = [createMiddleware(client), transitionMiddleware];
 
   let finalCreateStore;
