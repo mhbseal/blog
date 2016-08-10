@@ -1,29 +1,28 @@
 var
+  config = require('../src/config/dev'),
   G = {
-    ADMINPATH: require('../src/config/dev').adminPath,
+    ADMINPATH: config.adminPath,
     __CLIENT__: true,
-    __SERVER__: false,
     __DEVELOPMENT__: true,
     __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
   },
   path = require('path'),
   webpack = require('webpack'),
   WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin'), // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-  envConfig = require('../../env.config'),
   babelConfig = require('./babel.config')(G.__DEVELOPMENT__, G.__CLIENT__);
 
 module.exports = {
   devtool: 'inline-source-map',
-  context: path.resolve(__dirname, '../..'),
+  context: path.resolve(__dirname, '..'),
   entry: [
-    'webpack-hot-middleware/client?path=http://' + envConfig.dev.webpackServer.host + ':' + envConfig.dev.webpackServer.port + '/__webpack_hmr',
-    './fe/src/client.js'
+    'webpack-hot-middleware/client?path=http://' + config.webpackServer.host + ':' + config.webpackServer.port + '/__webpack_hmr',
+    './src/client.js'
   ],
   output: {
     path: path.resolve(__dirname, '../../resource/static/dist'),
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: 'http://' + envConfig.dev.webpackServer.host + ':' + envConfig.dev.webpackServer.port + '/static/dist/'
+    publicPath: 'http://' + config.webpackServer.host + ':' + config.webpackServer.port + '/static/dist/'
   },
   module: {
     loaders: [
@@ -42,14 +41,12 @@ module.exports = {
     extensions: ['', '.json', '.js']
   },
   plugins: [
-    new webpack.DefinePlugin(G),
-
     // hot reload
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-
+    // global vars
+    new webpack.DefinePlugin(G),
     // isomorphic
+    new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new WebpackIsomorphicToolsPlugin(require('./webpack.isomorphic.tools')).development()
   ]
 };

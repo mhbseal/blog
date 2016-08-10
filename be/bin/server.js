@@ -7,4 +7,4 @@ if (process.env.NODE_ENV !== 'production') {
     return;
   }
 }
-require('../be/api');
+require('../server.js');

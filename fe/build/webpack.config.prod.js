@@ -1,14 +1,13 @@
 // for github
 var adminPath;
 try {
-  adminPath = require('../src/config/prod').adminPath;
+  adminPath = require('../src/config').adminPath;
 } catch(e) {};
 
 var
   G = {
     ADMINPATH: adminPath || require('../src/config/dev').adminPath,
     __CLIENT__: true,
-    __SERVER__: false,
     __DEVELOPMENT__: false,
     __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
   },
@@ -57,13 +56,13 @@ module.exports = {
       minChunks: Infinity
     }),
 
-    new webpack.DefinePlugin(G),
     new CleanPlugin([relativeAssetsPath]),
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
 
     // set global vars
+    new webpack.DefinePlugin(G),
     new webpack.DefinePlugin({
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react

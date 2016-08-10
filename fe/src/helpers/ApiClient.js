@@ -1,25 +1,19 @@
 import superagent from 'superagent';
-import envConfig from '../../../env.config';
+import config from '../config';
 
 const methods = ['get', 'post', 'put', 'del'];
 
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  if (__SERVER__) {
+  if (!__CLIENT__) {
     // Prepend host and port of the API server to the path.
-    return 'http://' + envConfig[__DEVELOPMENT__ ? 'dev' : 'prod'].apiServer.host + ':' + envConfig[__DEVELOPMENT__ ? 'dev' : 'prod'].apiServer.port + adjustedPath;
+    return 'http://' + config.apiServer.host + ':' + config.apiServer.port + adjustedPath;
   }
   // Prepend `/api` to relative URL, to proxy to API server.
   return '/api' + adjustedPath;
 }
 
-/*
- * This silly underscore is here to avoid a mysterious "ReferenceError: ApiClient is not defined" error.
- * See Issue #14. https://github.com/erikras/react-redux-universal-hot-example/issues/14
- *
- * Remove it at your own risk.
- */
-class _ApiClient {
+export default class ApiClient {
   constructor(req) {
     methods.forEach((method) =>
       this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
@@ -29,7 +23,7 @@ class _ApiClient {
           request.query(params);
         }
 
-        if (__SERVER__ && req.get('cookie')) {
+        if (!__CLIENT__ && req.get('cookie')) {
           request.set('cookie', req.get('cookie'));
         }
 
@@ -40,8 +34,15 @@ class _ApiClient {
         request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
       }));
   }
+  /*
+   * There's a V8 bug where, when using Babel, exporting classes with only
+   * constructors sometimes fails. Until it's patched, this is a solution to
+   * "ApiClient is not defined" from issue #14.
+   * https://github.com/erikras/react-redux-universal-hot-example/issues/14
+   *
+   * Relevant Babel bug (but they claim it's V8): https://phabricator.babeljs.io/T2455
+   *
+   * Remove it at your own risk.
+   */
+  empty() {}
 }
-
-const ApiClient = _ApiClient;
-
-export default ApiClient;

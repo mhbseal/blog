@@ -25,4 +25,10 @@ require(path.join(C.dir.model, C.exceptFolder)); // model初始化入口
 require(path.join(C.dir.controller, C.exceptFolder))(app); // router初始化入口
 
 // 监听端口
-app.listen(C.port);
+app.listen(C.port, function(err) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.info('----\n==> server.be is running on http://%s:%s', C.host, C.port);
+  }
+});

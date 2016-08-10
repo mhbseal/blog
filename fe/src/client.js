@@ -7,21 +7,21 @@ import { render } from 'react-dom';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import { Provider } from 'react-redux';
-import {reduxReactRouter, ReduxRouter} from 'redux-router';
-
-
-import createHistory from 'history/lib/createBrowserHistory';
+import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { ReduxAsyncConnect } from 'redux-async-connect';
 
 import getRoutes from './routes';
-import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
 
 const client = new ApiClient();
-
 const dest = document.getElementById('app');
-const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, client, window.__data);
+const store = createStore(browserHistory, client, window.__data);
+const history = syncHistoryWithStore(browserHistory, store);
 
 const component = (
-  <ReduxRouter routes={getRoutes(store)} />
+  <Router render={(props) => <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />} history={history}>
+    {getRoutes(store)}
+  </Router>
 );
 
 render(
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-if (__DEVTOOLS__) {
+if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools');
   render(
     <Provider store={store} key="provider">

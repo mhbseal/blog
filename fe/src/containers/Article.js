@@ -1,19 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import DocumentMeta from 'react-document-meta';
+import Helmet from 'react-helmet';
 import { load, insertComment } from '../redux/modules/article';
-import connectData from '../helpers/connectData';
+import { asyncConnect } from 'redux-async-connect';
 import Alert from '../components/Alert';
 import formatForm from '../utils/formatForm';
 import { create as createComment } from '../redux/modules/comment';
 import State from './State';
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(load({params: location.query}));
-}
-
-@connectData(fetchData)
+@asyncConnect({
+  promise: ({store: {dispatch}}) => dispatch(load({params: location.query}))
+})
 @connect(
   state => ({
     article: state.article,
@@ -40,7 +38,7 @@ export default class Article extends Component {
 
       return (
         <section className="contents">
-          <DocumentMeta title={`${article.title}_${article.type.name}_${blogInfo.title}`}/>
+          <Helmet title={`${article.title}_${article.type.name}_${blogInfo.title}`}/>
           <article className="detail">
             <header>
               <h2>{article.title}</h2>
