@@ -22,7 +22,7 @@ module.exports = {
     path: path.resolve(__dirname, '../resource/dist'),
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: 'http://' + config.webpackServer.host + ':' + config.webpackServer.port + '/static/dist/'
+    publicPath: 'http://' + config.webpackServer.host + ':' + config.webpackServer.port + '/dist/'
   },
   module: {
     loaders: [

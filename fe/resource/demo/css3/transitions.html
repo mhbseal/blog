@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>transitions</title>
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #eee;
+    }
+
+    ul {
+      list-style: none;
+      margin: 50px;
+    }
+
+    li,
+    p {
+      width: 150px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      color: #fff;
+      background: #96c;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 100px;
+      background: none;
+      border: 1px solid #333;
+      color: #333;
+      font-size: 16px;
+    }
+
+    li.hover {
+      margin-left: 500px;
+    }
+
+    li:nth-child(1) {
+      background: #f36;
+    }
+
+    li:nth-child(1).hover {
+      transition: all 5s ease;
+    }
+
+    li:nth-child(2) {
+      background: #369;
+    }
+
+    li:nth-child(2).hover {
+      transition: all 5s ease-in;
+    }
+
+    li:nth-child(3) {
+      background: #636;
+    }
+
+    li:nth-child(3).hover {
+      transition: all 5s ease-out;
+    }
+
+    li:nth-child(4) {
+      background: #3e6;
+    }
+
+    li:nth-child(4).hover {
+      transition: all 5s steps(3, end);
+    }
+
+    li:nth-child(5) {
+      background: #999;
+    }
+
+    li:nth-child(5).hover {
+      transition: all 5s linear;
+    }
+
+    li:nth-child(6) {
+      background: #0a3;
+    }
+
+    li:nth-child(6).hover {
+      transition: all 5s cubic-bezier(1, 0.5, 1, 0.5);
+    }
+
+    li:nth-child(7) {
+      background: #875;
+    }
+
+    li:nth-child(7).hover {
+      transition: all 5s step-start;
+    }
+
+    li:nth-child(8) {
+      background: #368;
+    }
+
+    li:nth-child(8).hover {
+      transition: all 5s step-end;
+    }
+
+    li:nth-child(9) {
+      background: #f11;
+    }
+
+    li:nth-child(9).hover {
+      transition: all 5s steps(5, start);
+    }
+
+    li:nth-child(10) {
+      background: #b96;
+    }
+
+    li:nth-child(10).hover {
+      transition: all 5s steps(5, end);
+    }
+
+  </style>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('p').hover(function () {
+        $('li').addClass('hover')
+      }, function () {
+        $('li').removeClass('hover')
+      })
+    })
+  </script>
+</head>
+<body>
+<ul>
+  <li>Ease</li>
+  <li>Ease-in</li>
+  <li>Ease-out</li>
+  <li>Ease-in-out</li>
+  <li>Linear</li>
+  <li>cubic-bezier某值</li>
+  <li>step-start</li>
+  <li>step-end</li>
+  <li>steps(5, start)</li>
+  <li>steps(5, end)</li>
+</ul>
+<p>transition start</p>
+</body>
+</html>

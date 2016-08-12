@@ -15,7 +15,9 @@ funcs = {
     res.json({
       error: err
     })
-  }
+  },
+  // node命令中的参数
+  argv: require('minimist')(process.argv.slice(2))
 }
 
 module.exports = funcs;

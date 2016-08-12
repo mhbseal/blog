@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>html5ImgCompress</title>
+  <script src="./jquery-1.11.1.min.js"></script>
+  <script src="../dist/html5ImgCompress.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      margin: 10px 0 0 10px;
+    }
+    div[class^="box_"] {
+      margin: 10px;
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1.5em;
+      border: 2px dashed #ccc;
+    }
+    span {
+      color: red;
+    }
+    img {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<p>单张：<input type="file" id="single" /></p>
+<p>多张：<input type="file" multiple="multiple" id="multiple" /></p>
+<div id="box"></div>
+</body>
+<script>
+  var j = 1;
+
+  $(function () {
+    // 单张
+    $('#single').on('change', function (e) {
+      new html5ImgCompress(e.target.files[0], {
+        before: function(file) {
+          console.log('单张: 压缩前...');
+        },
+        done: function (file, base64) {
+          console.log('单张: 压缩成功...');
+          insertImg(file, j); // 显示原图
+          insertImg(base64, j++); // 显示压缩后
+        },
+        fail: function(file) {
+          console.log('单张: 压缩失败...');
+        },
+        complate: function(file) {
+          console.log('单张: 压缩完成...');
+        },
+        notSupport: function(file) {
+          alert('浏览器不支持！');
+        }
+      });
+    });
+
+    // 多张
+    $('#multiple').on('change', function (e) {
+      var
+        i = 0,
+        files = e.target.files,
+        len = files.length,
+        notSupport = false;
+
+      // 循环多张图片，需要for循环和notSupport变量支持（检测）
+      for (; i < len; i++) {
+        if (!notSupport) {
+          (function(i) {
+            new html5ImgCompress(files[i], {
+              before: function(file) {
+                console.log('多张: ' + i + ' 压缩前...');
+              },
+              done: function (file, base64) { // 这里是异步回调，done中i的顺序不能保证
+                console.log('多张: ' + i + ' 压缩成功...');
+                insertImg(file, j);
+                insertImg(base64, j++);
+              },
+              fail: function(file) {
+                console.log('多张: ' + i + ' 压缩失败...');
+              },
+              complate: function(file) {
+                console.log('多张: ' + i + ' 压缩完成...');
+              },
+              notSupport: function(file) {
+                notSupport = true;
+                alert('浏览器不支持！');
+              }
+            });
+          })(i);
+        }
+      }
+    })
+  });
+
+  // html中插入图片
+  function insertImg(file, j) {
+    var
+      img = new Image(),
+      title, src, size, base;
+
+    if (typeof file === 'object') {
+      title = '前';
+      size = file.size;
+      src = URL.createObjectURL(file);
+      base = 1024;
+    } else {
+      title = '后';
+      size = file.length;
+      src = file;
+      base = 1333;
+    }
+
+    if (!$('.box_' + j).length) {
+      $('#box').prepend('<div class="box_' + j + '" />'); // 逆序，方便demo多次上传预览
+    }
+
+    img.onload = function() {
+      $('.box_' + j).prepend(img).prepend('<p>图片' + j + '，处理' + title + '</p><p>质量约：<span>' + (size / base).toFixed(2) + 'KB</span>' + '&nbsp;&nbsp;&nbsp;&nbsp;尺寸：<span>' + this.width + '*' + this.height + '</span></p>');
+    };
+
+    img.src = src;
+
+    file = null; // 处理完后记得清缓存
+  };
+</script>
+</html>

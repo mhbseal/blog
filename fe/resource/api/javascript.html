@@ -1,0 +1,761 @@
+<!-- css来自underscore,直接copy的 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="target-densitydpi=device-dpi">
+  <title>javascript</title>
+  <style>
+    body {
+      font-size: 14px;
+      line-height: 22px;
+      background: #f4f4f4 url(./images/background.png);
+      color: #000;
+      font-family: Helvetica Neue, Helvetica, Arial;
+    }
+
+    .interface {
+      font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important;
+    }
+
+    div#sidebar {
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 15px 0 30px 30px;
+      border-right: 1px solid #bbb;
+      box-shadow: 0 0 20px #ccc;
+      -webkit-box-shadow: 0 0 20px #ccc;
+      -moz-box-shadow: 0 0 20px #ccc;
+    }
+
+    a.toc_title, a.toc_title:visited {
+      display: block;
+      color: black;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    a.toc_title:hover {
+      text-decoration: underline;
+    }
+
+    #sidebar .version {
+      font-size: 10px;
+      font-weight: normal;
+    }
+
+    ul.toc_section {
+      font-size: 11px;
+      line-height: 14px;
+      margin: 5px 0 0 0;
+      padding-left: 0px;
+      list-style-type: none;
+      font-family: Lucida Grande;
+    }
+
+    .toc_section li {
+      cursor: pointer;
+      margin: 0 0 3px 0;
+    }
+
+    .toc_section li a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .toc_section li a:hover {
+      text-decoration: underline;
+    }
+
+    div.container {
+      width: 550px;
+      margin: 40px 0 50px 260px;
+    }
+
+    img#logo {
+      width: 189px;
+      height: 69px;
+    }
+
+    div.warning {
+      margin-top: 15px;
+      font: bold 11px Arial;
+      color: #770000;
+    }
+
+    p {
+      margin: 20px 0;
+      width: 550px;
+    }
+
+    a, a:visited {
+      color: #444;
+    }
+
+    a:active, a:hover {
+      color: #000;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      padding-top: 20px;
+    }
+
+    h2 {
+      font-size: 25px;
+    }
+
+    b.header {
+      font-size: 16px;
+      line-height: 30px;
+    }
+
+    span.alias {
+      font-size: 14px;
+      font-style: italic;
+      margin-left: 20px;
+    }
+
+    table, tr, td {
+      margin: 0;
+      padding: 0;
+    }
+
+    td {
+      padding: 2px 12px 2px 0;
+    }
+
+    table .rule {
+      height: 1px;
+      background: #ccc;
+      margin: 5px 0;
+    }
+
+    ul {
+      list-style-type: circle;
+      padding: 0 0 0 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    code, pre, tt {
+      font-family: Monaco, Consolas, "Lucida Console", monospace;
+      font-size: 12px;
+      line-height: 18px;
+      font-style: normal;
+    }
+
+    tt {
+      padding: 0px 3px;
+      background: #fff;
+      border: 1px solid #ddd;
+      zoom: 1;
+    }
+
+    code {
+      margin-left: 20px;
+    }
+
+    pre {
+      font-size: 12px;
+      padding: 2px 0 2px 15px;
+      border-left: 5px solid #bbb;
+      margin: 0px 0 30px;
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-width: 640px), only screen and (-o-min-device-pixel-ratio: 3/2) and (max-width: 640px), only screen and (min-device-pixel-ratio: 1.5) and (max-width: 640px) {
+      img {
+        max-width: 100%;
+      }
+
+      div#sidebar {
+        -webkit-overflow-scrolling: initial;
+        position: relative;
+        width: 90%;
+        height: 120px;
+        left: 0;
+        top: -7px;
+        padding: 10px 0 10px 30px;
+        border: 0;
+      }
+
+      img#logo {
+        width: auto;
+        height: auto;
+      }
+
+      div.container {
+        margin: 0;
+        width: 100%;
+      }
+
+      p, div.container ul {
+        max-width: 98%;
+        overflow-x: scroll;
+      }
+
+      pre {
+        overflow: scroll;
+      }
+    }
+  </style>
+</head>
+<body>
+<script type="mo/templates">
+<div id="sidebar" class="interface">
+  <a class="toc_title" href="#">javascript</a>
+  <a class="toc_title" href="#">introduction</a>
+  <a class="toc_title" href="#BOM">BOM</a>
+  <ul class="toc_section">
+    <li>- <a href="#BOM_1">对象</a></li>
+    <li>- <a href="#BOM_2">方法</a></li>
+    <li>- <a href="#BOM_3">属性</a></li>
+  </ul>
+  <a class="toc_title" href="#DOM">DOM</a>
+  <ul class="toc_section">
+    <li>- <a href="#DOM_1">方法</a></li>
+    <li>- <a href="#DOM_2">属性</a></li>
+  </ul>
+  <a class="toc_title" href="#String">String</a>
+  <ul class="toc_section">
+    <li>- <a href="#String_1">方法</a></li>
+    <li>- <a href="#String_2">属性</a></li>
+  </ul>
+  <a class="toc_title" href="#RegExp">RegExp</a>
+  <ul class="toc_section">
+    <li>- <a href="#RegExp_1">修饰符</a></li>
+    <li>- <a href="#RegExp_2">方括号</a></li>
+    <li>- <a href="#RegExp_3">元字符</a></li>
+    <li>- <a href="#RegExp_4">量词</a></li>
+    <li>- <a href="#RegExp_5">分组</a></li>
+    <li>- <a href="#RegExp_6">属性</a></li>
+    <li>- <a href="#RegExp_7">静态属性</a></li>
+    <li>- <a href="#RegExp_8">方法</a></li>
+  </ul>
+  <a class="toc_title" href="#Array">Array</a>
+  <ul class="toc_section">
+    <li>- <a href="#Array_1">方法</a></li>
+    <li>- <a href="#Array_2">属性</a></li>
+  </ul>
+  <a class="toc_title" href="#Number">Number</a>
+  <ul class="toc_section">
+    <li>- <a href="#Number_1">方法</a></li>
+    <li>- <a href="#Number_2">常量</a></li>
+  </ul>
+  <a class="toc_title" href="#Date">Date</a>
+  <ul class="toc_section">
+    <li>- <a href="#Date_1">方法</a></li>
+  </ul>
+  <a class="toc_title" href="#Math">Math</a>
+  <ul class="toc_section">
+    <li>- <a href="#Math_1">方法</a></li>
+    <li>- <a href="#Math_2">属性</a></li>
+  </ul>
+  <a class="toc_title" href="#Event">Event</a>
+  <ul class="toc_section">
+    <li>- <a href="#Event_1">元素</a></li>
+    <li>- <a href="#Event_2">属性</a></li>
+    <li>- <a href="#Event_3">方法</a></li>
+  </ul>
+</div>
+<div class="container">
+  <p id="introduction">
+    <img id="logo" src="./images/javascript.png" alt="javascript.js">
+  </p>
+
+  <p>常用的javascript API</p>
+
+  <div id="documentation">
+    <!--BOM S-->
+    <h2 id="BOM">BOM</h2>
+
+    <p>浏览器对象模型（Browser Object Model）window</p>
+
+    <p id="BOM_1">
+      <b class="header">对象</b>
+    </p>
+		<pre>window.navigator 浏览器的信息
+navigator.appCodeName 浏览器的代码名
+navigator.appName 浏览器的名称
+navigator.appVersion 浏览器的平台和版本信息
+navigator.cookieEnabled 浏览器是否启用cookie
+navigator.platform 运行浏览器的操作系统平台
+navigator.userAgent 用户代理标识
+navigator.languages 浏览器的语言设定</pre>
+		<pre>window.screen 显示器的信息
+screen.availHeight 屏幕的可用高度（单位像素，减去桌面任务栏等）
+screen.availWidth 屏幕的可用宽度（单位像素，减去桌面任务栏等）
+screen.height 屏幕的高度
+screen.width 屏幕的宽度</pre>
+		<pre>window.history 历史对象
+history.back() 返回到上一个URL，与在浏览器后退按钮相同
+history.forward() 返回到下一个URL，与在浏览器向前按钮相同
+history.go() 返回到某个具体页面</pre>
+		<pre>window.location 页面地址URL
+location.hash 返回从井号（#）开始的URL
+location.host 返回当前的域名和端口号
+location.hostname 返回当前的域名
+location.href 返回当前页面的URL
+location.pathname 返回当前页面的路径和文件名
+location.port 返回当前的端口号
+location.protocol 返回当前的URL协议
+location.search 返回从问号（?）开始的URL
+location.assign(url) 加载新的文档
+location.reload() 重新加载当前页面
+location.replace(newUrl) 用新文档替换当前文档</pre>
+		<pre>window.document 页面元素
+document.all[] 获取所有html元素数组
+document.anchors[] 获取描点对象数组
+document.forms[] 获取表单对象数组
+document.images[] 获取图像对象数组
+document.links[] 获取链接对象数组
+document.cookie 获取当前文档所有的cookie
+document.domain 获取当前文档的域名
+document.referrer 获取载入当前文档的文档的URL
+document.title 获取当前文档的标题
+document.URL 获取当前文档的URL</pre>
+    <p id="BOM_2">
+      <b class="header">方法</b>
+    </p>
+		<pre>窗口控制（前四个方法经测试只有IE支持较好）
+window.moveBy(x,y) 窗口移动x,y
+window.moveTo(x,y) 窗口移动到x,y
+window.resizeBy(x,y) 改变窗口的大小,改变值为x,y
+window.resizeTo(x,y) 改变窗口的大小到x,y
+window.scrollBy(x,y) 窗口内容滚动x,y
+window.scrollTo(x,y) 窗口内容滚动到x,y
+window.close() 关闭当前窗口
+window.open(url, name, param) 打开新窗口
+url为新开窗口的地址，name为弹窗的名称（不是文件名），非必须，
+可用空''代替，param是打开窗口风格的一些参数设置，包含多个值，用逗号隔开。
+参数包括：height,width,left,top,location(yes/no),menubar(yes/no),
+resizable(yes/no),scrollbars(yes/no),status(yes/no),toolbar(yes/no)。
+注：该方法实际应用中，各浏览器对其中的参数支持的非常不统一，
+但是对该方法都是支持的，一个最简单而又常用的写法：
+window.open('http://www.muhaibao.com', '', 'height=500, width=500, top=0,
+left=0, toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no')</pre>
+		<pre>定时器
+setTimeout(fun, millisec) 延迟millisec执行fun
+setInterval(fun, millisec) 指定周期(millisec)重复执行fun
+clearTimeout(timer) 清除指定的timer(setTimeout)
+clearInterval(timer) 清除指定的timer(setInterval)</pre>
+		<pre>对话框
+alert(msg) 警告框
+confirm(msg) 确认框，点击确认，返回值为true，点击取消则返回false
+prompt(msg, defaultText) 提示框，点击确认，返回输入的值，点击取消则返回null</pre>
+    <p id="BOM_3">
+      <b class="header">属性</b>
+    </p>
+		<pre>screenLeft 窗口的左上角的X坐标(FF不识别)
+screenTop 窗口的左上角的Y坐标(FF不识别)
+screenX 窗口的左上角的X坐标(IE8-不识别)
+screenY 窗口的左上角的Y坐标(IE8-不识别)
+pageXOffset 当前页面相对于窗口显示区左上角的 X 位置
+(IE不识别，可用document.body.scrollLeft和document.documentElement.scrollLeft替代)
+pageYOffset 当前页面相对于窗口显示区左上角的 Y 位置
+(IE不识别，可用document.body.scrollTop和document.documentElement.scrollTop替代)
+innerHeight 窗口的文档显示区的高度
+(不包括菜单栏、工具栏以及滚动条等，IE8-不识别，可用document.body.clientHeight和document.documentElement.clientHeight替代)
+innerWidth 窗口的文档显示区的宽度
+(不包括菜单栏、工具栏以及滚动条等，IE8-不识别，可用document.body.clientWidth和document.documentElement.clientWidth替代)
+outerHeight 整个窗口的高度(IE8-不识别)
+outerWidth 整个窗口的宽度(IE8-不识别)
+name 窗口的名称</pre>
+    <!--BOM E-->
+    <!--BOM S-->
+    <h2 id="DOM">DOM</h2>
+
+    <p>文档对象模型（Document Object Model）document</p>
+
+    <p id="DOM_1">
+      <b class="header">方法</b>
+    </p>
+		<pre>getElementById() 通过元素ID获取节点
+getElementsByName() 通过元素name获取节点（集合/节点数组）
+getElementsByTagName() 通过元素标签获取节点（集合/节点数组）
+appendChild() 向节点的子节点列表末尾添加新的子节点
+removeChild() 删除子节点
+replaceChild(new,old) 将某个子节点替换为另一个
+insertBefore() 指定的子节点前插入新的子节点
+cloneNode(true/false) 复制节点，参数为true（默认）时，复制当前节点和其子节点，false则只复制当前节点
+createAttribute() 创建属性节点
+createElement() 创建元素节点
+createTextNode() 创建文本节点
+getAttribute() 返回指定的属性值
+setAttribute(name,value) 把指定属性设置或修改为指定的值
+removeAttribute() 删除指定的属性值</pre>
+    <p id="DOM_2">
+      <b class="header">属性</b>
+    </p>
+		<pre>parentNode 获取节点的父节点
+childNodes 获取节点的子节点列表
+firstChild 获取节点的第一个子节点
+lastChild 获取节点的最后一个子节点
+previousSibling 获取节点的前一个节点
+nextSibling 获取节点的后一个节点
+innerHTML 获取节点的文本值
+attributes 获取节点的属性列表
+nodeName 获取节点的名称
+nodeValue 获取节点的值
+nodeType 获取节点的类型</pre>
+    <!--BOM E-->
+    <!--String S-->
+    <h2 id="String">String</h2>
+
+    <p id="String_1">
+      <b class="header">方法</b>
+    </p>
+		<pre>str.charAt(index) 返回在指定位置的字符
+str.charCodeAt(index) 返回在指定的位置的字符的Unicode编码
+
+String.fromCharCode(numX, numX, ..., numX)
+返回一个字符串（参数为一组Unicode值,并且该方法是作用于String对象，并非创建的string对象）
+
+str.concat(value1, value2, ...)
+连接字符串（原str值不变，形成新的str，另外次方法比较文艺，通常连接字符串一般采用简平快的'+'）
+
+str.indexOf(value, index)
+从前向后检索字符串，查找是否包含指定的字符串，如果找到则返回首次出现字符串的位置，如果未找到，则返回-1，
+其中参数value为要检索的字符串，index可选，指查询的起始位置（基于0），
+如果省略则从str的起始位置开始查找，另外该方法对大小写敏感。
+
+str.lastIndexOf(value, index)
+该方法和indexOf()相反，是从后向前检索字符串，所以返回的是字符串最后出现的位置。
+
+str.match(regexp)
+该方法检索字符串与regexp匹配的子字符串，参数为正则表达式，
+如果非正则表达式，则会将其传给RegExp()构造函数，并转换为正则表达式。
+当参数无全局参数g时，match()方法只进行一次匹配，没找到匹配文本则返回null；
+否则返回一个数组，其中存放了与它找到的匹配文本有关的信息。
+依次为匹配的字符串、子表达式匹配的字符串(可能多个)、index：匹配起始位置、input：原字符串。
+当参数带有全局参数g时，match()方法进行全局检索，查找string中所有匹配的子字符串。
+若没有找到任何匹配的子串，则返回 null。如果找到了一个或多个匹配子串，则返回一个数组。
+不过全局匹配返回的数组的内容与前者大不相同，
+它的数组元素中存放的是string中所有的匹配子串(子表达式匹配的字符串)，而且也没有index属性或input属性。
+
+str.search(regexp)
+该方法检索字符串与regexp匹配的子字符串，参数为正则表达式，
+如果非正则表达式，则会将其传给RegExp()构造函数，并转换为正则表达式，
+如果未找到，则返回-1，找到则返回与regexp匹配的字符串的起始位置。
+
+str.replace(searchValue, replaceValue)
+该方法用于在字符串中，用一些字符替换另一些字符，或替换一个与正则表达式匹配的子字符串。
+参数searchValue可以是substr或regexp，
+如果是正则，亦可以分为全局（正则需要加参数g）和非全局匹配（不加g），如果是字符串，则只检索一次substr；
+参数replaceValue，可以是一个字符串或者是一个函数，如果是字符串，replaceValue中的 $ 字符具有特定的含义：
+$1 $2 $3..  与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。
+$&          与 regexp 相匹配的子串。
+$`          位于匹配子串左侧的文本。
+$'          位于匹配子串右侧的文本。
+$$          直接量符号。
+如果是函数，每次匹配都调用该函数，该函数的参数依次为匹配的字符串、子表达式匹配的字符串(可能多个)、匹配起始位置、原字符串。
+
+str.split(separator, limit)
+此方法用于把一个字符串分割成字符串数组，参数separator可以是一个string，也可以是一个regexp；
+limit可选，如果取值，则指定返回的数组的最大长度。
+返回值为一个字符串数组，该数组是通过在separator指定的边界处将字符串string分割成子串创建的。
+
+str.substr(start, length)
+截取字符串，参数start为起始位置，如果为负数，则从最后一个开始计算（起始数为-1）；
+参数length可选，为截取的长度，如果省略，则截取到结尾。返回值为被截取后的新字符串。
+
+str.substring(start, end)
+截取字符串，参数start为起始位置，并且为非负数；
+参数end可选，也为非负整数，截取的结束位置，如果省略，则截取到结尾。
+返回值为被截取后的新字符串（不包括end位置的字符串）。
+
+str.slice(start, end)
+截取字符串，参数start为起始位置，如果为负数，则从最后一个开始计算（起始数为-1）；
+参数end可选，如果为负数，则从最后一个开始计算（起始数为-1），如果省略，则截取到结尾。
+返回值为被截取后的新字符串（不包括end位置的字符串）。
+
+str.toUpperCase()
+str.toLocaleUpperCase()
+转为大写，其中带local的是按照本地方式转为大写，
+只有几种语言（如土耳其语）具有地方特有的大小写映射，所有该方法的返回值通常与 toUpperCase() 一样。
+
+str.toLowerCase()
+str.toLocaleLowerCase()
+转为小写，local同上。</pre>
+    <p id="String_2">
+      <b class="header">属性</b>
+    </p>
+    <pre>str.length 获取字符串的长度</pre>
+    <!--String E-->
+    <!--RegExp S-->
+    <h2 id="RegExp">RegExp</h2>
+
+    <p id="RegExp_1">
+      <b class="header">修饰符</b>
+    </p>
+		<pre>i 忽略大小写匹配
+g 全局匹配
+m 多行匹配</pre>
+    <p id="RegExp_2">
+      <b class="header">方括号</b>
+    </p>
+		<pre>[abc] 查找方括号之间的任何字符
+[^ab] 查找任何不在方括号之间的字符
+[0-9] 查找任何从0至9的数字
+[a-z] 查找任何从小写a到小写z的字符
+[A-Z] 查找任何从大写A到大写Z的字符
+[A-z] 查找任何从大写A到小写z的字符，还包括[\]^_'几个字符，所以要匹配所有字母还是用[A-Za-z]吧</pre>
+    <p id="RegExp_3">
+      <b class="header">元字符</b>
+    </p>
+		<pre>.        查找单个字符，除了换行符
+\w       查找单词字符，等同于[a-zA-Z0-9_]
+\W       查找非单词字符，等同于[^a-zA-Z0-9_]
+\d       查找数字，等同于[0-9]
+\D       查找非数字字符，等同于[^0-9]
+\s       查找空白字符，等同于[\n\f\r\t\v ]，注意方括号内包括空格space
+\S       查找非空白字符，等同于[^\n\f\r\t\v ]，注意方括号内包括空格space
+\b       匹配单词边界
+\B       匹配非单词边界
+\0       查找NULL字符
+\n       查找换行符
+\f       查找换页符
+\r       查找回车符
+\t       查找制表符
+\v       查找垂直制表符
+\xxx     查找以八进制数xxx规定的字符
+\xdd     查找以十六进制数dd规定的字符
+\uxxxx   查找以十六进制数xxxx规定的Unicode字符</pre>
+    <p id="RegExp_4">
+      <b class="header">量词</b>
+    </p>
+		<pre>n+        匹配任何包含至少一个n的字符串
+n*        匹配任何包含零个或多个n的字符串
+n?        匹配任何包含零个或一个n的字符串，在懒惰匹配中起重要作用
+n{x}      匹配包含x个n的序列的字符串
+n{x,y}    匹配包含x-y个n的序列的字符串
+n{x,}     匹配包含至少x个n的序列的字符串
+n$        匹配任何结尾为n的字符串
+^n        匹配任何开头为n的字符串</pre>
+    <p id="RegExp_5">
+      <b class="header">分组</b>
+    </p>
+		<pre>(n)     匹配n，并捕获文本到自动命名的数组中
+(?:n)   匹配n，不捕获文本
+(?=n)   匹配任何其后紧接指定字符串n的字符串
+(?!n)   匹配任何其后没有紧接指定字符串n的字符串</pre>
+    <p id="RegExp_6">
+      <b class="header">属性</b>
+    </p>
+		<pre>global          是否启用全局匹配
+ignoreCase      是否启用忽略大小写匹配
+lastIndex       下一次匹配的起始字符位置
+multiline       是否启用多行匹配
+source          获取正则表达式的源文本</pre>
+    <p id="RegExp_7">
+      <b class="header">静态属性</b>
+    </p>
+		<pre>input             最近一次匹配的字符串（也已可以用$_）
+lastMatch         最近一次的匹配项（也已可以用$&）
+lastParen         最近一次匹配的捕获组（也已可以用$+）
+leftContext       被搜索的字符串中从字符串开始位置开始到最后匹配之前的位置之间的字符（也已可以用$`）
+rightContent      被搜索的字符串中从最后一个匹配位置开始到字符串结尾之间的字符（也已可以用$'）
+multiline         是否启用多行匹配（也已可以用$*）,ie和opera不支持（来自编写高质量代码）</pre>
+    <p id="RegExp_8">
+      <b class="header">方法</b>
+    </p>
+		<pre>reg.test(str) 检测一个字符串是否匹配某个模式，返回boolean值
+reg.exec(str)
+检索字符串中的正则表达式的匹配，返回一个数组，其中存放匹配的结果，
+如果未找到匹配，则返回值为 null，如果exec()找到了匹配的文本，则返回一个结果数组。
+依次为匹配的字符串、子表达式匹配的字符串(可能多个)、index：匹配起始位置、input：原字符串。
+可以看得出，在调用非全局的reg对象的exec()方法时，返回的数组与调用方法str.match()返回的数组是相同的。
+但是，当reg是一个全局正则表达式时，会在reg的lastIndex属性指定的字符处开始检索字符串，
+当exec()找到了与表达式相匹配的文本时，在匹配后，它将把reg的lastIndex属性设置为匹配文本的最后一个字符的下一个位置。
+这就是说，可以通过反复调用exec()方法来遍历字符串中的所有匹配文本。
+当exec()再也找不到匹配的文本时，它将返回 null，并把lastIndex属性重置为0。</pre>
+    <!--RegExp E-->
+    <!--Array S-->
+    <h2 id="Array">Array</h2>
+
+    <p id="Array_1">
+      <b class="header">方法</b>
+    </p>
+		<pre>concat() 连接两个或更多的数组，并返回结果(不改变原数组)
+join() 把数组的所有元素放入一个字符串，元素通过指定的分隔符进行分隔，并返回该字符串(不改变原数组)
+push() 向数组的末尾添加一个或更多元素，并返回新的长度(改变原数组)
+unshift() 向数组的开头添加一个或更多元素，并返回新的长度(改变原数组)
+pop() 删除并返回数组的最后一个元素(改变原数组)
+shift() 删除并返回数组的第一个元素(改变原数组)
+slice(start, end)
+从数组返回选定的元素数组，参数start为起始位置，如果为负数，则从最后一个开始计算（起始数为-1）；
+参数end可选，如果为负数，则从最后一个开始计算（起始数为-1），如果省略，则截取到结尾，返回值不包括end位置的元素（不改变原数组）
+splice(start, length, item1, ..., itemX)
+删除元素并向数组添加新元素，参数start为删除和添加元素起始位置，
+如果为负数，则从最后一个开始计算（起始数为-1），参数length为删除的长度，参数item可选，为新添加的新元素。
+如果从arr中删除了元素，则返回的是含有被删除的元素的数组，否则返回一个空数组（改变原数组）
+sort(sortby) 对数组的元素进行排序，参数sortby可选，必须为函数，规定排序顺序(改变原数组)
+reverse() 颠倒数组中元素的顺序(改变原数组)
+toString() 把数组转换为字符串，并返回结果(不改变原数组)
+toLocaleString() 把数组转换为本地字符串，并返回结果(不改变原数组)</pre>
+    <p id="Array_2">
+      <b class="header">属性</b>
+    </p>
+    <pre>arr.length 获取数组的长度</pre>
+    <!--Array E-->
+    <!--Number S-->
+    <h2 id="Number">Number</h2>
+
+    <p id="Number_1">
+      <b class="header">方法</b>
+    </p>
+		<pre>toFixed(num) 把数值四舍五入为指定小数位数的数字(String类型)，参数num为指定的位数
+toString(radix) 把数值转换为字符串，参数radix为基数（2~36之间，默认为10，即十进制）
+toExponential(num) 把数值转换成指数计数法，参数num为指数计数法中的小数位数（0~20之间）
+toPrecision(num) 把数值转换为指定长度，少了补齐小数位，多了转换为指数计数，参数num指定的长度（1~21之间）</pre>
+    <p id="Number_2">
+      <b class="header">常量</b>
+    </p>
+		<pre>Number.MAX_VALUE 最大值
+Number.MIN_VALUE 最小值
+Number.NaN 非数字值（一般用isNaN来检测是否为数字，任何数字都不等于NaN，包括他本身）
+Number.NEGATIVE_INFINITY 负无穷大
+Number.POSITIVE_INFINITY 正无穷大</pre>
+    <!--Number E-->
+    <!--Date S-->
+    <h2 id="Date">Date</h2>
+
+    <p id="Date_1">
+      <b class="header">方法</b>
+    </p>
+		<pre>getDate() 返回Date对象一个月中的某一天 (1 ~ 31)
+getDay() 返回Date对象一周中的某一天 (0 ~ 6)
+getMonth() 返回Date对象的月份 (0 ~ 11)
+getFullYear() 以四位数字返回Date对象的年份
+getHours() 返回Date对象的小时 (0 ~ 23)
+getMinutes() 返回Date对象的分钟 (0 ~ 59)
+getSeconds() 返回Date对象的秒数 (0 ~ 59)
+getMilliseconds() 返回Date对象的毫秒(0 ~ 999)
+getTime() 返回1970年1月1日至今的毫秒数
+
+setDate(day) 设置Date对象中月的某一天 (1 ~ 31)，参数day必选
+setMonth(month, day) 设置Date对象中月份 (0 ~ 11)，参数month必选
+setFullYear(year, month, day) 设置Date对象中的年份（四位数字），参数year必选
+setHours(hour, min, sec, millisec) 设置Date对象中的小时 (0 ~ 23)，参数hour必选
+setMinutes(min, sec, millisec) 设置Date对象中的分钟 (0 ~ 59)，参数min必选
+setSeconds(sec, millisec) 设置Date对象中的秒钟 (0 ~ 59)，参数sec必选
+setMilliseconds(millisec) 设置Date对象中的毫秒 (0 ~ 999)，参数millisec必选
+setTime(millisec) 以毫秒设置Date对象，基于1970/01/01</pre>
+    <!--Date E-->
+    <!--Math S-->
+    <h2 id="Math">Math</h2>
+
+    <p id="Math_1">
+      <b class="header">方法</b>
+    </p>
+		<pre>max(x,y) 返回x和y中的最大值
+min(x,y) 返回x和y中的最小值
+ceil(x) 对数进行上舍入
+floor(x) 对数进行下舍入
+random() 返回 0 ~ 1 之间的随机数
+round(x) 把数四舍五入为最接近的整数
+
+abs(x) 返回数的绝对值
+acos(x) 返回数的反余弦值
+asin(x) 返回数的反正弦值
+atan(x) 以介于 -PI/2 与 PI/2 弧度之间的数值来返回x的反正切值
+atan2(y,x) 返回从x轴到点(x,y)的角度（介于 -PI/2 与 PI/2 弧度之间）
+cos(x) 返回数的余弦
+exp(x) 返回e的指数
+log(x) 返回数的自然对数（底为e）
+pow(x,y) 返回x的y次幂
+sin(x) 返回数的正弦
+sqrt(x) 返回数的平方根
+tan(x) 返回角的正切</pre>
+    <p id="Math_2">
+      <b class="header">属性</b>
+    </p>
+		<pre>E 返回算术常量e，即自然对数的底数（约等于2.718）
+LN2 返回2的自然对数（约等于0.693）
+LN10 返回10的自然对数（约等于2.302）
+LOG2E 返回以2为底的e的对数（约等于 1.414）
+LOG10E 返回以10为底的e的对数（约等于0.434）
+PI 返回圆周率（约等于3.14159）
+SQRT1_2 返回返回2的平方根的倒数（约等于 0.707）
+SQRT2 返回2的平方根（约等于 1.414）</pre>
+    <!--Math E-->
+    <!--Event S-->
+    <h2 id="Event">Event</h2>
+
+    <p id="Event_1">
+      <b class="header">元素</b>
+    </p>
+		<pre>onblur 元素失去焦点时触发
+onfocus 元素获得焦点时触发
+onclick 单击元素时触发
+ondblclick 双击元素时触发
+onkeydown 某个键盘按键被按下时触发
+onkeyup 某个键盘按键被松开时触发
+onkeypress 某个键盘按键被按下并松开时触发
+onmousedown 鼠标按钮被按下时触发
+onmouseup 鼠标按键被松开时触发
+onmousemove 鼠标被移动时触发
+onmouseover 鼠标移到某元素之上时触发
+onmouseout 鼠标从某元素移开时触发
+onreset 重置按钮被点击时触发
+onsubmit 确认按钮被点击时触发
+onselect 被选中时触发
+onchange 内容改变时触发
+onload 页面或图像完成加载时触发
+onunload 页面关闭或者刷新时触发（刷新时在onload之前触发，各浏览器及个版本支持不一）
+onbeforeunload 页面关闭或者刷新时触发（在onunload之前触发，各浏览器及个版本支持不一）
+onresize 窗口或框架被重新调整大小时触发
+onmousewheel 滚动轮滚动时触发
+onscroll 滚动条滚动时触发</pre>
+    <p id="Event_2">
+      <b class="header">属性</b>
+    </p>
+		<pre>event.preventDefault() 取消事件的默认行为
+event.stopPropagation() 不再派发事件，不再冒泡</pre>
+    <p id="Event_3">
+      <b class="header">方法</b>
+    </p>
+		<pre>event.altKey "Alt" 是否被按下（返回值true|false）
+event.ctrlKey "Ctrl"是否被按下（返回值true|false）
+event.shiftKey "Shift"是否被按下（返回值true|false）
+event.button 哪个鼠标按键被点击（返回值0|1|2，IE8-为1|4|2，顺序以此为左中右键）
+event.clientX 鼠标指针相对于浏览器页面的水平坐标
+event.clientY 鼠标指针相对于浏览器页面的垂直坐标
+event.screenX 鼠标指针相对于屏幕的水平坐标
+event.screenY 鼠标指针相对于屏幕的垂直坐标
+event.type 事件的名称
+event.keyCode keydown、keyup事件发生时，按键的代码
+event.returnValue 是否阻止默认行为，取值boolean类型,IE8-不支持（event.returnValue = ture 相当于 event.preventDefault())
+event.cancelBubble 是否冒泡，取值boolean类型,IE9-不支持（event.cancelBubble = ture 相当于 event.stopPropagation()）</pre>
+    <!--Event E-->
+  </div>
+</div>
+</script>
+<script>
+  var
+    script = document.getElementsByTagName('script')[0],
+    template = script.innerText,
+    body = document.getElementsByTagName('body')[0],
+    map = {
+      '<': '&lt;',
+      '>': '&gt;'
+    },
+    i = 0, text;
+
+  body.innerHTML = template.replace(/(<pre>)([\s\S]*?)(<\/pre>)/g, function(match, $1, $2, $3) {
+    return $1 + $2.replace(/[<>]/g, function(match) {
+        return map[match];
+      }) + $3;
+  });
+</script>
+</body>
+</html>

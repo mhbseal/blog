@@ -8,9 +8,9 @@ var
 
 /**
  * 全局变量
- * C 配置
+ * C 配置config
  * M 数据model
- * F 方法
+ * F 方法/变量
  */
 global.C = require('./config');
 global.M = {};

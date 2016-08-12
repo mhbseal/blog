@@ -1,0 +1,1814 @@
+<!-- css来自underscore,直接copy的 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="target-densitydpi=device-dpi">
+  <title>mojs</title>
+  <style>
+    body {
+      font-size: 14px;
+      line-height: 22px;
+      background: #f4f4f4 url(./images/background.png);
+      color: #000;
+      font-family: Helvetica Neue, Helvetica, Arial;
+    }
+    .interface {
+      font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important;
+    }
+    div#sidebar {
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 15px 0 30px 30px;
+      border-right: 1px solid #bbb;
+      box-shadow: 0 0 20px #ccc;
+      -webkit-box-shadow: 0 0 20px #ccc;
+      -moz-box-shadow: 0 0 20px #ccc;
+    }
+    a.toc_title, a.toc_title:visited {
+      display: block;
+      color: black;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    a.toc_title:hover {
+      text-decoration: underline;
+    }
+    #sidebar .version {
+      font-size: 10px;
+      font-weight: normal;
+    }
+    ul.toc_section {
+      font-size: 11px;
+      line-height: 14px;
+      margin: 5px 0 0 0;
+      padding-left: 0px;
+      list-style-type: none;
+      font-family: Lucida Grande;
+    }
+    .toc_section li {
+      cursor: pointer;
+      margin: 0 0 3px 0;
+    }
+    .toc_section li a {
+      text-decoration: none;
+      color: black;
+    }
+    .toc_section li a:hover {
+      text-decoration: underline;
+    }
+    div.container {
+      width: 550px;
+      margin: 40px 0 50px 260px;
+    }
+    img#logo {
+      width: 150px;
+      height: 69px;
+    }
+    div.warning {
+      margin-top: 15px;
+      font: bold 11px Arial;
+      color: #770000;
+    }
+    p {
+      margin: 20px 0;
+      width: 550px;
+    }
+    a, a:visited {
+      color: #444;
+    }
+    a:active, a:hover {
+      color: #000;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      padding-top: 20px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+    b.header {
+      font-size: 16px;
+      line-height: 30px;
+    }
+    span.alias {
+      font-size: 14px;
+      font-style: italic;
+      margin-left: 20px;
+    }
+    table, tr, td {
+      margin: 0;
+      padding: 0;
+    }
+    td {
+      padding: 2px 12px 2px 0;
+    }
+    table .rule {
+      height: 1px;
+      background: #ccc;
+      margin: 5px 0;
+    }
+    ul {
+      list-style-type: circle;
+      padding: 0 0 0 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    code, pre, tt {
+      font-family: Monaco, Consolas, "Lucida Console", monospace;
+      font-size: 12px;
+      line-height: 18px;
+      font-style: normal;
+    }
+    tt {
+      padding: 0px 3px;
+      background: #fff;
+      border: 1px solid #ddd;
+      zoom: 1;
+    }
+    code {
+      margin-left: 20px;
+    }
+    pre {
+      font-size: 12px;
+      padding: 2px 0 2px 15px;
+      border-left: 5px solid #bbb;
+      margin: 0px 0 30px;
+    }
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-width: 640px), only screen and (-o-min-device-pixel-ratio: 3/2) and (max-width: 640px), only screen and (min-device-pixel-ratio: 1.5) and (max-width: 640px) {
+      img {
+        max-width: 100%;
+      }
+      div#sidebar {
+        -webkit-overflow-scrolling: initial;
+        position: relative;
+        width: 90%;
+        height: 120px;
+        left: 0;
+        top: -7px;
+        padding: 10px 0 10px 30px;
+        border: 0;
+      }
+      img#logo {
+        width: auto;
+        height: auto;
+      }
+      div.container {
+        margin: 0;
+        width: 100%;
+      }
+      p, div.container ul {
+        max-width: 98%;
+        overflow-x: scroll;
+      }
+      pre {
+        overflow: scroll;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="sidebar" class="interface">
+  <a class="toc_title" href="#">
+    mojs <span class="version">(0.2.4)</span>
+  </a>
+  <ul class="toc_section">
+    <li>» <a href="http://github.com/mhbseal/mojs">gitbub repository</a></li>
+  </ul>
+  <a class="toc_title" href="#">
+    introduction
+  </a>
+  
+    <a class="toc_title" href="#common">common</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#common_has">has</a></li>
+      
+    
+      
+      <li>- <a href="#common_forIn">forIn</a></li>
+      
+    
+      
+      <li>- <a href="#common_extend">extend</a></li>
+      
+    
+      
+      <li>- <a href="#common_type">type</a></li>
+      
+    
+      
+      <li>- <a href="#common_isBoolean">isBoolean</a></li>
+      
+    
+      
+      <li>- <a href="#common_isNumber">isNumber</a></li>
+      
+    
+      
+      <li>- <a href="#common_isString">isString</a></li>
+      
+    
+      
+      <li>- <a href="#common_isFunction">isFunction</a></li>
+      
+    
+      
+      <li>- <a href="#common_isDate">isDate</a></li>
+      
+    
+      
+      <li>- <a href="#common_isRegExp">isRegExp</a></li>
+      
+    
+      
+      <li>- <a href="#common_isObject">isObject</a></li>
+      
+    
+      
+      <li>- <a href="#common_isArray">isArray</a></li>
+      
+    
+      
+      <li>- <a href="#common_isArraylike">isArraylike</a></li>
+      
+    
+      
+      <li>- <a href="#common_isNaN">isNaN</a></li>
+      
+    
+      
+      <li>- <a href="#common_size">size</a></li>
+      
+    
+      
+      <li>- <a href="#common_trim">trim</a></li>
+      
+    
+      
+      <li>- <a href="#common_keys">keys</a></li>
+      
+    
+      
+      <li>- <a href="#common_now">now</a></li>
+      
+    
+      
+      <li>- <a href="#common_log">log</a></li>
+      
+    
+      
+      <li>- <a href="#common_baseCreate">baseCreate</a></li>
+      
+    
+      
+      <li>- <a href="#common_baseClass">baseClass</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#Cookie">Cookie</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#Cookie_Cookie">Cookie</a></li>
+      
+    
+      
+      <li>- <a href="#Cookie_set">set</a></li>
+      
+    
+      
+      <li>- <a href="#Cookie_get">get</a></li>
+      
+    
+      
+      <li>- <a href="#Cookie_remove">remove</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#date">date</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#date_format">format</a></li>
+      
+    
+      
+      <li>- <a href="#date_add/sub">add/sub</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#es5">es5</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#es5_each">each</a></li>
+      
+    
+      
+      <li>- <a href="#es5_map">map</a></li>
+      
+    
+      
+      <li>- <a href="#es5_filter">filter</a></li>
+      
+    
+      
+      <li>- <a href="#es5_some">some</a></li>
+      
+    
+      
+      <li>- <a href="#es5_every">every</a></li>
+      
+    
+      
+      <li>- <a href="#es5_indexOf">indexOf</a></li>
+      
+    
+      
+      <li>- <a href="#es5_lastIndexOf">lastIndexOf</a></li>
+      
+    
+      
+      <li>- <a href="#es5_bind">bind</a></li>
+      
+    
+      
+      <li>- <a href="#es5_reduce">reduce</a></li>
+      
+    
+      
+      <li>- <a href="#es5_reduceRight">reduceRight</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#IdCard">IdCard</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#IdCard_IdCard">IdCard</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_checkCode">checkCode</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_checkBirth">checkBirth</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_getBirth">getBirth</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_getSex">getSex</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#objectPath">objectPath</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#objectPath_set">set</a></li>
+      
+    
+      
+      <li>- <a href="#objectPath_get">get</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#ParseUrl">ParseUrl</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#ParseUrl_ParseUrl">ParseUrl</a></li>
+      
+    
+      
+      <li>- <a href="#ParseUrl_getAttr">getAttr</a></li>
+      
+    
+      
+      <li>- <a href="#ParseUrl_getParam">getParam</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#pubSub">pubSub</a>
+    <ul class="toc_section">
+    
+      
+    
+      
+      <li>- <a href="#pubSub_publish">publish</a></li>
+      
+    
+      
+      <li>- <a href="#pubSub_subscribe">subscribe</a></li>
+      
+    
+      
+      <li>- <a href="#pubSub_unsubscribe">unsubscribe</a></li>
+      
+    
+      
+      <li>- <a href="#pubSub_clear">clear</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#rules">rules</a>
+    <ul class="toc_section">
+    
+    </ul>
+  
+    <a class="toc_title" href="#AbstractStore">AbstractStore</a>
+    <ul class="toc_section">
+    
+      
+    
+      
+      <li>- <a href="#AbstractStore_AbstractStore">AbstractStore</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_set">set</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_setAttr">setAttr</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_get">get</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_getAttr">getAttr</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_getTag">getTag</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_remove">remove</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_setExpireTime">setExpireTime</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_getExpireTime">getExpireTime</a></li>
+      
+    
+      
+      <li>- <a href="#AbstractStore_rollback">rollback</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#LocalStore">LocalStore</a>
+    <ul class="toc_section">
+    
+    </ul>
+  
+    <a class="toc_title" href="#SessionStore">SessionStore</a>
+    <ul class="toc_section">
+    
+    </ul>
+  
+    <a class="toc_title" href="#utils">utils</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#utils_guid">guid</a></li>
+      
+    
+      
+      <li>- <a href="#utils_getByteInfo">getByteInfo</a></li>
+      
+    
+      
+      <li>- <a href="#utils_pad">pad</a></li>
+      
+    
+    </ul>
+  
+</div>
+<div class="container">
+  <p id="introduction">
+    <img id="logo" src="images/logo.png" alt="mojs">
+  </p>
+  <p>mojs，一个javascript常用方法库，包含了浏览器中对storage、cookie的操作封装，e5 super，date日期处理，身份证、url中元素校验解析，及一些其他常用的方法集合（正则、extend、继承、类等...）。<br /><br />源码采用AMD书写，以webpack打包，karma+jasmine单元测试，UMD格式输出。</p>
+  <div id="documentation">
+    
+      <h2 id="common">common</h2>
+      <p>一些底层的方法</p>
+      
+      <pre>var foo, obj1, obj2, obj3;
+
+function Foo () {
+  this.a = 1
+};
+Foo.prototype.b = 2;
+foo = new Foo();
+
+obj1 = {
+  a: 1,
+  b: 2,
+  toString: 3,
+  isPrototypeOf: 4,
+  constructor: 5
+};
+obj2 = {
+  b: 22,
+  c: {
+    d: 6
+  }
+};
+obj3 = {
+  c: {
+    e: 7,
+    f: {
+      g: 8,
+      h: 9
+    }
+  }
+};</pre>
+      
+      
+      
+      
+        <p id="common_has">
+          <b class="header">has</b><code>c.has(obj, key)</code>
+          <br>
+          判断是否是非继承属性
+        </p>
+        
+        
+        <pre>c.has(foo, &#x27;a&#x27;) =&gt; true
+c.has(foo, &#x27;b&#x27;) =&gt; false</pre>
+        
+        
+      
+      
+      
+        <p id="common_forIn">
+          <b class="header">forIn</b><code>c.forIn(obj, iteratee[, context])</code>
+          <br>
+          兼容 IE8- 下有些不枚举的属性，例如'toString',	'toLocaleString', 'valueOf', 'hasOwnProperty',	'isPrototypeOf', 'propertyIsEnumerable', 'constructor'
+        </p>
+        
+<pre>
+@param {object} obj
+@param {function} iteratee
+  - param {..} value
+  - param {..} key
+  - param {object} forIn的第一个参数obj
+@param {object} iteratee的上下文,可选</pre>
+        
+        
+        <pre>c.forIn(obj1, function(v, k) {
+  console.log(k + &#x27;:&#x27; + v)
+})
+=&gt; 依次输出: &#x27;a: 1&#x27;, &#x27;b: 2&#x27;, &#x27;toString: 3&#x27;, &#x27;isPrototypeOf: 4&#x27;, &#x27;constructor: 5&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="common_extend">
+          <b class="header">extend</b><code>c.extend([isDeep,] obj1, obj2, obj3...)</code>
+          <br>
+          合并对象到第一个obj
+        </p>
+        
+<pre>
+@param {boolean} 是否深度复制,可选
+@param {object|array} 目标对象
+@params {object|array} 需要extend的对象,可多个参数
+@return {object|array} extend后的object</pre>
+        
+        
+        <pre>c.extend(obj1, obj2) =&gt; {a: 1, b: 22, c: {d: 6}, toString: 3, isPrototypeOf: 4, constructor: 5}
+// 浅拷贝
+c.extend(obj2, obj3) =&gt; {b: 22, c: {e: 7, f: {g: 8, h: 9}}}
+// 深度拷贝
+c.extend(true, obj1, obj2, obj3)
+=&gt; {a: 1, b: 22, c: {d: 6, e: 7, f: {g: 8, h: 9}}, toString: 3, isPrototypeOf: 4, constructor: 5}</pre>
+        
+        
+      
+      
+      
+        <p id="common_type">
+          <b class="header">type</b><code>c.type()</code>
+          <br>
+          判断对象的类型
+        </p>
+        
+        
+        <pre>c.type({a: 1}) =&gt; &#x27;object&#x27;
+c.type(&#x27;mojs&#x27;) =&gt; &#x27;string&#x27;
+c.type(2) =&gt; &#x27;number&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="common_isBoolean">
+          <b class="header">isBoolean</b><code>c.isBoolean()</code>
+          <br>
+          是否是Boolean类型
+        </p>
+        
+        
+        <pre>c.isBoolean({a: 1}) =&gt; false</pre>
+        
+        
+      
+      
+      
+        <p id="common_isNumber">
+          <b class="header">isNumber</b><code>c.isNumber()</code>
+          <br>
+          是否是Number类型
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_isString">
+          <b class="header">isString</b><code>c.isString()</code>
+          <br>
+          是否是String类型
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_isFunction">
+          <b class="header">isFunction</b><code>c.isFunction()</code>
+          <br>
+          是否是Function类型
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_isDate">
+          <b class="header">isDate</b><code>c.isDate()</code>
+          <br>
+          是否是Date类型
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_isRegExp">
+          <b class="header">isRegExp</b><code>c.isRegExp()</code>
+          <br>
+          是否是RegExp类型
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_isObject">
+          <b class="header">isObject</b><code>c.isObject()</code>
+          <br>
+          是否是Object类型
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_isArray">
+          <b class="header">isArray</b><code>c.isArray()</code>
+          <br>
+          是否是数组
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_isArraylike">
+          <b class="header">isArraylike</b><code>c.isArraylike()</code>
+          <br>
+          是否是类数组, 例如nodelist,arguments,具有length并且keys为0.1.2...的obj
+        </p>
+        
+        
+        <pre>c.isArraylike([1, 2, 3]) =&gt; true
+c.isArraylike({1: 1, 2: 2, 3: 3, length: 3}) =&gt; true
+c.isArraylike({1: 1, 2: 2, 3: 3}) =&gt; false</pre>
+        
+        
+      
+      
+      
+        <p id="common_isNaN">
+          <b class="header">isNaN</b><code>c.isNaN()</code>
+          <br>
+          判断是否为NaN
+        </p>
+        
+        
+        <pre>c.isNaN(NaN) =&gt; true
+c.isNaN(undefined) =&gt; false</pre>
+        
+        
+      
+      
+      
+        <p id="common_size">
+          <b class="header">size</b><code>c.size(obj)</code>
+          <br>
+          返回obj的长度
+        </p>
+        
+        
+        <pre>c.size([1, 2, 3]) =&gt; 3
+c.size({a: 1, b: 2}) =&gt; 2</pre>
+        
+        
+      
+      
+      
+        <p id="common_trim">
+          <b class="header">trim</b><code>c.trim(text)</code>
+          <br>
+          去掉字符串前后的空
+        </p>
+        
+        
+        <pre>c.trim(&#x27; abc defg &#x27;) =&gt; &#x27;abc defg&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="common_keys">
+          <b class="header">keys</b><code>c.keys(obj)</code>
+          <br>
+          获取对象的key集合
+        </p>
+        
+        
+        <pre>c.keys({a: 1, b: 2}) =&gt; [&#x27;a&#x27;, &#x27;b&#x27;]</pre>
+        
+        
+      
+      
+      
+        <p id="common_now">
+          <b class="header">now</b><code>c.now()</code>
+          <br>
+          当前时间戳
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_log">
+          <b class="header">log</b><code>c.log()</code>
+          <br>
+          同console.log()
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="common_baseCreate">
+          <b class="header">baseCreate</b><code>c.baseCreate(prototype)</code>
+          <br>
+          同Object.create(prototype)
+        </p>
+        
+<pre>
+@param {object} prototype
+@return {object} 原型为参数prototype的对象</pre>
+        
+        
+        <pre>c.baseCreate() =&gt; {}
+c.baseCreate({ a: Foo }).a =&gt; Foo</pre>
+        
+        
+      
+      
+      
+        <p id="common_baseClass">
+          <b class="header">baseClass</b><code>c.baseClass(subCtor, prototypes, superCtor)</code>
+          <br>
+          创建一个构造函数(继承、原型方法都可选,继承可以通过新构造函数的superCtor访问父级构造函数)
+        </p>
+        
+<pre>
+@param {function} (子级)构造函数
+@param {object} 原型的方法集，可选
+@param {function} 父级构造函数，可选
+@return {function} 新的构造函数</pre>
+        
+        
+        <pre>c.baseClass(A, {a: function() {}, b: function(){}}, B) =&gt; A继承B,并且prototype上添加方法a和b
+c.baseClass(A, {a: function() {}, b: function(){}}) =&gt; A的prototype上添加方法a和b
+c.baseClass(A, B) =&gt; A继承B</pre>
+        
+        
+      
+      
+    
+      <h2 id="Cookie">Cookie</h2>
+      <p>操作cookie的方法</p>
+      
+      
+      
+      
+        <p id="Cookie_Cookie">
+          <b class="header">Cookie</b><code>new Cookie(options)</code>
+          <br>
+          构造函数
+        </p>
+        
+<pre>
+@param {object} options
+  - isRaw {boolean} 是否原生字符（不转码）, 默认为false
+  - isJson {boolean} 是否str-&gt;json, 默认为false</pre>
+        
+        
+        <pre>var
+  cookie = new Cookie(),
+  cookie2 = new Cookie({isRaw: true, isJson: true});</pre>
+        
+        
+      
+      
+      
+        <p id="Cookie_set">
+          <b class="header">set</b><code>cookie.set(name, value[, options])</code>
+          <br>
+          设置cookie
+        </p>
+        
+<pre>
+@param {string} name
+@param {..} value
+@param {obj} options
+  - expires {number|string} 失效时长,单位 ‘天’, 默认为Session
+  - path    {string} 路径,path只能设置当前path的子path, 默认为当前path
+  - domain  {string} 域,domain只能设置当前domain的子domain, 默认为当前domain
+  - secure  {boolean} 安全策略,只有https下能设置 ture or false, 默认为false</pre>
+        
+        
+        <pre>cookie.set(&#x27;user&#x27;, &#x27;mo&#x27;);
+cookie2.set(&#x27;user2&#x27;, {a: &#x27;mojs&#x27;, b: &#x27;modoc&#x27;}, {expires: 1});</pre>
+        
+        
+      
+      
+      
+        <p id="Cookie_get">
+          <b class="header">get</b><code>cookie.get(name)</code>
+          <br>
+          读取cookie
+        </p>
+        
+<pre>
+@param {string} cookie的name
+@return {..} cookie的value</pre>
+        
+        
+        <pre>cookie.get(&#x27;user&#x27;) =&gt; &#x27;mo&#x27;
+cookie2.get(&#x27;user2&#x27;) =&gt; {a: &#x27;mojs&#x27;, b: &#x27;modoc&#x27;}</pre>
+        
+        
+      
+      
+      
+        <p id="Cookie_remove">
+          <b class="header">remove</b><code>cookie.remove(name)</code>
+          <br>
+          删除cookie
+        </p>
+        
+<pre>
+@param {string} cookie的name</pre>
+        
+        
+        <pre>cookie.remove(&#x27;user&#x27;)</pre>
+        
+        
+      
+      
+    
+      <h2 id="date">date</h2>
+      <p>日期格式化、计算</p>
+      
+      <pre>var
+  birthday = new Date(), // 默认值,当前客户端时间Date实例
+  birthday2 = &#x27;/Date(562941040500+0800)/&#x27;, // 非JS格式的时间戳,例如.NET
+  birthday3 = &#x27;1987/11/03 20:30:40&#x27;, // 需要重新格式化的字符串,注意12小时制不支持
+  birthday4 = &#x27;1987/11/03&#x27;, // 需要重新格式化的字符串
+  birthday5 = 562941040500, // 时间戳(number/string)
+  birthday6 = new Date(&#x27;1987&#x27;, &#x27;10&#x27;, &#x27;03&#x27;, &#x27;20&#x27;, &#x27;30&#x27;, &#x27;40&#x27;, &#x27;500&#x27;); // Date实例</pre>
+      
+      
+      
+      
+        <p id="date_format">
+          <b class="header">format</b><code>date.format([date,] format)</code>
+          <br>
+          格式化日期
+        </p>
+        
+<pre>
+@param {number/string/date} 需要格式化的date
+@param {string} token字符串
+@return {string} 格式化后的字符串</pre>
+        
+        
+        <pre>date.format(birthday6, &#x27;YYYY-MM-DD HH:mm:ss:SSS&#x27;) =&gt; &#x27;1987-11-03 20:30:40:500&#x27;
+date.format(birthday6, &#x27;YY年M月D日 h时m分s秒 S毫秒 ddd&#x27;) =&gt; &#x27;87年11月3日 8时30分40秒 500毫秒 周二&#x27;
+date.format(birthday6, &#x27;\\Q\\ww\\a,第Q季度,第ww周季度,A&#x27;) =&gt; &#x27;Qwwa,第4季度,第45周季度,PM&#x27;</pre>
+        
+        
+        <pre>token映射表 参照 http://momentjs.com/docs/#/displaying/,只引用了其中一部分,涉及到中文的部分稍微有调整
+==================================================================
+                         Token       Output
+Month                    M           1 2 ... 11 12
+                         MM          01 02 ... 11 12
+Quarter                  Q           1 2 3 4
+Day of Month             D           1 2 ... 30 31
+                         DD          01 02 ... 30 31
+Day of Year              DDD         1 2 ... 364 365
+                         DDDD        001 002 ... 364 365
+Day of Week              d           0 1 ... 5 6
+                         ddd         周日 周一 ... 周五 周六
+                         dddd        星期日 星期一 ... 星期五 星晴六
+Week of Year             w           1 2 ... 52 53
+                         ww          01 02 ... 52 53
+Year                     YY          70 71 ... 29 30
+                         YYYY        1970 1971 ... 2029 2030
+AM/PM                    A           AM PM
+                         a           am pm
+                         aa          上午 下午
+Hour                     H           0 1 ... 22 23
+                         HH          00 01 ... 22 23
+                         h           1 2 ... 11 12
+                         hh          01 02 ... 11 12
+Minute                   m           0 1 ... 58 59
+                         mm          00 01 ... 58 59
+Second                   s           0 1 ... 58 59
+                         ss          00 01 ... 58 59
+Fractional Second        S           0 1 ... 8 9
+                         SS          0 1 ... 98 99
+                         SSS         0 1 ... 998 999
+==================================================================</pre>
+        
+      
+      
+      
+        <p id="date_add/sub">
+          <b class="header">add/sub</b><code>date.add([date,] name, number)/date.sub([date,] name, number)</code>
+          <br>
+          日期加减计算
+        </p>
+        
+<pre>
+@param {number|string|date} 需要格式化的date,不传默认为当前时间
+@param {string} 单位[&#x27;FullYear&#x27;, &#x27;Month&#x27;, &#x27;Date&#x27;, &#x27;Hours&#x27;, &#x27;Minutes&#x27;, &#x27;Seconds&#x27;, &#x27;Milliseconds&#x27;, &#x27;Time&#x27;]
+@param {number} n单位
+@return {Date} 计算后的结果</pre>
+        
+        
+        <pre>date.add(birthday6, &#x27;Hours&#x27;, 1) =&gt; Tue Nov 03 1987 21:30:40 GMT+0800 (CST)
+date.sub(birthday6, &#x27;Minutes&#x27;, 1) =&gt; Tue Nov 03 1987 20:29:40 GMT+0800 (CST)</pre>
+        
+        
+      
+      
+    
+      <h2 id="es5">es5</h2>
+      <p>es5 super
+其中each,map,filter,some,every可以应用到类数组,对象
+indexOf,lastIndexOf,reduce,reduceRight可以应用到类数组</p>
+      
+      
+      
+      
+        <p id="es5_each">
+          <b class="header">each</b><code>es5.each(obj, iteratee[, context])</code>
+          <br>
+          遍历类数组或者对象,如果想终止循环return false即可
+        </p>
+        
+<pre>
+@param {arraylike|object} 类数组或者对象
+@param {function} 迭代函数
+  - param {..} value
+  - param {..} index|key
+  - param {array|object} each的第一个参数
+@param {object} iteratee的上下文,可选</pre>
+        
+        
+        
+      
+      
+      
+        <p id="es5_map">
+          <b class="header">map</b><code>es5.map(obj, iteratee[, context])</code>
+          <br>
+          遍历类数组或者对象,返回一个新数组(obj执行iteratee后的返回值的集合)
+        </p>
+        
+<pre>
+@param {arraylike|object} 类数组或者对象
+@param {function} 迭代函数
+  - param {..} value
+  - param {..} index/key
+  - param {array|object} map的第一个参数
+@param {object} iteratee的上下文,可选
+@return {array} 结果</pre>
+        
+        
+        
+      
+      
+      
+        <p id="es5_filter">
+          <b class="header">filter</b><code></code>
+          <br>
+          遍历类数组或者对象,返回一个新数组(obj执行iteratee后返回值为真的value的元素的集合),其他同map
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="es5_some">
+          <b class="header">some</b><code></code>
+          <br>
+          遍历类数组或者对象,obj执行iteratee后返回值如果有一个为真,则返回true,否则返回false,其他同map
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="es5_every">
+          <b class="header">every</b><code></code>
+          <br>
+          遍历类数组或者对象,obj执行iteratee后返回值如果全为真,则返回true,否则返回false,其他同map
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="es5_indexOf">
+          <b class="header">indexOf</b><code>es5.indexOf(array, item[, from])</code>
+          <br>
+          返回item在arraylike中的索引值(从0开始找),如果item不存在arraylike中就返回-1,原生不支持NaN
+        </p>
+        
+<pre>
+@param {arraylike} 需要查找的类数组
+@param {..} 需要查找的元素
+@param {number} 开始索引,可选
+@return {number} 查找到元素的索引值</pre>
+        
+        
+        
+      
+      
+      
+        <p id="es5_lastIndexOf">
+          <b class="header">lastIndexOf</b><code></code>
+          <br>
+          同indexOf,区别是从arraylike的末尾开始(从右到左)
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="es5_bind">
+          <b class="header">bind</b><code>es5.bind(func, context[, arg1] [, arg2...])</code>
+          <br>
+          函数绑定
+        </p>
+        
+<pre>
+@param {function} 需要绑定上下文或者是添加参数的函数
+@param {object} func的上下文
+@params {..} 需要添加的n个参数
+@return {function} 绑定上下文或者是添加参数后函数</pre>
+        
+        
+        
+      
+      
+      
+        <p id="es5_reduce">
+          <b class="header">reduce</b><code>es5.reduce(arraylike, iteratee[, memo][, context])</code>
+          <br>
+          接收一个函数作为累加器,类数组中的每个值从左到右开始缩减，最终为一个值
+        </p>
+        
+<pre>
+@param {arraylike} 类数组
+@param {function} 迭代函数
+  - param {..} previousValue
+  - param {..} currentValue
+  - param {..} index/key
+  - param {array|object} reduce的第一个参数
+@param {..} 可选,作为第一次调用iteratee的第一个参数,如果不存在,则把第一次要iteratee的value复制给memo,并且跳过index这次iteratee
+@param {object} iteratee的上下文,可选</pre>
+        
+        
+        
+      
+      
+      
+        <p id="es5_reduceRight">
+          <b class="header">reduceRight</b><code></code>
+          <br>
+          同reduce,区别是从类数组的末尾开始(从右到左)
+        </p>
+        
+        
+        
+      
+      
+    
+      <h2 id="IdCard">IdCard</h2>
+      <p>身份证的校验以及从从身份证号码中获取一些信息，例如出生日期，性别</p>
+      
+      
+      <pre>身份证规则
+=====================================================================
+身份证15位编码规则 -- dddddd yymmdd xx p
+dddddd : 地区码
+yymmdd : 出生年月日
+xx     : 顺序类编码，无法确定
+p      : 性别，奇数为男，偶数为女
+
+身份证18位编码规则 -- dddddd yyyymmdd xxx y
+dddddd   : 地区码
+yyyymmdd : 出生年月日
+xxx      : 顺序类编码，无法确定，奇数为男，偶数为女
+y        : 校验码，该位数值可通过前17位计算获得
+
+18位号码加权因子为          : WI = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1]
+校验位集合                  : CODE = [1, 0, &#x27;x&#x27;, 9, 8, 7, 6, 5, 4, 3, 2]
+校验位index计算公式         : index = mod(∑(ai×Wi), 11)
+=====================================================================</pre>
+      
+      
+      
+        <p id="IdCard_IdCard">
+          <b class="header">IdCard</b><code>new IdCard(num)</code>
+          <br>
+          构造函数
+        </p>
+        
+<pre>
+@param {string} 身份证号,这里必须是string格式,因为身份证号超出了js的整数精度范围</pre>
+        
+        
+        <pre>var idCard = new IdCard(&#x27;610125198711037137&#x27;);</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_checkCode">
+          <b class="header">checkCode</b><code></code>
+          <br>
+          验证校验位,针对18位
+        </p>
+        
+<pre>
+@return {boolean} </pre>
+        
+        
+        <pre>idCard.checkCode() =&gt; true</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_checkBirth">
+          <b class="header">checkBirth</b><code></code>
+          <br>
+          验证出生日期
+        </p>
+        
+<pre>
+@return {boolean} </pre>
+        
+        
+        <pre>idCard.checkBirth() =&gt; true</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_getBirth">
+          <b class="header">getBirth</b><code></code>
+          <br>
+          获取出生日期
+        </p>
+        
+<pre>
+@return {object} 返回对象
+  - year  {number}
+  - month {number}
+  - day   {number}</pre>
+        
+        
+        <pre>idCard.getBirth() =&gt; {year: &#x27;1987&#x27;, month: &#x27;11&#x27;, day: &#x27;03&#x27;}</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_getSex">
+          <b class="header">getSex</b><code></code>
+          <br>
+          获取性别
+        </p>
+        
+<pre>
+@return {string} </pre>
+        
+        
+        <pre>idCard.getSex() =&gt; &#x27;男&#x27;</pre>
+        
+        
+      
+      
+    
+      <h2 id="objectPath">objectPath</h2>
+      <p>读取或设置object path下的value</p>
+      
+      <pre>var obj = { f: { g: &#x27;blog&#x27; } };</pre>
+      
+      
+      
+      
+        <p id="objectPath_set">
+          <b class="header">set</b><code>objectPath.set(obj, path, value)</code>
+          <br>
+          设置object path下的value
+        </p>
+        
+<pre>
+@param {object} obj
+@param {string} path
+@param {..} value
+@return {boolean} 成功true,失败false</pre>
+        
+        
+        <pre>objectPath.set(obj, &#x27;a.d&#x27;, &#x27;mojs&#x27;) =&gt; obj.a.d = &#x27;mojs&#x27;
+objectPath.set(obj, &#x27;a.b.e&#x27;, &#x27;modoc&#x27;) =&gt; obj.a.b.e = &#x27;modoc&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="objectPath_get">
+          <b class="header">get</b><code>objectPath.set(obj, path)</code>
+          <br>
+          读取object path下的value
+        </p>
+        
+<pre>
+@param {object} obj
+@param {string} path
+@return {..} value</pre>
+        
+        
+        <pre>objectPath.get(obj, &#x27;f.g&#x27;) =&gt; &#x27;blog&#x27;
+objectPath.get(obj, &#x27;a.b.e&#x27;) =&gt; &#x27;mojs&#x27;</pre>
+        
+        
+      
+      
+    
+      <h2 id="ParseUrl">ParseUrl</h2>
+      <p>解析url</p>
+      
+      
+      <pre>url注解
+=====================================================================
+
+http://username:password&amp;#64;www.example.com:80/path/file.name?query=string#anchor
+|__|   |______| |______| |_____________||_||___||________||___________||_____|
+ |        |        |            |       |   |         |         |        |
+protocol user   password      host  port directory  file      query   anchor
+      |_______________|                   |_____________|
+              |                                 |
+           userInfo                           path
+     |___________________________________||_________________________________|
+                       |                                   |
+                   authority                          relative
+|___________________________________________________________________________|
+                                        |
+                                      source
+
+=====================================================================</pre>
+      
+      
+      
+        <p id="ParseUrl_ParseUrl">
+          <b class="header">ParseUrl</b><code>new ParseUrl(url)</code>
+          <br>
+          构造函数
+        </p>
+        
+<pre>
+@param {string} 默认为location.href</pre>
+        
+        
+        <pre>var parseUrl = new ParseUrl(&#x27;http://username:password&amp;#64;www.example.com:80/path/file.name?query=string#anchor&#x27;);</pre>
+        
+        
+      
+      
+      
+        <p id="ParseUrl_getAttr">
+          <b class="header">getAttr</b><code>parseUrl.getAttr([name])</code>
+          <br>
+          读取url中的attr,name为空,则返回所有attr
+        </p>
+        
+<pre>
+@param {string} name,可选 范围&quot;source&quot;, &quot;protocol&quot;, &quot;authority&quot;, &quot;userInfo&quot;, &quot;user&quot;,
+&quot;password&quot;, &quot;host&quot;, &quot;port&quot;, &quot;relative&quot;, &quot;path&quot;, &quot;directory&quot;, &quot;file&quot;, &quot;query&quot;, &quot;anchor&quot;
+@return {string} value</pre>
+        
+        
+        <pre>parseUrl.getAttr(&#x27;port&#x27;) =&gt; &#x27;80&#x27;
+url.getAttr(&#x27;protocol&#x27;) =&gt; &#x27;http&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="ParseUrl_getParam">
+          <b class="header">getParam</b><code>parseUrl.getParam([name])</code>
+          <br>
+          读取url中的param,name为空,则返回所有param
+        </p>
+        
+<pre>
+@param {string} name
+@return {string} value</pre>
+        
+        
+        <pre>parseUrl.getParam() =&gt; {query: &#x27;string&#x27;}
+parseUrl.getParam(&#x27;query&#x27;) =&gt; &#x27;string&#x27;</pre>
+        
+        
+      
+      
+    
+      <h2 id="pubSub">pubSub</h2>
+      <p>pub/sub 发布订阅</p>
+      
+      <pre>var
+  data = [{
+    name: &#x27;熊大&#x27;,
+    job: &#x27;阻止光头强砍树&#x27;
+  }, {
+    name: &#x27;熊二&#x27;,
+    job: &#x27;调戏光头强&#x27;
+  }, {
+    name: &#x27;光头强&#x27;,
+    job: &#x27;伐木&#x27;
+  }],
+  handler = handler = function(data) {
+    console.log(data.name + &#x27;应该&#x27; + data.job);
+  },
+  handler2 = function(data) {
+    console.log(data.name + &#x27;喜欢&#x27; + data.job);
+  };</pre>
+      
+      
+      
+      
+      
+      
+        <p id="pubSub_publish">
+          <b class="header">publish</b><code>pubSub.publish(message, data)</code>
+          <br>
+          发布
+        </p>
+        
+<pre>
+@param {string} 消息,支持子message. eg. &#x27;a.b.c&#x27;
+@param {..} 执行订阅的handler时传入的data</pre>
+        
+        
+        
+      
+      
+      
+        <p id="pubSub_subscribe">
+          <b class="header">subscribe</b><code>pubSub.subscribe(message, handler[, context])</code>
+          <br>
+          订阅(注意,message不要包含'id_', eg. '...id_...')
+        </p>
+        
+<pre>
+@param {string} 消息
+@param {function} 处理句柄
+@param {object} handler执行的上下文,可选</pre>
+        
+        
+        <pre>pubSub.subscribe(&#x27;a&#x27;, handler);
+pubSub.subscribe(&#x27;a&#x27;, handler2);
+pubSub.publish(&#x27;a&#x27;, data[0]);
+=&gt; &#x27;熊大应该阻止光头强砍树&#x27;
+=&gt; &#x27;熊大喜欢阻止光头强砍树&#x27;
+pubSub.subscribe(&#x27;b&#x27;, handler);
+pubSub.subscribe(&#x27;b.b&#x27;, handler2);
+pubSub.publish(&#x27;b&#x27;, data[1]);
+=&gt; &#x27;熊二应该调戏光头强&#x27;
+=&gt; &#x27;熊二喜欢调戏光头强&#x27;
+pubSub.subscribe(&#x27;c&#x27;, handler);
+pubSub.publish(&#x27;c&#x27;, data[2]);
+=&gt; &#x27;光头强应该伐木&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="pubSub_unsubscribe">
+          <b class="header">unsubscribe</b><code>pubSub.unsubscribe(message, handler)</code>
+          <br>
+          取消订阅(只能取消此message上的handler,不能作用于子message)
+        </p>
+        
+<pre>
+@param {string} 消息
+@param {function} 处理句柄,可选,如果为空则清除message上的所有handler</pre>
+        
+        
+        <pre>pubSub.unsubscribe(&#x27;a&#x27;, handler2);
+pubSub.publish(&#x27;a&#x27;, data[0]);
+=&gt; &#x27;熊大应该阻止光头强砍树&#x27;
+pubSub.unsubscribe(&#x27;b&#x27;);
+pubSub.publish(&#x27;b&#x27;, data[1]);
+=&gt; &#x27;熊二喜欢调戏光头强&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="pubSub_clear">
+          <b class="header">clear</b><code>pubSub.unsubscribe(message)</code>
+          <br>
+          清除某个message(包含子message)或者所有message的订阅
+        </p>
+        
+<pre>
+@param {string} 消息,可选,如果message为空,则清除所有message.</pre>
+        
+        
+        <pre>pubSub.clear(&#x27;b&#x27;);
+pubSub.publish(&#x27;b&#x27;, data[1]);
+pubSub.clear();
+pubSub.publish(&#x27;c&#x27;, data[2]);</pre>
+        
+        
+      
+      
+    
+      <h2 id="rules">rules</h2>
+      <p>常用的正则校验规则</p>
+      
+      <pre>// 校验，返回值为true/false
+rules.isRequired(&#x27;校验文本&#x27;) // 必填
+rules.isChinese(..) // 中文
+rules.isDoubleByte(..) // 双字节
+rules.isZipcode(..) // 邮政编码
+rules.isQq(..) // QQ
+rules.isPicture(..) // 图片
+rules.isRar(..) // 压缩文件
+rules.isMobile(..) // 手机号
+rules.isMoney(..) // 金额（不能包含分隔符）
+rules.isEnglish(..) // 英文字母
+rules.isLowerCase(..) // 英文小写
+rules.isUpperCase(..) // 英文大写
+rules.isNumber(..) // 纯数字
+rules.isInteger(..) // 整数
+rules.isFloat(..) // 浮点数
+rules.isRealName(..) // 姓名（中英文）
+rules.isEmail(..) // 邮箱
+rules.isUrl(..) // 网址 http://mhbsesal.com
+rules.isIdCard(..) // 身份证
+rules.isPhone(..) // 座机（区号-主号-分机号）029-8784326-11316
+rules.isAreaNum(..) // 座机-区号
+rules.isHostNum(..) // 座机-主号
+rules.isExtensionNum(..) // 座机-分机号
+rules.isIp(..) // IP地址</pre>
+      
+      
+      
+    
+      <h2 id="AbstractStore">AbstractStore</h2>
+      <p>store的抽象类,针对storage中的key,一般不使用该类,常用他的子类LocalStore(options.storage = window.localStorage)、SessionStore(options.storage = window.sessionStorage)</p>
+      
+      
+      
+      
+      
+      
+        <p id="AbstractStore_AbstractStore">
+          <b class="header">AbstractStore</b><code>new AbstractStore(options)</code>
+          <br>
+          构造函数
+        </p>
+        
+<pre>
+@param {object} options
+  - proxy           {AbstractStorage} AbstractStorage实例
+  - key             {string} key
+  - lifetime        {string} 生命周期,默认&#x27;1H&#x27; 单位D,H,M,S. eg. &#x27;24H&#x27;
+  - rollbackEnabled {boolean} 是否回滚</pre>
+        
+        
+        <pre>var store = new AbstractStore({
+  proxy: new AbstractStorage({
+    storage: window.localStorage
+  })
+  key: &#x27;USER&#x27;
+}))</pre>
+        
+        
+      
+      
+      
+        <p id="AbstractStore_set">
+          <b class="header">set</b><code>store.set(value[, tag][, isOld])</code>
+          <br>
+          设置this.key下的value
+        </p>
+        
+<pre>
+@param {..} value
+@param {string} 可选,tag标识,如果传递tag,get时会比较tag标识,不一致返回null
+@param {string} 可选,默认false,是否设置回滚数据
+@return {boolean} 成功true,失败false</pre>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_setAttr">
+          <b class="header">setAttr</b><code>store.setAttr(name, value[, tag][, isOld])</code>
+          <br>
+          设置this.key下的value中name的value
+        </p>
+        
+<pre>
+@param {String} name 支持通过路径的方式，如&#x27;a.b.c&#x27;
+@param {..} value
+@param {string} 可选,tag标识,如果传递tag,get时会比较tag标识,不一致返回null
+@param {string} 可选,默认false,是否设置回滚数据
+@return {boolean} 成功true,失败false</pre>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_get">
+          <b class="header">get</b><code>store.get([tag][, isOld])</code>
+          <br>
+          读取this.key下的value
+        </p>
+        
+<pre>
+@param {string} 可选,tag标识,如果传递tag,get时会比较tag标识,不一致返回null
+@param {string} 可选,默认false,是否设置回滚数据
+@return {..} value</pre>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_getAttr">
+          <b class="header">getAttr</b><code>store.getAttr(name[, tag][, isOld])</code>
+          <br>
+          读取this.key下的value中name的value
+        </p>
+        
+<pre>
+@param {String} name 支持通过路径的方式，如&#x27;a.b.c&#x27;
+@param {string} 可选,tag标识,如果传递tag,get时会比较tag标识,不一致返回null
+@param {string} 可选,默认false,是否设置回滚数据
+@return {..} value</pre>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_getTag">
+          <b class="header">getTag</b><code>store.getTag()</code>
+          <br>
+          获取tag
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_remove">
+          <b class="header">remove</b><code>store.remove()</code>
+          <br>
+          移除存储对象
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_setExpireTime">
+          <b class="header">setExpireTime</b><code>store.setExpireTime()</code>
+          <br>
+          设置失效时间
+        </p>
+        
+<pre>
+@param {number} timeout</pre>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_getExpireTime">
+          <b class="header">getExpireTime</b><code>store.getExpireTime()</code>
+          <br>
+          返回失效时间
+        </p>
+        
+        
+        
+      
+      
+      
+        <p id="AbstractStore_rollback">
+          <b class="header">rollback</b><code>store.rollback([isClearOld])</code>
+          <br>
+          回滚至上个版本
+        </p>
+        
+<pre>
+@param {string} 可选,默认false,回滚后是否清除回滚数据
+@return {boolean} 成功true,失败false</pre>
+        
+        
+        
+      
+      
+    
+      <h2 id="LocalStore">LocalStore</h2>
+      <p>AbstractStore的子类</p>
+      
+      <pre>var store = new AbstractStore({
+  key: &#x27;USER&#x27;
+})</pre>
+      
+      
+      
+    
+      <h2 id="SessionStore">SessionStore</h2>
+      <p>AbstractStore的子类</p>
+      
+      <pre>var store = new AbstractStore({
+  key: &#x27;USER&#x27;
+})</pre>
+      
+      
+      
+    
+      <h2 id="utils">utils</h2>
+      <p>工具方法集</p>
+      
+      
+      
+      
+        <p id="utils_guid">
+          <b class="header">guid</b><code>util.guid()</code>
+          <br>
+          生成guid
+        </p>
+        
+<pre>
+@return {string} guid</pre>
+        
+        
+        <pre>util.guid() =&gt; &#x27;d42fb5af-9b78-6320-9a79-327cb00ea561&#x27;</pre>
+        
+        
+      
+      
+      
+        <p id="utils_getByteInfo">
+          <b class="header">getByteInfo</b><code>util.getByteInfo(str[, index])</code>
+          <br>
+          字符串的长度和index计算
+        </p>
+        
+<pre>
+@param {string} 要计算的字符串
+@param {number} 可选,字符串(双字节长度为2)的index
+@return {object} 返回对象
+  - length {number} 字符串(双字节长度为2)的长度
+  - index  {number} 字符串的index,如果参数index为空,则该字段无返回值</pre>
+        
+        
+        <pre>util.getByteInfo(&#x27;我的生日是1987年11月03日&#x27;, 5) =&gt; Object {length: 24, index: 2}
+util.getByteInfo(&#x27;生日：1987-08-05&#x27;) =&gt; Object {length: 16}</pre>
+        
+        
+      
+      
+      
+        <p id="utils_pad">
+          <b class="header">pad</b><code>util.pad(str, len[, fill][, right])</code>
+          <br>
+          字符串填充
+        </p>
+        
+<pre>
+@param {string} 需要处理的字符串,非字符串会先转换为字符串
+@param {number} 填充的长度,如果需要处理的字符串大于此参数,则放弃
+@param {string} 可选,填充字符,非字符串会先转换为字符串,默认为空格字符
+@param {boolean} 可选,左边还是右边,默认为false,左边
+@param {boolean} 可选,字符串的长度超过参数len是否截取,默认为false
+@return {string} 处理后的字符串</pre>
+        
+        
+        <pre>util.pad(&#x27;mo&#x27;, 4, &#x27;-&#x27;) =&gt; &#x27;--mo&#x27;
+util.pad(19871103, 14, 0, true) =&gt; &#x27;19871103000000&#x27;
+util.pad(19871103, 6, null, false, true) =&gt; &#x27;871103&#x27;</pre>
+        
+        
+      
+      
+    
+  </div>
+</div>
+<script src="javascripts/mojs.js"></script>
+</body>
+</html>

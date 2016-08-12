@@ -16,9 +16,9 @@ npm-debug.log
 
 # data
 /be/data
-
-
-# github ignore
 /fe/resource/upload
+/fe/resource/upload.tar.gz
+
+# scp
 /be/bin/scp.dev.sh
-/fe/webpack-assets.json
+/fe/bin/scp.dev.sh

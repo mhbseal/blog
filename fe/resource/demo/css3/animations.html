@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>animations</title>
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #eee;
+    }
+
+    ul {
+      list-style: none;
+      margin: 50px;
+    }
+
+    li,
+    p {
+      width: 200px;
+      height: 40px;
+      padding: 5px 10px;
+      line-height: 20px;
+      text-align: center;
+      color: #fff;
+      background: #96c;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 100px;
+      background: none;
+      border: 1px solid #333;
+      color: #333;
+      font-size: 16px;
+    }
+
+    @-webkit-keyframes move {
+      0% {
+        margin-left: 0;
+      }
+      100% {
+        margin-left: 500px;
+      }
+    }
+
+    li {
+      -webkit-animation: move 3s linear 0.5s;
+    }
+
+    li:nth-child(1) {
+      background: #f36;
+    }
+
+    li:nth-child(2) {
+      background: #3e6;
+      -webkit-animation-fill-mode: forwards;
+    }
+
+    li:nth-child(3) {
+      background: #369;
+      -webkit-animation-iteration-count: 2;
+    }
+
+    li:nth-child(4) {
+      background: #369;
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    li:nth-child(5) {
+      background: #636;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: alternate;
+    }
+
+    li:nth-child(6) {
+      background: #3e6;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: alternate;
+      -webkit-animation-fill-mode: forwards;
+    }
+
+    li:nth-child(6).hover {
+      -webkit-animation-play-state: paused;
+    }
+  </style>
+  <script type="text/javascript" src="/static/scripts/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('p').hover(function () {
+        $('li').eq(5).addClass('hover')
+      }, function () {
+        $('li').eq(5).removeClass('hover')
+      })
+    })
+  </script>
+</head>
+<body>
+<ul>
+  <li>基础动画(线性动画，延迟0.5秒，执行3秒，0px-->500px)</li>
+  <li>设置对象动画之外的状态为动画结束时的状态</li>
+  <li>循环2次</li>
+  <li>无限循环</li>
+  <li>无限循环的往返运动</li>
+  <li>无限循环的往返运动，并通过下面的button控制运动、停止</li>
+</ul>
+<p>悬停 --> 停止<br/>离开 --> 运动</p>
+</body>
+</html>

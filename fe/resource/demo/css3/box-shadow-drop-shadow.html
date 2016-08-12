@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>box-shadow-drop-shadow</title>
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #eee;
+    }
+
+    .center {
+      width: 500px;
+      margin: 0 auto;
+    }
+
+    .shadow {
+      position: relative;
+      margin: 100px 50px 50px;
+      width: 400px;
+      height: 150px;
+      background: #fff;
+      font-size: 20px;
+      text-align: center;
+      line-height: 150px;
+    }
+
+    .shadow:before,
+    .shadow:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 200px;
+      height: 30px;
+      z-index: -1;
+      -webkit-box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .shadow:before {
+      left: 10px;
+      bottom: 10px;
+      -ms-transform: rotate(-4deg);
+      -webkit-transform: rotate(-4deg);
+      transform: rotate(-4deg);
+    }
+
+    .shadow:after {
+      right: 10px;
+      bottom: 10px;
+      -ms-transform: rotate(4deg);
+      -webkit-transform: rotate(4deg);
+      transform: rotate(4deg);
+    }
+
+  </style>
+</head>
+<body>
+<div class="center">
+  <div class="shadow">demo-css3-drop-shadow</div>
+</div>
+</body>
+</html>

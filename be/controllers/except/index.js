@@ -16,7 +16,7 @@ module.exports = function (app) {
   }
 
   // 后台检验是否登陆
-  if (!C.argv.noauth) {
+  if (!F.argv.noauth) {
     app.all('/admin/*', function (req, res, next) {
       if (req.session.admin || req.path === '/admin/auth' || (req.path === '/admin/blogInfo' && req.method == 'GET') ) {
         next();

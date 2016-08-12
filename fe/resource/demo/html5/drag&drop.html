@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HTML5之拖放</title>
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 500px;
+      margin: 20px auto;
+    }
+
+    .box {
+      width: 180px;
+      min-height: 330px;
+      padding: 0 10px 10px;
+      border: 2px dashed #ccc;
+      text-align: center;
+    }
+
+    #left_box {
+      float: left;
+    }
+
+    #right_box {
+      float: right;
+    }
+
+    .drag {
+      width: 180px;
+      height: 100px;
+      margin-top: 10px;
+      line-height: 100px;
+      color: #fff;
+      background: #428BCA;
+      text-align: center;
+      cursor: move;
+    }
+  </style>
+  <script src="/static/scripts/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<div class="box" id="left_box">
+  <div draggable="true" class="drag" id="drag1">A</div>
+  <div draggable="true" class="drag" id="drag2">B</div>
+  <div draggable="true" class="drag" id="drag3">C</div>
+</div>
+<div class="box" id="right_box"></div>
+<script>
+  $(function () {
+    var dragElement = $('.drag') // 被拖拽元素
+      , targetElement = $('.box'); // 目标元素
+
+    dragElement.on('dragstart', function (e) {
+      e.originalEvent.dataTransfer.setData("Text", e.target.id); // 设置拖拽事件中的传递数据
+    })
+
+    targetElement.on('dragover', function (e) {
+      e.preventDefault(); // 阻止默认行为
+    }).on('dragenter', function (e) {
+      e.target.style.borderColor = 'red';  // 进入目标元素，目标元素样式改变
+    }).on('dragleave', function (e) {
+      e.target.style.borderColor = '#ccc';  // 离开目标元素，目标元素样式改变
+    }).on('drop', function (e) {
+      // 把拖拽事件中的传递数据取出并插入到目标元素中
+      var data = e.originalEvent.dataTransfer.getData("Text");
+      $(this).append(document.getElementById(data));
+      // 目标元素样式改变
+      this.style.borderColor = '#ccc';
+    })
+
+  })
+</script>
+</body>
+</html>

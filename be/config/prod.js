@@ -4,7 +4,7 @@ var
   config = {
     cookieSession: { // session
       name: 'blog',
-      keys: ["Mo's Blog"]
+      keys: ["~!@#$SDFGH%^&*)HJ"]
     },
     db: { // 数据库配置
       uri: 'mongodb://localhost:27017/blog',
@@ -14,15 +14,19 @@ var
       }
     },
     host: 'localhost',
-    port: 3003,
+    port: 3000,
     dir: { // 目录配置
       root: beRoot,
       model: path.resolve(beRoot, 'models'),
       controller: path.resolve(beRoot, 'controllers'),
       resource: path.resolve(beRoot, '../fe/resource')
     },
-    resourceFixUrl: '', // 静态资源web访问修正路径
+    resourceFixUrl: 'http://mhbseal.com', // 静态资源web访问修正路径
     exceptFolder: 'except' // model 和 controller 中read dir排除的目录名称
   };
 
 module.exports = config;
+
+
+
+

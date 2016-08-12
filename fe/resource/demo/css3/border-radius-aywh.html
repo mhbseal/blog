@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>demo-css3-奥运五环</title>
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #eee;
+    }
+
+    .center {
+      width: 495px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 20px;
+      text-align: center;
+      line-height: 2
+    }
+
+    .aywh {
+      list-style-type: none;
+      position: relative;
+      margin: 100px 50px 50px;
+      width: 395px;
+      height: 180px;
+    }
+
+    .aywh li {
+      position: absolute;
+      width: 92px;
+      height: 92px;
+      border: 14px solid transparent;
+      border-radius: 60px;
+    }
+
+    li.blue, li.blue_over {
+      left: 0;
+      top: 0;
+    }
+
+    li.yellow, li.yellow_over {
+      left: 68px;
+      top: 57px;
+    }
+
+    li.black, li.black_over {
+      left: 136px;
+      top: 0;
+    }
+
+    li.green, li.green_over {
+      left: 204px;
+      top: 57px;
+    }
+
+    li.red, li.red_over {
+      left: 272px;
+      top: 0px;
+    }
+
+    li.blue {
+      z-index: 50;
+      border-color: blue;
+    }
+
+    li.yellow {
+      z-index: 40;
+      border-color: yellow;
+    }
+
+    li.black {
+      z-index: 30;
+      border-color: black;
+    }
+
+    li.green {
+      z-index: 20;
+      border-color: green;
+    }
+
+    li.red {
+      z-index: 10;
+      border-color: red;
+    }
+
+    /*嵌套层*/
+    li.yellow_over {
+      z-index: 51;
+      border-left-color: yellow;
+    }
+
+    li.black_over {
+      z-index: 41;
+      border-bottom-color: black;
+    }
+
+    li.green_over {
+      z-index: 51;
+      border-left-color: green;
+    }
+
+    li.red_over {
+      z-index: 21;
+      border-bottom-color: red;
+    }
+
+  </style>
+</head>
+<body>
+<div class="center">
+  <ul class="aywh">
+    <li class="blue"></li>
+    <li class="yellow"></li>
+    <li class="yellow_over"></li>
+    <li class="black"></li>
+    <li class="black_over"></li>
+    <li class="green"></li>
+    <li class="green_over"></li>
+    <li class="red"></li>
+    <li class="red_over"></li>
+  </ul>
+  <h1>demo-css3-奥运五环</h1>
+</div>
+</body>
+</html>

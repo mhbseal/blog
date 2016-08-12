@@ -6,6 +6,8 @@
     "pm2.start": "NODE_ENV=production pm2 start ./bin/server.js --name blog.render --watch",
     "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.render --watch",
     "build": "webpack --verbose --colors --display-error-details --config ./build/webpack.config.prod",
+    "source.dev": "bin/scp.dev.sh && bin/tar.dev.sh",
+    "source.prod": "bin/tar.prod.sh",
     "lint": "eslint ./"
   },
   "dependencies": {
