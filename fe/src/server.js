@@ -24,7 +24,7 @@ const resourceDir = path.join(__dirname, '../resource');
 
 // 静态资源
 app.use(compression());
-app.use(favicon(path.join(resourceDir, 'images/favicon.ico')));
+app.use(favicon(path.join(resourceDir, 'static/images/favicon.ico')));
 app.use(express.static(resourceDir, {maxAge: '365d'}));
 
 const proxy = httpProxy.createProxyServer({
