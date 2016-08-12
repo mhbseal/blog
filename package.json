@@ -17,27 +17,5 @@
     "redux",
     "babel",
     "blog"
-  ],
-  "scripts": {
-    "start.api": "node ./bin/apiServer",
-    "start.api.noauth": "node ./bin/apiServer noauth",
-    "start.render": "node ./bin/renderServer",
-    "start.webpack": "node ./fe/build/webpack.dev.server",
-    "dev": "npm run start.api & npm run start.render & npm run start.webpack",
-    "dev.noauth": "npm run start.api.noauth & npm run start.render & npm run start.webpack",
-    "pm2.start.api": "NODE_ENV=production pm2 start ./bin/apiServer.js --name blog.api --watch",
-    "pm2.start.render": "NODE_ENV=production pm2 start ./bin/renderServer.js --name blog.render --watch",
-    "pm2.reload.api": "NODE_ENV=production pm2 reload ./bin/apiServer.js --name blog.api --watch",
-    "pm2.reload.render": "NODE_ENV=production pm2 reload ./bin/renderServer.js --name blog.render --watch",
-    "build": "webpack --verbose --colors --display-error-details --config ./fe/build/webpack.config.prod",
-    "nginx.start": "/usr/local/nginx/sbin/nginx",
-    "nginx.reload": "/usr/local/nginx/sbin/nginx -s reload",
-    "chmod": "chmod -R +x bin",
-    "tar.dev": "bin/tar.dev.sh",
-    "tar.prod": "bin/tar.prod.sh",
-    "scp.dev": "bin/scp.dev.sh",
-    "data.dev": "npm run scp.dev && npm run tar.dev && npm run mongorestore.dev",
-    "data.prod": "npm run mongodump.prod && npm run tar.prod",
-    "lint": "eslint ./fe ./be"
-  }
+  ]
 }

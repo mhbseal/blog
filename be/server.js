@@ -29,6 +29,6 @@ app.listen(C.port, function(err) {
   if (err) {
     console.error(err);
   } else {
-    console.info('----\n==> server.be is running on http://%s:%s', C.host, C.port);
+    console.info('----\n==> apiServer is running on http://%s:%s', C.host, C.port);
   }
 });

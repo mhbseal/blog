@@ -20,11 +20,11 @@ import config from './config';
 
 const pretty = new PrettyError();
 const app = new express();
-const resourceDir = path.join(__dirname, '../../resource');
+const resourceDir = path.join(__dirname, '../resource');
 
 // 静态资源
 app.use(compression());
-app.use(favicon(path.join(resourceDir, 'static/images/favicon.ico')));
+app.use(favicon(path.join(resourceDir, 'images/favicon.ico')));
 app.use(express.static(resourceDir, {maxAge: '365d'}));
 
 const proxy = httpProxy.createProxyServer({
@@ -104,6 +104,6 @@ app.listen(config.renderServer.port, function(err) {
   if (err) {
     console.error(err);
   } else {
-    console.info('----\n==> server.fe is running on http://%s:%s', config.renderServer.host, config.renderServer.port);
+    console.info('----\n==> renderServer is running on http://%s:%s', config.renderServer.host, config.renderServer.port);
   }
 });

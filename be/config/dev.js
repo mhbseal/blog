@@ -19,7 +19,7 @@ var
       root: beRoot,
       model: path.resolve(beRoot, 'models'),
       controller: path.resolve(beRoot, 'controllers'),
-      resource: path.resolve(beRoot, '../resource')
+      resource: path.resolve(beRoot, '../fe/resource')
     },
     argv: require('minimist')(process.argv.slice(2)), // node命令中的参数
     resourceFixUrl: '', // 静态资源web访问修正路径

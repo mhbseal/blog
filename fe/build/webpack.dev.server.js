@@ -1,12 +1,12 @@
 var Express = require('express');
 var webpack = require('webpack');
 
-var envConfig = require('../../env.config');
+var config = require('../src/config/dev');
 var webpackConfig = require('./webpack.config.dev');
 var compiler = webpack(webpackConfig);
 
 var serverOptions = {
-  contentBase: 'http://' + envConfig.dev.webpackServer.host + ':' + envConfig.dev.webpackServer.port,
+  contentBase: 'http://' + config.webpackServer.host + ':' + config.webpackServer.port,
   quiet: true,
   noInfo: true,
   hot: true,
@@ -22,4 +22,10 @@ var app = new Express();
 app.use(require('webpack-dev-middleware')(compiler, serverOptions));
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.listen(envConfig.dev.webpackServer.port);
+app.listen(config.webpackServer.port, function(err) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.info('----\n==> webpackServer is running on http://%s:%s', config.webpackServer.host, config.webpackServer.port);
+  }
+});

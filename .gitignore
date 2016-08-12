@@ -1,7 +1,6 @@
 # 包
 /be/node_modules
 /fe/node_modules
-/node_modules
 
 # webstorm配置
 .idea
@@ -20,13 +19,6 @@ npm-debug.log
 
 
 # github ignore
-/resource/test
-/resource/api
-/resource/demo
-/resource/upload
-/resource/static/dist
-/be/config/prod.js
-/fe/src/config/prod.js
-/bin/scp.dev.sh
-webpack-assets.json
-
+/fe/resource/upload
+/be/bin/scp.dev.sh
+/fe/webpack-assets.json

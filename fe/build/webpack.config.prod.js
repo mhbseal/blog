@@ -1,12 +1,6 @@
-// for github
-var adminPath;
-try {
-  adminPath = require('../src/config').adminPath;
-} catch(e) {};
-
 var
   G = {
-    ADMINPATH: adminPath || require('../src/config/dev').adminPath,
+    ADMINPATH: require('../src/config/prod').adminPath,
     __CLIENT__: true,
     __DEVELOPMENT__: false,
     __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
@@ -17,20 +11,20 @@ var
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin'), // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
   babelConfig = require('./babel.config')(G.__DEVELOPMENT__, G.__CLIENT__),
-  relativeAssetsPath = '../../resource/static/dist';
+  relativeAssetsPath = '../resource/dist';
 
 module.exports = {
   devtool: 'source-map',
-  context: path.resolve(__dirname, '../..'),
+  context: path.resolve(__dirname, '..'),
   entry: {
-    app: './fe/src/client.js',
-    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-router', 'classnames', 'superagent']
+    app: './src/client.js',
+    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'react-router-redux', 'redux-async-connect', 'classnames', 'superagent']
   },
   output: {
     path: path.resolve(__dirname, relativeAssetsPath),
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/static/dist/'
+    publicPath: '/dist/'
   },
   module: {
     loaders: [

@@ -19,14 +19,14 @@ module.exports = {
     './src/client.js'
   ],
   output: {
-    path: path.resolve(__dirname, '../../resource/static/dist'),
+    path: path.resolve(__dirname, '../resource/dist'),
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: 'http://' + config.webpackServer.host + ':' + config.webpackServer.port + '/static/dist/'
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelConfig), 'eslint']},
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel?' + JSON.stringify(babelConfig)},
       { test: /\.json$/, loader: 'json'},
       { test: /\.less$/, loader: 'style!css!autoprefixer!less'},
       { test: /\.scss$/, loader: 'style!css!autoprefixer!sass'}

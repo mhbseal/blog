@@ -3,30 +3,28 @@
   "scripts": {
     "start": "node ./bin/server",
     "start.noauth": "node ./bin/server --noauth",
-    "mongod": "./bin/mongod.dev.sh",
+    "mongod.dev": "bin/mongod.dev.sh",
+    "mongod.prod": "bin/mongod.prod.sh",
+    "pm2.start": "NODE_ENV=production pm2 start ./bin/server.js --name blog.api --watch",
+    "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.api --watch",
+    "data.dev": "bin/scp.dev.sh && bin/tar.dev.sh && bin/mongorestore.dev.sh",
+    "data.prod": "bin/mongodump.prod.sh && bin/tar.prod.sh",
     "lint": "eslint ./"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "co": "^4.6.0",
-    "compression": "^1.6.2",
     "cookie-session": "^2.0.0-alpha.1",
     "express": "^4.14.0",
     "minimist": "^1.2.0",
     "mo2js": "^0.2.4",
     "mongoose": "^4.5.8",
     "morgan": "^1.7.0",
-    "multer": "^1.2.0",
-    "serve-favicon": "^2.3.0"
+    "multer": "^1.2.0"
   },
   "devDependencies": {
-    "better-npm-run": "0.0.10",
     "eslint": "^3.2.2",
-    "eslint-loader": "^1.5.0",
-    "eslint-plugin-import": "^1.12.0",
-    "eslint-plugin-react": "^6.0.0",
-    "piping": "^1.0.0-rc.3",
-    "pretty-error": "^2.0.0"
+    "piping": "^1.0.0-rc.3"
   },
   "engines": {
     "node": "6.2.2"
