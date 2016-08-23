@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import DocumentMeta from 'react-document-meta';
 import { load } from '../redux/modules/articleList';
-import connectData from '../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import PageList from '../components/PageList';
 import State from './State';
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(load({params: location.query}));
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(load({params: location.query}));
+  }
+}])
 @connect(
   state => ({
     articleList: state.articleList,
@@ -31,7 +31,7 @@ export default class ArticleList extends Component {
 
       return (
         <section className="contents">
-          <DocumentMeta title={(typeOrTagName ? typeOrTagName + '_' : '') + blogInfo.title}/>
+          <Helmet title={(typeOrTagName ? typeOrTagName + '_' : '') + blogInfo.title}/>
           {articles.map((article, i) => {
             return (
               <article key={i} className="excerpt">

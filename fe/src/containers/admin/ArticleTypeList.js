@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { load } from '../../redux/modules/admin/articleTypeList';
 import { del } from '../../redux/modules/admin/articleType';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
 import State from './State';
 import { deleteOver } from '../../utils/actionOver';
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(load({params: {...location.query, x: 'articleType'}}));
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(load({params: {...location.query, x: 'articleType'}}));
+  }
+}])
 @connect(
   state => ({
     list: state.adminArticleTypeList,

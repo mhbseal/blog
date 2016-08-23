@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as blogInfoActions from '../../redux/modules/admin/blogInfo';
 import State from './State';
-import { pushState } from 'redux-router';
+import { pushState } from 'react-router-redux';
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(blogInfoActions.load());
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}}) => {
+    return dispatch(blogInfoActions.load());
+  }
+}])
 @connect(
   state => ({
     blogInfo: state.adminBlogInfo

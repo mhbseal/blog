@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { load } from '../../redux/modules/admin/linkList';
 import { del } from '../../redux/modules/admin/link';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
 import State from './State';
 import { deleteOver } from '../../utils/actionOver';
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(load({params: {...location.query, x: 'link'}}));
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(load({params: {...location.query, x: 'link'}}));
+  }
+}])
 @connect(
   state => ({
     list: state.adminLinkList,

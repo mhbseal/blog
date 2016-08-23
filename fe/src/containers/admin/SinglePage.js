@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
-import DocumentMeta from 'react-document-meta';
 import { connect } from 'react-redux';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as detailActions from '../../redux/modules/admin/singlePage';
 import State from './State';
 import m from '../../utils/moReactUtils';
-import { pushState } from 'redux-router';
+import { pushState } from 'react-router-redux';
 
 let contentEditor;
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(detailActions.load({params: {x: 'singlePage', id: location.query.id}}));
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(detailActions.load({params: {x: 'singlePage', id: location.query.id}}));
+  }
+}])
 @connect(
   state => ({
     detail: state.adminSinglePage
   }),
   { ...detailActions, pushState }
 )
-export default class singlePage extends Component {
+export default class SinglePage extends Component {
   state = {
     validateMsg: null,
     showAlert: false
@@ -53,7 +52,6 @@ export default class singlePage extends Component {
       let {xData} = detail.data.data;
       return (
         <div className="main">
-          <DocumentMeta script={{}}/>
           <table className="table1" ref="form">
             <tbody>
             <tr>

@@ -1,23 +1,23 @@
 import React, { Component, PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import DocumentMeta from 'react-document-meta';
 import { Link } from 'react-router';
-import { pushState } from 'redux-router';
+import { pushState } from 'react-router-redux';
 import { isLoaded, load } from '../redux/modules/layout';
-import connectData from '../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import classNames from 'classnames';
 import m from '../utils/moReactUtils';
 import './layout.scss';
 
-function fetchData(getState, dispatch) {
-  if (!isLoaded(getState())) {
-    return dispatch(load());
-  }
-}
-
 let timer;
 
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
+    if (!isLoaded(getState())) {
+      return dispatch(load());
+    }
+  }
+}])
 @connect(
   state => ({layout: state.layout}),
   { pushState }
@@ -98,7 +98,7 @@ export default class Layout extends Component {
     } else {
       return (
         <div className="welcome">
-          <DocumentMeta title='500 Error'/>
+          <Helmet title='500 Error'/>
           <h1>网络错误，请稍后重试...</h1>
         </div>
       )

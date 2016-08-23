@@ -50,6 +50,7 @@ export default function createCURD(prefix, actions, pageName) {
   })
 
   const createReducer = function(state, action) {
+    console.log(action);
     switch (action.type) {
       case constants.LOAD:
         return {

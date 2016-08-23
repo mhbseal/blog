@@ -1,19 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import DocumentMeta from 'react-document-meta';
+import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 import { isLoaded, load } from '../../redux/modules/admin/blogInfo';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import classNames from 'classnames';
 import '../layout.scss';
 
-function fetchData(getState, dispatch) {
-  if (!isLoaded(getState())) {
-    return dispatch(load());
+@asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
+    if (!isLoaded(getState())) {
+      return dispatch(load());
+    }
   }
-}
-
-@connectData(fetchData)
+}])
 @connect(
   state => ({blogInfo: state.adminBlogInfo})
 )
@@ -26,7 +26,7 @@ export default class Layout extends Component {
         {blogInfo} = blogInfoProps.data.data;
       return (
         <div className="admin">
-          <DocumentMeta title='后台管理'/>
+          <Helmet title='后台管理'/>
           <header className="header">
             <div className="inner">
               <h1><Link to={String(ADMINPATH)} className="logo">{blogInfo.title} 后台管理</Link></h1>
@@ -51,7 +51,7 @@ export default class Layout extends Component {
     } else {
       return (
         <div className="welcome">
-          <DocumentMeta title='500 Error'/>
+          <Helmet title='500 Error'/>
           <h1>网络错误，请稍后重试...</h1>
         </div>
       )

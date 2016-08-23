@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import { load, insertComment } from '../redux/modules/article';
-import { asyncConnect } from 'redux-async-connect';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../components/Alert';
 import formatForm from '../utils/formatForm';
 import { create as createComment } from '../redux/modules/comment';
 import State from './State';
 
-@asyncConnect({
+@asyncConnect([{
   promise: ({store: {dispatch}}) => dispatch(load({params: location.query}))
-})
+}])
 @connect(
   state => ({
     article: state.article,

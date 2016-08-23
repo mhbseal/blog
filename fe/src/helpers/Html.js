@@ -34,7 +34,7 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-capable" content="yes"/>
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>
-            <link href={assets.styles[style]} rel="stylesheet" type="text/css" charSet="UTF-8"/>
+            <link key={key} href={assets.styles[style]} rel="stylesheet" type="text/css" charSet="UTF-8"/>
           )}
         </head>
         <body>
@@ -47,7 +47,7 @@ export default class Html extends Component {
           <div id="app" dangerouslySetInnerHTML={{__html: content}}/>
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}}/>
           {Object.keys(assets.javascript).map((script, key) =>
-            <script src={assets.javascript[script]} charSet="UTF-8"/>
+            <script key={key} src={assets.javascript[script]} charSet="UTF-8"/>
           )}
         </body>
       </html>

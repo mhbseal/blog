@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import DocumentMeta from 'react-document-meta';
+import Helmet from 'react-helmet';
 
 export default class NotFound extends Component {
   render() {
     return (
       <section className="contents">
-        <DocumentMeta title='404 Not Found'/>
+        <Helmet title='404 Not Found'/>
         <em>404, Not Found...</em>
       </section>
     )

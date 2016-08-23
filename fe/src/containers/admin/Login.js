@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as authActions from '../../redux/modules/admin/auth';
 import State from './State';
-import { pushState } from 'redux-router';
+import { pushState } from 'react-router-redux';
 
-function fetchData(getState, dispatch) {
-  return dispatch(authActions.load());
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(authActions.load());
+  }
+}])
 @connect(
   state => ({
     auth: state.adminAuth

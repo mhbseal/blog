@@ -24,19 +24,6 @@ m.prototype = {
     } else if ( elem.detachEvent ) {
       elem.detachEvent( "on" + type, eventHandle );
     }
-  },
-  getByClass(className) {
-    let
-      children = this.elem.getElementsByTagName('*'),
-      ret = [],
-      reg = new RegExp('\\b' + className + '\\b', 'i'),
-      i = 0;
-
-    for(; i < children.length; i++) {
-      reg.test(children[i].className) && ret.push(children[i]);
-    }
-
-    return ret;
   }
 };
 

@@ -1,22 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import DocumentMeta from 'react-document-meta';
+import Helmet from 'react-helmet';
 import { load } from '../redux/modules/singlePage';
-import connectData from '../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import State from './State';
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(load({params: location.query}));
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    console.log(1);
+    return dispatch(load({params: location.query}));
+  }
+}])
 @connect(
   state => ({
     singlePage: state.singlePage,
     layout: state.layout
   })
 )
-export default class singlePage extends Component {
+export default class SinglePage extends Component {
   render() {
     let
       props = this.props,
@@ -29,7 +30,7 @@ export default class singlePage extends Component {
 
       return (
         <section className="contents">
-          <DocumentMeta title={`${singlePage.title}_${blogInfo.title}`}/>
+          <Helmet title={`${singlePage.title}_${blogInfo.title}`}/>
           <article className="detail">
             <header>
               <h2>{singlePage.title}</h2>

@@ -18,7 +18,7 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: {
     app: './src/client.js',
-    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'react-router-redux', 'redux-async-connect', 'classnames', 'superagent']
+    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'react-router-redux', 'redux-connect', 'classnames', 'superagent']
   },
   output: {
     path: path.resolve(__dirname, relativeAssetsPath),

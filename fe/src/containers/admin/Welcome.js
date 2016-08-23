@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { load } from '../../redux/modules/admin/auth';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import State from './State';
 
-function fetchData(getState, dispatch) {
-  return dispatch(load());
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(load());
+  }
+}])
 @connect(
   state => ({
     auth: state.adminAuth

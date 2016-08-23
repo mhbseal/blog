@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as detailActions from '../../redux/modules/admin/articleTag';
 import State from './State';
-import { pushState } from 'redux-router';
+import { pushState } from 'react-router-redux';
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(detailActions.load({params: {x: 'articleTag', id: location.query.id}}));
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(detailActions.load({params: {x: 'articleTag', id: location.query.id}}));
+  }
+}])
 @connect(
   state => ({
     detail: state.adminArticleTag

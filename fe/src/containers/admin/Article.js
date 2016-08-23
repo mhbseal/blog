@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import connectData from '../../helpers/connectData';
+import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as articleActions from '../../redux/modules/admin/article';
 import State from './State';
 import m from '../../utils/moReactUtils';
-import { pushState } from 'redux-router';
+import { pushState } from 'react-router-redux';
 
 let contentEditor, introEditor;
 
-function fetchData(getState, dispatch, location) {
-  return dispatch(articleActions.load({params: {id: location.query.id}}));
-}
-
-@connectData(fetchData)
+@asyncConnect([{
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(articleActions.load({params: {id: location.query.id}}));
+  }
+}])
 @connect(
   state => ({
     article: state.adminArticle

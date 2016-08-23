@@ -3,7 +3,9 @@ module.exports = function (__DEVELOPMENT__, __CLIENT__) {
     config = {
       "presets": ["react", "es2015", "stage-0"],
       "plugins": [
-        "transform-runtime"
+        "transform-runtime",
+        "add-module-exports",
+        "transform-decorators-legacy"
       ]
     };
 
@@ -17,7 +19,7 @@ module.exports = function (__DEVELOPMENT__, __CLIENT__) {
   }
 
   if (__DEVELOPMENT__ && __CLIENT__) {
-    config.plugins[1].transforms.push({
+    config.plugins[3][1].transforms.push({
       "transform": "react-transform-hmr",
       "imports": ["react"],
       "locals": ["module"]
