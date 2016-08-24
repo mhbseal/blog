@@ -6,7 +6,7 @@ import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as detailActions from '../../redux/modules/admin/link';
 import State from './State';
-import { pushState } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
@@ -17,7 +17,7 @@ import { pushState } from 'react-router-redux';
   state => ({
     detail: state.adminLink
   }),
-  { ...detailActions, pushState }
+  { ...detailActions, push }
 )
 export default class Link extends Component {
   state = {

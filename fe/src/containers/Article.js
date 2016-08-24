@@ -10,7 +10,9 @@ import { create as createComment } from '../redux/modules/comment';
 import State from './State';
 
 @asyncConnect([{
-  promise: ({store: {dispatch}}) => dispatch(load({params: location.query}))
+  promise: ({store: {dispatch}, location}) => {
+    return dispatch(load({params: location.query}))
+  }
 }])
 @connect(
   state => ({
@@ -131,11 +133,10 @@ export default class Article extends Component {
 
     // 提交
     if (data) {
-      data = {...data, article};
-      props.createComment({ data }).then((data) => {
-        if (data.result.status === 'success') {
+      props.createComment({ data: {...data, article} }).then((data) => {
+        if (data.status === 'success') {
           this.refs.content.value = '';
-          props.insertComment(data.result.data);
+          props.insertComment(data.data);
           this.setState({showAlert: true});
         }
       });

@@ -6,10 +6,10 @@ import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as authActions from '../../redux/modules/admin/auth';
 import State from './State';
-import { pushState } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 @asyncConnect([{
-  promise: ({store: {dispatch}, location}) => {
+  promise: ({store: {dispatch}}) => {
     return dispatch(authActions.load());
   }
 }])
@@ -17,7 +17,7 @@ import { pushState } from 'react-router-redux';
   state => ({
     auth: state.adminAuth
   }),
-  { ...authActions, pushState }
+  { ...authActions, push }
 )
 export default class Login extends Component {
   state = {

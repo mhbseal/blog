@@ -7,7 +7,7 @@ import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as blogInfoActions from '../../redux/modules/admin/blogInfo';
 import State from './State';
-import { pushState } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
@@ -18,7 +18,7 @@ import { pushState } from 'react-router-redux';
   state => ({
     blogInfo: state.adminBlogInfo
   }),
-  { ...blogInfoActions, pushState }
+  { ...blogInfoActions, push }
 )
 export default class BlogInfo extends Component {
   state = {

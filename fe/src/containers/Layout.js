@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { pushState } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import { isLoaded, load } from '../redux/modules/layout';
 import { asyncConnect } from 'redux-connect';
 import classNames from 'classnames';
@@ -20,7 +20,7 @@ let timer;
 }])
 @connect(
   state => ({layout: state.layout}),
-  { pushState }
+  { push }
 )
 export default class Layout extends Component {
   state = {
@@ -117,7 +117,7 @@ export default class Layout extends Component {
       return;
     }
 
-    this.props.pushState(null, '/', {keyword: search.value});
+    this.props.push(`/?keyword=${search.value}`);
     search.value = '';
   }
   handleScroll = () => {

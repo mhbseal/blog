@@ -7,6 +7,7 @@ import { asyncConnect } from 'redux-connect';
 import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
 import State from './State';
+import { deleteOver } from '../../utils/actionOver';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
@@ -71,13 +72,6 @@ export default class UserList extends Component {
     }
   }
   handleDelete(id) {
-    let props = this.props;
-
-    props.del({params: {x: 'user', id}}).then(() => {
-      this.setState({showAlert: true});
-      props.load({params: {...props.location.query, x: 'user'}});
-    }, () => {
-      this.setState({showAlert: true});
-    });
+    deleteOver(this.props.del({params: {x: 'user', id}}), this, 'user');
   }
 };

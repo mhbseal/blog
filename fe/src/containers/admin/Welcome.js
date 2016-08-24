@@ -6,7 +6,7 @@ import { asyncConnect } from 'redux-connect';
 import State from './State';
 
 @asyncConnect([{
-  promise: ({store: {dispatch}, location}) => {
+  promise: ({store: {dispatch}}) => {
     return dispatch(load());
   }
 }])

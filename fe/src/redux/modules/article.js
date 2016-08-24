@@ -10,9 +10,9 @@ export default function reducer(state = {}, action = {}) {
   } else {
     switch (action.type) {
       case INSERT_COMMENT:
-        let state = {...state};
-        state.data.data.comments.unshift(action.comment);
-        return state;
+        let s = {...state};
+        s.data.data.comments.unshift(action.comment);
+        return s;
       default:
         return state;
     }

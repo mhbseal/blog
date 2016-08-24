@@ -29,11 +29,19 @@
       
 2.几个config文件
 
-    /be/config/  //后端配置文件（数据库、session等）
-    /fe/src/config/  // 前端配置文件（后台访问目录路径）
-    /env.config.js  // 2个server的host和port
+    /be/config/  //后端配置文件（数据库、session、host、port等）
+    /fe/src/config/  // 前端配置文件（后台访问目录路径、host、port等）
 
 ### 更新日志
+
+**0.5.0（2016-08-26）**  
+基于工程前后端代码彻底分离，升级react，babel及其相应pkg。
+
+1.blog前后端代码彻底分离fe/be
+2.react->15+，babel->6+，node->6.4+
+3.增加文章点赞功能
+4.增加切换路由时的loading动画
+5.修改文章留言、后台用户列表的一些bug
 
 **0.4.0（2015-12-03）**  
 服务一分为2（apiServer + renderServer），基于react + redux + react-router，对renderServer实现前后端同构，首次加载走服务端，脚本加载后走客户端。

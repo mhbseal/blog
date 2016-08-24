@@ -7,7 +7,7 @@ import { editOver } from '../../utils/actionOver';
 import * as detailActions from '../../redux/modules/admin/singlePage';
 import State from './State';
 import m from '../../utils/moReactUtils';
-import { pushState } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 let contentEditor;
 
@@ -20,7 +20,7 @@ let contentEditor;
   state => ({
     detail: state.adminSinglePage
   }),
-  { ...detailActions, pushState }
+  { ...detailActions, push }
 )
 export default class SinglePage extends Component {
   state = {

@@ -7,7 +7,7 @@ import { editOver } from '../../utils/actionOver';
 import * as articleActions from '../../redux/modules/admin/article';
 import State from './State';
 import m from '../../utils/moReactUtils';
-import { pushState } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 let contentEditor, introEditor;
 
@@ -20,7 +20,7 @@ let contentEditor, introEditor;
   state => ({
     article: state.adminArticle
   }),
-  { ...articleActions, pushState }
+  { ...articleActions, push }
 )
 export default class Article extends Component {
   state = {

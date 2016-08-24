@@ -7,7 +7,6 @@ import State from './State';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    console.log(1);
     return dispatch(load({params: location.query}));
   }
 }])
