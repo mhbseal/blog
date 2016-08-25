@@ -1,12 +1,15 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app
     .route('/singlePage')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         res.json({
-          status: 'success',
+          status: {
+            code: 0,
+            msg: 'success'
+          },
           data: (yield M.singlePage.findOne({'path': req.query.path})) || {}
         });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

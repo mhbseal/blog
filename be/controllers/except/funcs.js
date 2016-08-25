@@ -1,6 +1,7 @@
 var
   funcs,
-  crypto = require('crypto');
+  crypto = require('crypto'),
+  co = require('co');
 
 funcs = {
   // 管理员账号加密
@@ -9,11 +10,18 @@ funcs = {
   },
   // 格式化日期
   date: require('mo2js').date,
-  // 统一服务错误处理
-  handleErr: function (res, err) {
-    res.status(500);
-    res.json({
-      error: err
+  // wrap co
+  co: function(success) {
+    co(success).catch(function (err) {
+      // 统一服务错误处理
+      res.status(500);
+      res.json({
+        status: {
+          code: 2,
+          msg: 'error'
+        },
+        data: err.stack
+      })
     })
   },
   // node命令中的参数

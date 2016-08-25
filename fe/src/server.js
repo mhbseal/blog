@@ -9,6 +9,7 @@ import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
+import logger from 'morgan';
 
 import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -23,6 +24,7 @@ const app = new express();
 const resourceDir = path.join(__dirname, '../resource');
 
 // 静态资源
+app.use(logger('dev'));
 app.use(compression());
 app.use(favicon(path.join(resourceDir, 'static/images/favicon.ico')));
 app.use(express.static(resourceDir, {maxAge: '365d'}));

@@ -30,9 +30,12 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel?' + JSON.stringify(babelConfig)},
       { test: /\.json$/, loader: 'json' },
-      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css!autoprefixer!less') },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!autoprefixer!sass') }
+      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!less') },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!sass') }
     ]
+  },
+  postcss: function () {
+    return [require('precss'), require('autoprefixer')];
   },
   progress: true,
   resolve: {

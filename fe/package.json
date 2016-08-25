@@ -15,6 +15,7 @@
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "http-proxy": "^1.14.0",
+    "morgan": "^1.7.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-helmet": "^3.1.0",
@@ -28,7 +29,7 @@
     "superagent": "^2.1.0"
   },
   "devDependencies": {
-    "autoprefixer-loader": "^3.2.0",
+    "autoprefixer": "^6.4.0",
     "babel-core": "^6.13.2",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
@@ -47,6 +48,8 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "node-sass": "^3.8.0",
     "piping": "^1.0.0-rc.3",
+    "postcss-loader": "^0.10.1",
+    "precss": "^1.4.0",
     "pretty-error": "^2.0.0",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",

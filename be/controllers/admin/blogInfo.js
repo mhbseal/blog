@@ -1,38 +1,51 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app // 博客信息
     .route('/admin/blogInfo')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         // 渲染
         res.json({
-          status: 'success',
+          status: {
+            code: 0,
+            msg: 'success'
+          },
           data: {
             logined: req.session.admin ? true : false,
             blogInfo: (yield M.blogInfo.findOne()) || {}
           }
         });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
     .put(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         res.json((yield M.blogInfo.findOneAndUpdate(req.body)) ?
-          { status: 'success',
-            msg: '更新成功'
+          {
+            status: {
+              code: 0,
+              msg: '更新成功'
+            }
           } : {
-            status: 'fail',
-            msg :'更新失败'
+            status: {
+              code: 1,
+              msg: '更新失败'
+            }
           });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
     .post(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         res.json((yield M.blogInfo.create(req.body)) ?
-          { status: 'success',
-            msg: '新增成功'
+          {
+            status: {
+              code: 0,
+              msg: '新增成功'
+            }
           } : {
-            status: 'fail',
-            msg :'新增失败'
+            status: {
+              code: 1,
+              msg: '新增失败'
+            }
           });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

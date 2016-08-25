@@ -1,14 +1,14 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app // 登陆
     .route('/admin/auth')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var
           conditions, admin,
           query = req.query;
 
         if (query.action === 'in') {
-          var status = 'success';
+          var code = 0;
           if (req.session.admin) {
             msg = '已经登陆';
           } else {
@@ -25,28 +25,35 @@ module.exports = function (app, co) {
                 email: admin.email
               };
             } else {
-              status = 'fail';
+              code = 1;
               msg = '登陆失败';
             }
           }
           res.json({
-            status: status,
-            msg: msg
+            status: {
+              code: code,
+              msg: msg
+            }
           })
         } else if (query.action === 'out') {
           req.session.admin = null;
           res.json({
-            status: 'success',
-            msg: '登出成功'
+            status: {
+              code: 0,
+              msg: '登出成功'
+            }
           })
         } else {
           res.json({
-            status: 'success',
+            status: {
+              code: 0,
+              msg: 'success'
+            },
             data: {
               admin: req.session.admin || {}
             }
           });
         }
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

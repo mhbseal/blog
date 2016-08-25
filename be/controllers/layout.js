@@ -1,8 +1,8 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app
     .route('/layout')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var
           blogInfo, articleTypes, articleTags, links;
         // 文章所有type
@@ -15,7 +15,10 @@ module.exports = function (app, co) {
         links = yield M.link.find();
         // 渲染
         res.json({
-          status: 'success',
+          status: {
+            code: 0,
+            msg: 'success'
+          },
           data: {
             articleTypes: articleTypes,
             blogInfo: blogInfo,
@@ -23,6 +26,6 @@ module.exports = function (app, co) {
             articleTags: articleTags
           }
         });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

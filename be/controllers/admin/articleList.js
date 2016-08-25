@@ -1,8 +1,8 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app // 文章列表
     .route('/admin/articleList')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var
           articleTypes, articles, pageList, options,
           conditions = req.query,
@@ -29,12 +29,15 @@ module.exports = function (app, co) {
         }
         // 模板渲染
         res.json({
-          status: 'success',
+          status: {
+            code: 0,
+            msg: 'success'
+          },
           data: {
             articles: articles,
             pageList: pageList
           }
         });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

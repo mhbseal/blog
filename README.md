@@ -38,10 +38,12 @@
 基于工程前后端代码彻底分离，升级react，babel及其相应pkg。
 
 1.blog前后端代码彻底分离fe/be
-2.react->15+，babel->6+，node->6.4+
-3.增加文章点赞功能
-4.增加切换路由时的loading动画
-5.修改文章留言、后台用户列表的一些bug
+2.apiServer接口格式优化
+3.react->15+，babel->6+，node->6.4+，other->last
+4.增加文章点赞功能
+5.增加切换路由时的loading动画
+6.优化文章留言
+7.修改后台用户列表bug
 
 **0.4.0（2015-12-03）**  
 服务一分为2（apiServer + renderServer），基于react + redux + react-router，对renderServer实现前后端同构，首次加载走服务端，脚本加载后走客户端。

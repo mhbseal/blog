@@ -1,4 +1,4 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   var
     fs = require('fs'),
     path = require('path'),
@@ -16,7 +16,7 @@ module.exports = function (app, co) {
 
   app // 上传,这里single参数要注意，需和前台form中的fieldName相同
     .post('/admin/upload', upload.single('upfile'), function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var fileName = req.file.filename;
         res.send(JSON.stringify({ // umeditor只接受Content-Type: 'text/html'
           url: C.resourceFixUrl + '/upload/' + fileName,

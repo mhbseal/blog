@@ -1,8 +1,8 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app
     .route('/articleList')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var
           articleTypes, articles, typeOrTagName, pageList, options, articleTags, rKeyword, typeId, tagId,
           query = req.query,
@@ -30,7 +30,14 @@ module.exports = function (app, co) {
             }
           });
           // 校验路由tagPath是否存在
-          if (!~tagPaths.indexOf(tagPath)) return res.json({status: 'warnning', msg: '找不到相应的文章标签'});
+          if (!~tagPaths.indexOf(tagPath)) {
+            return res.json({
+              status: {
+                code: 3,
+                msg: '找不到相应的文章标签'
+              }
+            });
+          }
           // 文章查询条件
           conditions['tags'] = {$all: tagId};
           pageList.query = {tagPath: tagPath};
@@ -50,7 +57,14 @@ module.exports = function (app, co) {
             }
           });
           // 校验路由typePath是否存在
-          if (!~typePaths.indexOf(typePath)) return res.json({status: 'warnning', msg: '找不到相应的文章类型'});
+          if (!~typePaths.indexOf(typePath)) {
+            return res.json({
+              status: {
+                code: 3,
+                msg: '找不到相应的文章类型'
+              }
+            });
+          }
           // 文章查询条件
           conditions['type'] = typeId;
           pageList.query = {typePath: typePath};
@@ -71,13 +85,16 @@ module.exports = function (app, co) {
         }
         // 模板渲染
         res.json({
-          status: 'success',
+          status: {
+            code: 0,
+            msg: 'success'
+          },
           data: {
             typeOrTagName: typeOrTagName,
             articles: articles,
             pageList: pageList,
           }
         });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

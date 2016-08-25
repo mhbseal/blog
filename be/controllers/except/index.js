@@ -1,14 +1,13 @@
 module.exports = function (app) {
   var
     path = require('path'),
-    fs = require('fs'),
-    co = require('co');
+    fs = require('fs');
 
   // 遍历controllers文件夹，执行所有router文件
   function eachFiles(dir) {
     fs.readdirSync(dir).forEach(function (name) {
       if (path.extname(name) !== '') {
-        require(path.join(dir, name))(app, co);
+        require(path.join(dir, name))(app);
       } else if (name !== C.exceptFolder && name !== '.DS_Store') { // 如果是文件夹并且不等于排除目录，则递归继续往下找(".DS_Store"为mac缓存，这里特殊处理)
         eachFiles(path.join(dir, name));
       }
@@ -22,8 +21,10 @@ module.exports = function (app) {
         next();
       } else {
         res.json({
-          status: 'fail',
-          msg: '登陆验证失败'
+          status: {
+            code: 1,
+            msg: '登陆验证失败'
+          }
         });
       }
     });
@@ -35,8 +36,10 @@ module.exports = function (app) {
   // default
   app.use(function(req, res) {
     res.json({
-      status: 'warnning',
-      msg: '无此api'
+      status: {
+        code: 3,
+        msg: '无此api'
+      }
     })
   });
 };

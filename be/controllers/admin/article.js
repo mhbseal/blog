@@ -1,8 +1,8 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app // 文章详情CRUD
     .route('/admin/article')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var
           // 文章id
           id = req.query.id,
@@ -15,54 +15,71 @@ module.exports = function (app, co) {
 
         // 模板渲染
         res.json({
-          status: 'success',
+          status: {
+            code: 0,
+            msg: 'success'
+          },
           data: {
             articleTypes: articleTypes,
             article: article,
             articleTags: articleTags
           }
         });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
     .delete(function (req, res) {
-      co(function *() {
+      F.co(function *() {
 
         res.json((yield M.article.remove({_id: req.query.id})) ?
-        { status: 'success',
-          msg: '删除成功'
-        } : {
-          status: 'fail',
-          msg :'删除失败'
-        });
-      }).catch(F.handleErr.bind(null, res))
+          {
+            status: {
+              code: 0,
+              msg: '删除成功'
+            }
+          } : {
+            status: {
+              code: 1,
+              msg: '删除失败'
+            }
+          });
+      })
     })
     .put(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var body = req.body;
         body.lastEditTime = F.date.format('YYYY-MM-DD HH:mm:ss');
 
         res.json((yield M.article.findOneAndUpdate({_id: req.query.id}, body)) ?
-          { status: 'success',
-            msg: '更新成功'
+          {
+            status: {
+              code: 0,
+                msg: '更新成功'
+            }
           } : {
-            status: 'fail',
-            msg :'更新失败'
+            status: {
+              code: 1,
+                msg: '更新失败'
+            }
           });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
     .post(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var body = req.body;
         body.createTime = body.lastEditTime = F.date.format('YYYY-MM-DD HH:mm:ss');
 
         res.json((yield M.article.create(body)) ?
-          { status: 'success',
-            msg: '新增成功'
+          {
+            status: {
+              code: 0,
+                msg: '新增成功'
+            }
           } : {
-            status: 'fail',
-            msg :'新增失败'
+            status: {
+              code: 1,
+                msg: '新增失败'
+            }
           });
-
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

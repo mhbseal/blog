@@ -1,8 +1,8 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app // 通用列表页
     .route('/admin/list')
     .get(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var
           xData, options,
           conditions = req.query,
@@ -37,12 +37,15 @@ module.exports = function (app, co) {
         }
         // 模板渲染
         res.json({
-          status: 'success',
+          status: {
+            code: 0,
+            msg: 'success'
+          },
           data: {
             xData: xData,
             pageList: pageList
           }
         });
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };

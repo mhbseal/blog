@@ -1,12 +1,12 @@
-module.exports = function (app, co) {
+module.exports = function (app) {
   app
     .route('/comment')
     .post(function (req, res) {
-      co(function *() {
+      F.co(function *() {
         var
           body = req.body,
           session = req.session,
-          user, admin, comment, status, msg, data;
+          user, admin, comment, status, data;
 
         if (admin = session.admin) { // 管理员
           body.admin = admin.id
@@ -47,17 +47,20 @@ module.exports = function (app, co) {
               name: admin.name
             };
           }
-          status = 'success';
-          msg = '评论成功！';
+          status = {
+            code: 0,
+            msg: '评论成功！'
+          }
         } else {
-          status = 'fail';
-          msg = '网络错误，请重试！'
+          status = {
+            code: 1,
+            msg: '网络错误，请重试！'
+          }
         }
         res.json({
           status: status,
-          msg: msg,
           data: data
         })
-      }).catch(F.handleErr.bind(null, res))
+      })
     })
 };
