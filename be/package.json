@@ -1,14 +1,17 @@
 {
   "name": "blog-be",
   "scripts": {
-    "start": "node ./bin/server",
-    "start.noauth": "node ./bin/server --noauth",
+    "dev": "bin/server.sh dev",
+    "dev.noauth": "bin/server.sh dev noauth",
+    "start": "bin/server.sh",
+    "start.noauth": "bin/server.sh noauth",
     "mongod.dev": "bin/mongod.dev.sh",
     "mongod.prod": "bin/mongod.prod.sh",
     "pm2.start": "NODE_ENV=production pm2 start ./bin/server.js --name blog.api --watch",
     "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.api --watch",
-    "data.dev": "bin/scp.dev.sh && bin/tar.dev.sh && bin/mongorestore.dev.sh",
-    "data.prod": "bin/mongodump.prod.sh && bin/tar.prod.sh",
+    "data.dev": "bin/scp.data.dev.sh && bin/tar.data.dev.sh && bin/mongorestore.dev.sh",
+    "data.prod": "bin/mongodump.prod.sh && bin/tar.data.prod.sh",
+    "log.dev": "bin/scp.log.dev.sh",
     "lint": "eslint ./"
   },
   "dependencies": {
@@ -23,8 +26,7 @@
     "multer": "^1.2.0"
   },
   "devDependencies": {
-    "eslint": "^3.2.2",
-    "piping": "^1.0.0-rc.3"
+    "eslint": "^3.2.2"
   },
   "engines": {
     "node": "6.4.0"

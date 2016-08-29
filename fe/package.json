@@ -1,13 +1,14 @@
 {
   "name": "blog-fe",
   "scripts": {
-    "start": "node ./bin/server",
+    "start": "bin/server",
     "watch": "node ./build/webpack.dev.server",
     "pm2.start": "NODE_ENV=production pm2 start ./bin/server.js --name blog.render --watch",
     "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.render --watch",
     "build": "webpack --verbose --colors --display-error-details --config ./build/webpack.config.prod",
     "source.dev": "bin/scp.dev.sh && bin/tar.dev.sh",
     "source.prod": "bin/tar.prod.sh",
+    "log.dev": "bin/scp.log.dev.sh",
     "lint": "eslint ./"
   },
   "dependencies": {
