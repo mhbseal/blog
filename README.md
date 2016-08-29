@@ -15,10 +15,14 @@
 ### 运行
     
     git clone https://github.com/mhbseal/blog  // 仓库
-    cd blog && npm install  // 安装（可能有点慢）
-    npm run build // 只需要第一次运行,同构工具[webpack-isomorphic-tools]所需
-    npm run dev  // 启动(mac下命令,windows貌似不支持node & node,详见package中dev,多行命令吧)
-    npm run dev.noauth  // 启动（初次运行，用此模式，可免登陆进入后台）
+    // 后端be
+    cd be && npm install  // 安装
+    npm start  // 启动
+    npm run start.noauth  // 启动（初次运行，用此免登陆模式）
+    // 前端fe
+    cd fe && npm install  // 安装（可能有点慢）
+    npm run build // 只需要初次运行时执行，同构工具[webpack-isomorphic-tools]所需
+    npm run start  // 启动
     
 ### 说明
 
@@ -37,14 +41,14 @@
 **0.5.0（2016-08-26）**  
 基于工程，前后端代码彻底分离，升级react，babel及其相应pkg。
 
-1.blog前后端代码彻底分离fe/be
-2.apiServer接口格式优化
-3.serverLogs优化
-4.react->15+，babel->6+，node->6.4+，other->last
-5.增加文章点赞功能
-6.增加切换路由时的loading动画
-7.优化文章留言
-8.修改后台用户列表bug
+1.blog前后端代码彻底分离fe/be  
+2.apiServer接口格式优化  
+3.serverLogs优化  
+4.react->15+，babel->6+，node->6.4+，other->last  
+5.增加文章点赞功能  
+6.增加切换路由时的loading动画  
+7.优化文章留言  
+8.修改后台用户列表bug  
 
 **0.4.0（2015-12-03）**  
 服务一分为2（apiServer + renderServer），基于react + redux + react-router，对renderServer实现前后端同构，首次加载走服务端，脚本加载后走客户端。

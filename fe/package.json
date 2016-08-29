@@ -48,7 +48,7 @@
     "eslint-plugin-react": "^6.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "node-sass": "^3.8.0",
-    "piping": "^1.0.0-rc.3",
+    "piping": "^0.3.2",
     "postcss-loader": "^0.10.1",
     "precss": "^1.4.0",
     "pretty-error": "^2.0.0",
