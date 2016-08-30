@@ -1,7 +1,7 @@
 export function editOver (promise, parent, url) {
   promise.then((data) => {
     parent.setState({showAlert: true});
-    if (url && data.status === 'success') {
+    if (url && data.status.code == 0) {
       setTimeout(() => {
         parent.props.push(url);
       }, 500)

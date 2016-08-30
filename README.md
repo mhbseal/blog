@@ -21,7 +21,7 @@
     npm run start.noauth  // 启动（初次运行，用此免登陆模式）
     // 前端fe
     cd fe && npm install  // 安装（可能有点慢）
-    npm run build.dev // 打包js
+    npm run build.dev // 打包客户端JS
     npm start  // 启动
     
 ### 说明

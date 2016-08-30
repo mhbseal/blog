@@ -134,7 +134,7 @@ export default class Article extends Component {
     // 提交
     if (data) {
       props.createComment({ data: {...data, article} }).then((data) => {
-        if (data.status === 'success') {
+        if (data.status.code == 0) {
           this.refs.content.value = '';
           props.insertComment(data.data);
           this.setState({showAlert: true});
