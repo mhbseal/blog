@@ -2,7 +2,7 @@ var Express = require('express');
 var webpack = require('webpack');
 
 var config = require('../src/config/dev');
-var webpackConfig = require('./webpack.config.dev');
+var webpackConfig = require('./webpack.config.watch.js');
 var compiler = webpack(webpackConfig);
 
 var serverOptions = {

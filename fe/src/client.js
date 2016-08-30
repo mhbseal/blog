@@ -31,7 +31,7 @@ render(
   dest
 );
 
-if (process.env.NODE_ENV !== 'production') {
+if (__DEVELOPMENT__) {
   window.React = React; // enable debugger
 
   if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {

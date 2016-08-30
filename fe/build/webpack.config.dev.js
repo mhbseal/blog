@@ -1,35 +1,38 @@
 var
-  config = require('../src/config/dev'),
   G = {
-    ADMINPATH: config.adminPath,
+    ADMINPATH: require('../src/config/dev').adminPath,
     __CLIENT__: true,
     __DEVELOPMENT__: true,
-    __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
+    __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
   },
   path = require('path'),
   webpack = require('webpack'),
+  CleanPlugin = require('clean-webpack-plugin'),
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
   WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin'), // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-  babelConfig = require('./babel.config')(G.__DEVELOPMENT__, G.__CLIENT__);
+  babelConfig = require('./babel.config')(G.__DEVELOPMENT__, G.__CLIENT__),
+  root = path.resolve(__dirname, '..'),
+  assetsPath = path.resolve(root, './resource/dist');
 
 module.exports = {
-  devtool: 'inline-source-map',
-  context: path.resolve(__dirname, '..'),
-  entry: [
-    'webpack-hot-middleware/client?path=http://' + config.webpackServer.host + ':' + config.webpackServer.port + '/__webpack_hmr',
-    './src/client.js'
-  ],
+  devtool: 'source-map',
+  context: root,
+  entry: {
+    app: './src/client.js',
+    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'react-router-redux', 'redux-connect', 'classnames', 'superagent']
+  },
   output: {
-    path: path.resolve(__dirname, '../resource/dist'),
+    path: assetsPath,
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: 'http://' + config.webpackServer.host + ':' + config.webpackServer.port + '/dist/'
+    publicPath: '/dist/'
   },
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel?' + JSON.stringify(babelConfig)},
-      { test: /\.json$/, loader: 'json'},
-      { test: /\.less$/, loader: 'style!css!postcss!less'},
-      { test: /\.scss$/, loader: 'style!css!postcss!sass'}
+      { test: /\.json$/, loader: 'json' },
+      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!less') },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!sass') }
     ]
   },
   postcss: function () {
@@ -46,8 +49,25 @@ module.exports = {
   plugins: [
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
-    // global vars
+    // for libs
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'libs-[hash].js',
+      minChunks: Infinity
+    }),
+
+    new CleanPlugin([assetsPath], { root: root }),
+
+    // css files from the extract-text-plugin loader
+    new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+
+    // set global vars
     new webpack.DefinePlugin(G),
+
+    // optimizations
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+
     // isomorphic
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new WebpackIsomorphicToolsPlugin(require('./webpack.isomorphic.tools')).development()

@@ -21,8 +21,8 @@
     npm run start.noauth  // 启动（初次运行，用此免登陆模式）
     // 前端fe
     cd fe && npm install  // 安装（可能有点慢）
-    npm run build // 只需要初次运行时执行，同构工具[webpack-isomorphic-tools]所需
-    npm run start  // 启动
+    npm run build.dev // 打包js
+    npm start  // 启动
     
 ### 说明
 
@@ -49,6 +49,7 @@
 6.增加切换路由时的loading动画  
 7.优化文章留言  
 8.修改后台用户列表bug  
+9.其他优化  
 
 **0.4.0（2015-12-03）**  
 服务一分为2（apiServer + renderServer），基于react + redux + react-router，对renderServer实现前后端同构，首次加载走服务端，脚本加载后走客户端。

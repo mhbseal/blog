@@ -11,17 +11,18 @@ var
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin'), // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
   babelConfig = require('./babel.config')(G.__DEVELOPMENT__, G.__CLIENT__),
-  relativeAssetsPath = '../resource/dist';
+  root = path.resolve(__dirname, '..'),
+  assetsPath = path.resolve(root, './resource/dist');
 
 module.exports = {
   devtool: 'source-map',
-  context: path.resolve(__dirname, '..'),
+  context: root,
   entry: {
     app: './src/client.js',
     vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'react-router-redux', 'redux-connect', 'classnames', 'superagent']
   },
   output: {
-    path: path.resolve(__dirname, relativeAssetsPath),
+    path: assetsPath,
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
@@ -53,7 +54,7 @@ module.exports = {
       minChunks: Infinity
     }),
 
-    new CleanPlugin([relativeAssetsPath]),
+    new CleanPlugin([assetsPath], { root: root }),
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
