@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
-import { load, insertComment } from '../redux/modules/article';
+import { load, insertComment/*, createStar*/ } from '../redux/modules/article';
 import { asyncConnect } from 'redux-connect';
 import Alert from '../components/Alert';
 import formatForm from '../utils/formatForm';
@@ -50,6 +50,8 @@ export default class Article extends Component {
               <span>{article.createTime.slice(0, 10)}</span>
               <i className="icon-eye"></i>
               <span>{article.visits}</span>
+              <i className="icon-eye"></i>
+              <span>{article.stars}</span>
               <i className="icon-comments"></i>
               <span>{comments.length}</span>
             </header>
@@ -146,5 +148,14 @@ export default class Article extends Component {
     let content = this.refs.content;
     content.focus();
     content.value = `@${name} - `;
+  }
+  handleStar() {
+    //props.createStar().then((data) => {
+    //  if (data.status.code == 0) {
+    //    this.refs.content.value = '';
+    //    props.insertComment(data.data);
+    //    this.setState({showAlert: true});
+    //  }
+    //});
   }
 }

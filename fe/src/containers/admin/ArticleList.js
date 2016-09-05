@@ -47,6 +47,7 @@ export default class ArticleList extends Component {
                 <th>标题</th>
                 <th>作者</th>
                 <th>阅读次数</th>
+                <th>赞</th>
                 <th>所属类别</th>
                 <th>标签</th>
                 <th>留言数</th>
@@ -63,6 +64,7 @@ export default class ArticleList extends Component {
                     <td>{article.title.slice(0, 25) + (article.title.length > 25 ? '...' : '')}</td>
                     <td>{article.author}</td>
                     <td>{article.visits}</td>
+                    <td>{article.stars}</td>
                     <td>{article.type.name}</td>
                     <td>
                       {article.tags.map((tag, i) => {

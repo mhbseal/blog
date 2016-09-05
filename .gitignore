@@ -19,12 +19,6 @@ npm-debug.log
 /fe/resource/upload
 /fe/resource/upload.tar.gz
 
-# scp
-/be/bin/scp.data.dev.sh
-/be/bin/scp.log.dev.sh
-/fe/bin/scp.upload.dev.sh
-/fe/bin/scp.log.dev.sh
-
 # log
 /be/log
 /fe/log

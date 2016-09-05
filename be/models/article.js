@@ -6,6 +6,10 @@ module.exports = function (Schema) {
       type: Number,
       default: 0
     },
+    stars: {
+      type: Number,
+      default: 0
+    },
     type: {
       type: Schema.Types.ObjectId,
       ref: 'articleType'
