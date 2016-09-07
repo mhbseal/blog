@@ -8,9 +8,6 @@
 # mac cache
 .DS_Store
 
-# sass编译map
-*.map
-
 # npm
 npm-debug.log
 

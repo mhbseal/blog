@@ -522,6 +522,30 @@ a.label {
   color: #b94a48;
 }
 
+.message {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: #000;
+  opacity: .6;
+  left: 0;
+  top: 0;
+}
+
+.message_layer {
+  position: absolute;
+  border-radius: 3px;
+  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 50px;
+  margin: -25px 0 0 -50px;
+  line-height: 50px;
+  color: #6C6C6C;
+}
+
 
 // font
 // ------------
