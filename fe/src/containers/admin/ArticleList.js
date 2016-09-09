@@ -4,9 +4,8 @@ import { Link } from 'react-router';
 import { load } from '../../redux/modules/admin/articleList';
 import { del } from '../../redux/modules/admin/article';
 import { asyncConnect } from 'redux-connect';
-import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
-import State from './State';
+import Prompt from '../../components/Prompt';
 import { deleteOver } from '../../utils/actionOver';
 
 @asyncConnect([{
@@ -29,16 +28,16 @@ export default class ArticleList extends Component {
     let
       props = this.props,
       articleList = props.articleList,
-      article = props.article;
+      article = props.article,
+      page;
 
-    if (articleList.data && articleList.data.data) {
+    if (articleList.loadData && articleList.loadData.data) {
       let
-        {articles, articleTypes, pageList} = articleList.data.data;
+        {articles, articleTypes, pageList} = articleList.loadData.data;
 
-      return (
+      page = (
         <div className="main admin">
-          <Link to={ADMINPATH + 'article'} className="btn">新增</Link>&nbsp;&nbsp;
-          <Alert data={article.deleteData} loading={article.deleteing} error={article.deleteError} showAlert={this.state.showAlert} />
+          <Link to={ADMINPATH + 'article'} className="btn">新增</Link>
           <div className="table2_wrap">
             <table className="table2">
               <tbody>
@@ -78,6 +77,7 @@ export default class ArticleList extends Component {
                     <td>
                       <Link to={ADMINPATH + 'article'} query={{id: article._id}}>编辑</Link>&nbsp;&nbsp;
                       <a href="javascript:void(0)" onClick={this.handleDelete.bind(this, article._id)}>删除</a>
+                      <Prompt data={article.deleteData} loading={article.deleteing} error={article.deleteError} loadingMsg="删除中..." />
                     </td>
                   </tr>
                 )
@@ -88,9 +88,13 @@ export default class ArticleList extends Component {
           <PageList {...pageList} path={ADMINPATH + 'articleList'} />
         </div>
       )
-    } else {
-      return <State {...articleList} />
     }
+
+    return (
+      <Prompt {...articleList}>
+        {page}
+      </Prompt>
+    )
   }
   handleDelete(id) {
     deleteOver(this.props.del({params: {id}}), this);

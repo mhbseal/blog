@@ -5,7 +5,7 @@ import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as detailActions from '../../redux/modules/admin/singlePage';
-import State from './State';
+import Prompt from '../../components/Prompt';
 import m from '../../utils/moReactUtils';
 import { push } from 'react-router-redux';
 
@@ -31,7 +31,7 @@ export default class SinglePage extends Component {
     let
       detail = this.props.detail;
     // 引入umeditor
-    if (detail.data && detail.data.data && detail.data.data.useEditor) {
+    if (detail.loadData && detail.loadData.data && detail.loadData.data.useEditor) {
       m.createStyle('/static/scripts/umeditor/themes/default/css/umeditor.css');
       m.createScript('/static/scripts/umeditor/third-party/jquery.min.js', function() {
         m.createScript('/static/scripts/umeditor/umeditor.config.js', function() {
@@ -46,11 +46,13 @@ export default class SinglePage extends Component {
   }
   render() {
     let
-      detail = this.props.detail;
+      detail = this.props.detail,
+      page;
 
-    if (detail.data && detail.data.data) {
-      let {xData} = detail.data.data;
-      return (
+    if (detail.loadData && detail.loadData.data) {
+      let {xData} = detail.loadData.data;
+
+      page = (
         <div className="main">
           <table className="table1" ref="form">
             <tbody>
@@ -74,16 +76,21 @@ export default class SinglePage extends Component {
               <td className="td1">&nbsp;</td>
               <td>
                 <a href="javascript:void(0)" className="btn" onClick={this.handleSubmit.bind(this, xData._id)}>确定</a>&nbsp;&nbsp;
-                <Alert data={detail.editData} loading={detail.editing} error={detail.editError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert} />
-              </td>
+                <Prompt data={detail.editData} loading={detail.editing} error={detail.editError} loadingMsg="提交中..." className='inline'>
+                  <Alert validateMsg={this.state.validateMsg} />
+                </Prompt></td>
             </tr>
             </tbody>
           </table>
         </div>
       )
-    } else {
-      return <State {...detail} />
     }
+
+    return (
+      <Prompt {...detail}>
+        {page}
+      </Prompt>
+    )
   }
   handleSubmit(id) {
     let

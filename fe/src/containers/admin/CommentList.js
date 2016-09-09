@@ -4,9 +4,8 @@ import { Link } from 'react-router';
 import { load } from '../../redux/modules/admin/commentList';
 import { del } from '../../redux/modules/admin/comment';
 import { asyncConnect } from 'redux-connect';
-import Alert from '../../components/Alert';
 import PageList from '../../components/PageList';
-import State from './State';
+import Prompt from '../../components/Prompt';
 import { deleteOver } from '../../utils/actionOver';
 
 @asyncConnect([{
@@ -29,15 +28,15 @@ export default class CommentList extends Component {
     let
       props = this.props,
       list = props.list,
-      detail = props.detail;
+      detail = props.detail,
+      page;
 
-    if (list.data && list.data.data) {
+    if (list.loadData && list.loadData.data) {
       let
-        {xData, pageList} = list.data.data;
+        {xData, pageList} = list.loadData.data;
 
-      return (
+      page = (
         <div className="main">
-          <Alert data={detail.deleteData} loading={detail.deleteing} error={detail.deleteError} showAlert={this.state.showAlert} />
           <div className="table2_wrap">
             <table className="table2">
               <tbody>
@@ -58,6 +57,7 @@ export default class CommentList extends Component {
                     <td>
                       <Link to='/article' query={{id: x.article.id}}>回复</Link>&nbsp;&nbsp;
                       <a href="javascript:void(0)" onClick={this.handleDelete.bind(this, x._id)}>删除</a>
+                      <Prompt data={detail.deleteData} loading={detail.deleteing} error={detail.deleteError} loadingMsg="删除中..." />
                     </td>
                   </tr>
                 )
@@ -68,9 +68,13 @@ export default class CommentList extends Component {
           <PageList {...pageList} path={ADMINPATH + 'commentList'} />
         </div>
       )
-    } else {
-      return <State {...list} />
     }
+
+    return (
+      <Prompt {...list}>
+        {page}
+      </Prompt>
+    )
   }
   handleDelete(id) {
     deleteOver(this.props.del({params: {x: 'comment', id}}), this, 'comment');

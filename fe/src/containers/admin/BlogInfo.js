@@ -28,7 +28,7 @@ export default class BlogInfo extends Component {
   render() {
     let
       blogInfoProps = this.props.blogInfo,
-      {blogInfo, logined} = blogInfoProps.data.data;
+      {blogInfo, logined} = blogInfoProps.loadData.data;
 
     if (logined) {
       return (
@@ -69,6 +69,12 @@ export default class BlogInfo extends Component {
     } else {
       return <div className="main"><p>登陆验证失败,请 <Link to={ADMINPATH + 'login'}>登陆</Link></p></div>
     }
+
+    return (
+      <Prompt {...detail}>
+        {page}
+      </Prompt>
+    )
   }
   handleSubmit(id) {
     let

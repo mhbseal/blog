@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 import { isLoaded, load } from '../../redux/modules/admin/blogInfo';
 import { asyncConnect } from 'redux-connect';
-import classNames from 'classnames';
 import '../layout.scss';
 
 @asyncConnect([{
@@ -21,9 +20,9 @@ export default class Layout extends Component {
   render() {
     let blogInfoProps = this.props.blogInfo;
 
-    if (blogInfoProps.data && blogInfoProps.data.data) {
+    if (blogInfoProps.loadData && blogInfoProps.loadData.data) {
       let
-        {blogInfo} = blogInfoProps.data.data;
+        {blogInfo} = blogInfoProps.loadData.data;
       return (
         <div className="admin">
           <Helmet title='后台管理'/>

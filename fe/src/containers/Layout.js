@@ -46,10 +46,10 @@ export default class Layout extends Component {
   render() {
     let layout = this.props.layout;
 
-    if (layout.data && layout.data.data) {
+    if (layout.loadData && layout.loadData.data) {
       let
         {showNav, showHeaderDown} = this.state,
-        {articleTypes, blogInfo, articleTags, links} = layout.data.data;
+        {articleTypes, blogInfo, articleTags, links} = layout.loadData.data;
       return (
         <div className="index">
           <header className={classNames('header', {header_down: showHeaderDown})}>

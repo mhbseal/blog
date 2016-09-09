@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
-import { load, insertComment/*, createStar*/ } from '../redux/modules/article';
+import { load, insertComment, addStar } from '../redux/modules/article';
 import { asyncConnect } from 'redux-connect';
 import Alert from '../components/Alert';
 import formatForm from '../utils/formatForm';
 import { create as createComment } from '../redux/modules/comment';
-import State from './State';
+import { create as createStar } from '../redux/modules/articleStar';
+import Prompt from '../components/Prompt';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
@@ -20,7 +21,7 @@ import State from './State';
     layout: state.layout,
     comment: state.comment
   }),
-  { createComment, insertComment }
+  { createComment, insertComment, createStar, addStar }
 )
 
 export default class Article extends Component {
@@ -31,14 +32,15 @@ export default class Article extends Component {
     let
       props = this.props,
       articleProps = props.article,
-      comment = props.comment || {};
+      comment = props.comment || {},
+      page;
 
-    if (articleProps.data && articleProps.data.data) {
+    if (articleProps.loadData && articleProps.loadData.data) {
       let
-        {blogInfo} = props.layout.data.data,
-        {article, comments, commenter} = articleProps.data.data;
+        {blogInfo} = props.layout.loadData.data,
+        {article, comments, commenter} = articleProps.loadData.data;
 
-      return (
+      page = (
         <section className="contents">
           <Helmet title={`${article.title}_${article.type.name}_${blogInfo.title}`}/>
           <article className="detail">
@@ -50,8 +52,8 @@ export default class Article extends Component {
               <span>{article.createTime.slice(0, 10)}</span>
               <i className="icon-eye"></i>
               <span>{article.visits}</span>
-              <i className="icon-eye"></i>
-              <span>{article.stars}</span>
+              <i className="icon-eye" onClick={this.handleStar.bind(this, article._id)}></i>
+              <span onClick={this.handleStar.bind(this, article._id)}>{article.stars}</span>
               <i className="icon-comments"></i>
               <span>{comments.length}</span>
             </header>
@@ -102,7 +104,9 @@ export default class Article extends Component {
                 <td>&nbsp;</td>
                 <td>
                   <a href="javascript:void(0)" onClick={this.handleSubmit.bind(this, {id: article._id, typePath: article.type.path})} className="btn">发表评论</a>&nbsp;&nbsp;
-                  <Alert data={comment.editData} loading={comment.editing} error={comment.editError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert} />
+                  <Prompt data={comment.editData} loading={comment.editing} error={comment.editError} loadingMsg="提交中..." className='inline'>
+                    <Alert validateMsg={this.state.validateMsg} />
+                  </Prompt>
                 </td>
               </tr>
               </tbody>
@@ -110,9 +114,13 @@ export default class Article extends Component {
           </section>
         </section>
       )
-    } else {
-      return <State {...articleProps} />
     }
+
+    return (
+      <Prompt {...articleProps}>
+        {page}
+      </Prompt>
+    )
   }
   handleSubmit(article) {
     let
@@ -139,7 +147,6 @@ export default class Article extends Component {
         if (data.status.code == 0) {
           this.refs.content.value = '';
           props.insertComment(data.data);
-          this.setState({showAlert: true});
         }
       });
     }
@@ -149,13 +156,10 @@ export default class Article extends Component {
     content.focus();
     content.value = `@${name} - `;
   }
-  handleStar() {
-    //props.createStar().then((data) => {
-    //  if (data.status.code == 0) {
-    //    this.refs.content.value = '';
-    //    props.insertComment(data.data);
-    //    this.setState({showAlert: true});
-    //  }
-    //});
+  handleStar(id) {
+    // 点赞功能不管是否成功,直接+1
+    let props = this.props;
+    props.createStar({params: {id}});
+    props.addStar();
   }
 }

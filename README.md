@@ -46,10 +46,10 @@
 3.serverLogs优化  
 4.react->15+，babel->6+，node->6.4+，other->last  
 5.增加文章点赞功能  
-6.增加切换路由时的loading动画  
+6.增加请求时loading动画、失败时toast提示  
 7.优化文章留言  
 8.修改后台用户列表bug  
-9.其他优化  
+9.其他bug修改、功能优化  
 
 **0.4.0（2015-12-03）**  
 服务一分为2（apiServer + renderServer），基于react + redux + react-router，对renderServer实现前后端同构，首次加载走服务端，脚本加载后走客户端。

@@ -11,6 +11,9 @@
 # npm
 npm-debug.log
 
+# map
+*.map
+
 # data
 /be/data
 /fe/resource/upload

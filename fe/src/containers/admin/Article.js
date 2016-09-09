@@ -5,7 +5,7 @@ import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as articleActions from '../../redux/modules/admin/article';
-import State from './State';
+import Prompt from '../../components/Prompt';
 import m from '../../utils/moReactUtils';
 import { push } from 'react-router-redux';
 
@@ -47,11 +47,13 @@ export default class Article extends Component {
   }
   render() {
     let
-      articleProps = this.props.article;
+      articleProps = this.props.article,
+      page;
 
-    if (articleProps.data && articleProps.data.data) {
-      let {article, articleTypes, articleTags} = articleProps.data.data;
-      return (
+    if (articleProps.loadData && articleProps.loadData.data) {
+      let {article, articleTypes, articleTags} = articleProps.loadData.data;
+
+      page = (
         <div className="main">
           <table className="table1">
             <tbody>
@@ -106,16 +108,22 @@ export default class Article extends Component {
               <td className="td1">&nbsp;</td>
               <td>
                 <a href="javascript:void(0)" className="btn" onClick={this.handleSubmit.bind(this, article._id)}>确定</a>&nbsp;&nbsp;
-                <Alert data={articleProps.editData} loading={articleProps.editing} error={articleProps.editError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert} />
+                <Prompt data={articleProps.editData} loading={articleProps.editing} error={articleProps.editError} loadingMsg="提交中..." className='inline'>
+                  <Alert validateMsg={this.state.validateMsg} />
+                </Prompt>
               </td>
             </tr>
             </tbody>
           </table>
         </div>
       )
-    } else {
-      return <State {...articleProps} />
     }
+
+    return (
+      <Prompt {...articleProps}>
+        {page}
+      </Prompt>
+    )
   }
   handleSubmit(id) {
     let

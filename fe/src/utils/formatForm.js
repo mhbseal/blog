@@ -27,10 +27,7 @@ export default (parent, inputs) => {
         if (input.rules) { // 需要校验
           for (let rule of input.rules.entries()) {
             if (!rules[rule[1]](data[name])) {
-              parent.setState({
-                validateMsg: input.msgs[rule[0]],
-                showAlert: true,
-              });
+              parent.setState({validateMsg: input.msgs[rule[0]]});
               data = null;
               break;
             } else {

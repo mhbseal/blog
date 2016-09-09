@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { load } from '../../redux/modules/admin/auth';
 import { asyncConnect } from 'redux-connect';
-import State from './State';
+import Prompt from '../../components/Prompt';
 
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
@@ -17,19 +17,26 @@ import State from './State';
 )
 export default class Welcome extends Component {
   render() {
-    let auth = this.props.auth;
+    let
+      auth = this.props.auth,
+      page;
 
-    if (auth.data && auth.data.data) {
-      let name = auth.data.data.admin.name;
-      return (
+    if (auth.loginData && auth.loginData.data) {
+      let name = auth.data.loginData.admin.name;
+
+      page = (
         <div className="main">
           <div className="welcome">
             <h1>欢迎{name ? ' ' + name + '!' : <span>! <Link to={ADMINPATH + 'login'}>请登陆</Link></span>}</h1>
           </div>
         </div>
       )
-    } else {
-      return <State {...auth} />
     }
+
+    return (
+      <Prompt {...auth}>
+        {page}
+      </Prompt>
+    )
   }
 }

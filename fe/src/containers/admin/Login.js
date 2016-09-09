@@ -5,7 +5,7 @@ import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as authActions from '../../redux/modules/admin/auth';
-import State from './State';
+import Prompt from '../../components/Prompt';
 import { push } from 'react-router-redux';
 
 @asyncConnect([{
@@ -26,11 +26,13 @@ export default class Login extends Component {
   }
   render() {
     let
-      auth = this.props.auth;
+      auth = this.props.auth,
+      page;
 
-    if (auth.data && auth.data.data) {
-      let {admin} = auth.data.data;
-      return (
+    if (auth.loginData && auth.loginData.data) {
+      let {admin} = auth.loginData.data;
+      
+      page = (
         <div className="main">
           <table className="table1">
             <tbody>
@@ -49,17 +51,21 @@ export default class Login extends Component {
             <tr>
               <td className="td1">&nbsp;</td>
               <td>
-                <a href="javascript:void(0)" onClick={::this.handleSubmit} className="btn">确定</a>&nbsp;&nbsp;
-                <Alert data={auth.loginData} loading={auth.loggingIn} error={auth.loginError} validateMsg={this.state.validateMsg} showAlert={this.state.showAlert} />
+                <a href="javascript:void(0)" onClick={::this.handleSubmit} className="btn">确定</a>
+                <Prompt data={auth.loginData} loading={auth.logining} error={auth.loginError} loadingMsg="登陆中..." />
               </td>
             </tr>
             </tbody>
           </table>
         </div>
       )
-    } else {
-      return <State {...auth} />
     }
+
+    return (
+      <Prompt {...auth}>
+        {page}
+      </Prompt>
+    )
   }
   handleSubmit() {
     let

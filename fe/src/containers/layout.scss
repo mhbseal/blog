@@ -137,6 +137,10 @@ input::-moz-focus-inner {
   display: none;
 }
 
+.inline {
+  display: inline;
+}
+
 // form
 // ------------
 
@@ -522,30 +526,49 @@ a.label {
   color: #b94a48;
 }
 
-.message {
+.loading {
   position: fixed;
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background-color: #000;
-  opacity: .6;
+  background-color: rgba(0,0,0,.5);
   left: 0;
   top: 0;
 }
 
-.message_layer {
+.loading_layer {
   position: absolute;
-  border-radius: 3px;
-  background-color: #fff;
+  border-radius: 7px;
+  background: #fff;
   top: 50%;
   left: 50%;
   width: 100px;
-  height: 50px;
-  margin: -25px 0 0 -50px;
-  line-height: 50px;
-  color: #6C6C6C;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  color: #666;
+  overflow: hidden;
+  text-align: center;
 }
 
+.loading_layer img {
+  width: 100px;
+  height: 75px;
+  margin: -3px 0 -3px 0;
+}
+
+.toast {
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, .7);
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin:  -20px 0 0 -100px;
+}
 
 // font
 // ------------

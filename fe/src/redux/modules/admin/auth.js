@@ -17,35 +17,43 @@ export default function reducer(state = { loaded: false }, action = {}) {
       case LOGIN:
         return {
           ...state,
-          loggingIn: true
+          logining: true
         };
       case LOGIN_SUCCESS:
         return {
           ...state,
-          loggingIn: false,
-          loginData: action.result
+          logining: false,
+          logined: true,
+          loginData: action.result,
+          loginError: null
         };
       case LOGIN_FAIL:
         return {
           ...state,
-          loggingIn: false,
+          logining: false,
+          logined: false,
+          loginData: null,
           loginError: action.error
         };
       case LOGOUT:
         return {
           ...state,
-          loggingOut: true
+          logouting: true
         };
       case LOGOUT_SUCCESS:
         return {
           ...state,
-          loggingOut: false,
-          logoutData: action.result
+          logouting: false,
+          logouted: true,
+          logoutData: action.result,
+          logoutError: null
         };
       case LOGOUT_FAIL:
         return {
           ...state,
-          loggingOut: false,
+          logouting: false,
+          logouted: false,
+          logoutData: null,
           logoutError: action.error
         };
       default:

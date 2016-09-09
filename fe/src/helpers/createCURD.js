@@ -61,14 +61,16 @@ export default function createCURD(prefix, actions, pageName) {
           ...state,
           loading: false,
           loaded: true,
-          data: action.result
+          loadData: action.result,
+          loadError: null
         };
       case constants.LOAD_FAIL:
         return {
           ...state,
           loading: false,
           loaded: false,
-          error: action.error
+          loadData: null,
+          loadError: action.error
         };
       case constants.CREATE:
       case constants.UPDATE:
@@ -81,13 +83,17 @@ export default function createCURD(prefix, actions, pageName) {
         return {
           ...state,
           editing: false,
-          editData: action.result
+          edited: true,
+          editData: action.result,
+          editError: null
         };
       case constants.CREATE_FAIL:
       case constants.UPDATE_FAIL:
         return {
           ...state,
           editing: false,
+          edited: false,
+          editData: null,
           editError: action.error
         };
       case constants.DELETE:
@@ -99,12 +105,16 @@ export default function createCURD(prefix, actions, pageName) {
         return {
           ...state,
           deleteing: false,
-          deleteData: action.result
+          deleted: true,
+          deleteData: action.result,
+          deleteError: null
         };
       case constants.DELETE_FAIL:
         return {
           ...state,
           deleteing: false,
+          deleted: false,
+          deleteData: null,
           deleteError: action.error
         };
     }
