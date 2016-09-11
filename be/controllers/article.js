@@ -13,7 +13,7 @@ module.exports = function (app) {
           return res.json({
             status: {
               code: 3,
-              msg: '找不到相应的文章内容'
+              msg: '找不到相应的文章'
             }
           });
         }

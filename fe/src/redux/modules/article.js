@@ -12,11 +12,11 @@ export default function reducer(state = {}, action = {}) {
     switch (action.type) {
       case INSERT_COMMENT:
         let a = {...state};
-        a.data.data.comments.unshift(action.comment);
+        a.loadData.data.comments.unshift(action.comment);
         return a;
       case ADD_STAR:
         let b = {...state};
-        b.data.data.article.stars++;
+        b.loadData.data.article.stars++;
         return b;
       default:
         return state;

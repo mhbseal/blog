@@ -31,7 +31,7 @@ export default class Article extends Component {
     let
       article = this.props.article;
     // 引入umeditor
-    if (article.data && article.data.data) {
+    if (article.loadData && article.loadData.data) {
       m.createStyle('/static/scripts/umeditor/themes/default/css/umeditor.css');
       m.createScript('/static/scripts/umeditor/third-party/jquery.min.js', function() {
         m.createScript('/static/scripts/umeditor/umeditor.config.js', function() {

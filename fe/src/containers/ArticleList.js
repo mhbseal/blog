@@ -3,6 +3,8 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { load } from '../redux/modules/articleList';
+import { addStar } from '../redux/modules/article';
+import { create as createStar } from '../redux/modules/articleStar';
 import { asyncConnect } from 'redux-connect';
 import PageList from '../components/PageList';
 import Prompt from '../components/Prompt';
@@ -16,7 +18,8 @@ import Prompt from '../components/Prompt';
   state => ({
     articleList: state.articleList,
     layout: state.layout
-  })
+  }),
+  { createStar, addStar }
 )
 export default class ArticleList extends Component {
   render() {
@@ -43,6 +46,8 @@ export default class ArticleList extends Component {
                     <i className="icon-user3"></i><span>{article.author}</span>
                     <i className="icon-clock2"></i><span>{article.createTime.slice(0, 10)}</span>
                     <i className="icon-eye"></i><span>{article.visits}</span>
+                    <i className="icon-star" onClick={this.handleStar.bind(this, article._id)}></i>
+                    <span onClick={this.handleStar.bind(this, article._id)}>{article.stars}</span>
                     <i className="icon-comments"></i><span>{article.commentCount}</span>
                   </div>
                 </header>
@@ -69,5 +74,11 @@ export default class ArticleList extends Component {
         {page}
       </Prompt>
     )
+  }
+  handleStar(id) {
+    // 点赞功能不管是否成功,直接+1
+    let props = this.props;
+    props.createStar({params: {id}});
+    props.addStar();
   }
 };

@@ -52,7 +52,7 @@ export default class Article extends Component {
               <span>{article.createTime.slice(0, 10)}</span>
               <i className="icon-eye"></i>
               <span>{article.visits}</span>
-              <i className="icon-eye" onClick={this.handleStar.bind(this, article._id)}></i>
+              <i className="icon-star" onClick={this.handleStar.bind(this, article._id)}></i>
               <span onClick={this.handleStar.bind(this, article._id)}>{article.stars}</span>
               <i className="icon-comments"></i>
               <span>{comments.length}</span>
