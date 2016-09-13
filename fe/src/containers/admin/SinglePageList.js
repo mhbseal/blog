@@ -6,6 +6,7 @@ import { del } from '../../redux/modules/admin/singlePage';
 import { asyncConnect } from 'redux-connect';
 import PageList from '../../components/PageList';
 import Prompt from '../../components/Prompt';
+import { deleteOver } from '../../utils/actionOver';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
@@ -20,9 +21,6 @@ import Prompt from '../../components/Prompt';
   { del, load }
 )
 export default class SinglePageList extends Component {
-  state = {
-    showAlert: false
-  }
   render() {
     let
       props = this.props,
@@ -55,7 +53,7 @@ export default class SinglePageList extends Component {
                     <td>
                       <Link to={ADMINPATH + 'singlePage'} query={{id: x._id}}>编辑</Link>&nbsp;&nbsp;
                       <a href="javascript:void(0)" onClick={this.handleDelete.bind(this, x._id)}>删除</a>
-                      <Prompt data={detail.deleteData} loading={detail.deleteing} error={detail.deleteError} loadingMsg="删除中..." />
+                      <Prompt loadData={detail.deleteData} loading={detail.deleteing} loadError={detail.deleteError} loadingMsg="删除中..." />
                     </td>
                   </tr>
                 )
@@ -75,13 +73,6 @@ export default class SinglePageList extends Component {
     )
   }
   handleDelete(id) {
-    let props = this.props;
-
-    props.del({params: {x: 'singlePage', id}}).then(() => {
-      this.setState({showAlert: true});
-      props.load({params: {...props.location.query, x: 'singlePage'}});
-    }, () => {
-      this.setState({showAlert: true});
-    });
+    deleteOver(this.props.del({params: {x: 'singlePage', id}}), this, 'singlePage');
   }
 };

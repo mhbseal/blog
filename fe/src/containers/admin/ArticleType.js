@@ -21,8 +21,7 @@ import { push } from 'react-router-redux';
 )
 export default class ArticleType extends Component {
   state = {
-    validateMsg: null,
-    showAlert: false
+    validateMsg: null
   }
   render() {
     let
@@ -61,7 +60,7 @@ export default class ArticleType extends Component {
               <td className="td1">&nbsp;</td>
               <td>
                 <a href="javascript:void(0)" className="btn" onClick={this.handleSubmit.bind(this, xData._id)}>确定</a>&nbsp;&nbsp;
-                <Prompt data={detail.editData} loading={detail.editing} error={detail.editError} loadingMsg="提交中..." className='inline'>
+                <Prompt loadData={detail.editData} loading={detail.editing} loadError={detail.editError} loadingMsg="提交中..." className='inline'>
                   <Alert validateMsg={this.state.validateMsg} />
                 </Prompt></td>
             </tr>

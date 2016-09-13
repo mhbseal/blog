@@ -21,8 +21,7 @@ import { push } from 'react-router-redux';
 )
 export default class Admin extends Component {
   state = {
-    validateMsg: null,
-    showAlert: false
+    validateMsg: null
   }
   render() {
     let

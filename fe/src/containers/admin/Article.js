@@ -24,8 +24,7 @@ let contentEditor, introEditor;
 )
 export default class Article extends Component {
   state = {
-    validateMsg: null,
-    showAlert: false
+    validateMsg: null
   }
   componentDidMount() {
     let
@@ -108,7 +107,7 @@ export default class Article extends Component {
               <td className="td1">&nbsp;</td>
               <td>
                 <a href="javascript:void(0)" className="btn" onClick={this.handleSubmit.bind(this, article._id)}>确定</a>&nbsp;&nbsp;
-                <Prompt data={articleProps.editData} loading={articleProps.editing} error={articleProps.editError} loadingMsg="提交中..." className='inline'>
+                <Prompt loadData={articleProps.editData} loading={articleProps.editing} loadError={articleProps.editError} loadingMsg="提交中..." className='inline'>
                   <Alert validateMsg={this.state.validateMsg} />
                 </Prompt>
               </td>

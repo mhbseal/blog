@@ -21,9 +21,6 @@ import { deleteOver } from '../../utils/actionOver';
   { del, load }
 )
 export default class UserList extends Component {
-  state = {
-    showAlert: false
-  }
   render() {
     let
       props = this.props,
@@ -56,7 +53,7 @@ export default class UserList extends Component {
                     <td><Link to={ADMINPATH + 'commentList'} query={{userId: x._id}}>{x.commentCount}</Link></td>
                     <td>
                       <a href="javascript:void(0)" onClick={this.handleDelete.bind(this, x._id)}>删除</a>
-                      <Prompt data={detail.deleteData} loading={detail.deleteing} error={detail.deleteError} loadingMsg="删除中..." />
+                      <Prompt loadData={detail.deleteData} loading={detail.deleteing} loadError={detail.deleteError} loadingMsg="删除中..." />
                     </td>
                   </tr>
                 )

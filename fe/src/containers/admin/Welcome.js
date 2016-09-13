@@ -21,8 +21,8 @@ export default class Welcome extends Component {
       auth = this.props.auth,
       page;
 
-    if (auth.loginData && auth.loginData.data) {
-      let name = auth.data.loginData.admin.name;
+    if (auth.loadData && auth.loadData.data) {
+      let name = auth.loadData.data.admin.name;
 
       page = (
         <div className="main">

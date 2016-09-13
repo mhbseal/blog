@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
-import Alert from '../../components/Alert';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
 import * as authActions from '../../redux/modules/admin/auth';
@@ -21,16 +20,15 @@ import { push } from 'react-router-redux';
 )
 export default class Login extends Component {
   state = {
-    validateMsg: null,
-    showAlert: false
+    validateMsg: null
   }
   render() {
     let
       auth = this.props.auth,
       page;
 
-    if (auth.loginData && auth.loginData.data) {
-      let {admin} = auth.loginData.data;
+    if (auth.loadData && auth.loadData.data) {
+      let {admin} = auth.loadData.data;
       
       page = (
         <div className="main">
@@ -52,7 +50,7 @@ export default class Login extends Component {
               <td className="td1">&nbsp;</td>
               <td>
                 <a href="javascript:void(0)" onClick={::this.handleSubmit} className="btn">确定</a>
-                <Prompt data={auth.loginData} loading={auth.logining} error={auth.loginError} loadingMsg="登陆中..." />
+                <Prompt loadData={auth.loginData} loading={auth.logining} loadError={auth.loginError} loadingMsg="登陆中..." />
               </td>
             </tr>
             </tbody>
