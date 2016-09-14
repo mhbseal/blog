@@ -1,3 +1,3 @@
 #!/bin/sh
-cd /Users/hbmu/workspace/github/blog/be/data
+cd /Users/muhaibao/workspace/github/blog/be/data
 tar -zxvf blog.tar.gz
