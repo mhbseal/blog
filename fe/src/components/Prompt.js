@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Loading from '../components/Loading';
 import Toast from '../components/Toast';
 import { Link } from 'react-router';

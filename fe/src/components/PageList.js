@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 export default class Pagelist extends Component {
