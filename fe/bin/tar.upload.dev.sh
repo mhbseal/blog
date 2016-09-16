@@ -1,3 +1,3 @@
 #!/bin/sh
-cd /Users/hbmu/workspace/github/blog/fe/resource
+cd /Users/muhaibao/workspace/github/blog/fe/resource
 tar -zxvf upload.tar.gz
