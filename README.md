@@ -38,6 +38,12 @@ blog参考：https://github.com/erikras/react-redux-universal-hot-example
     /be/config/  //后端配置文件（数据库、session、host、port等）
     /fe/src/config/  // 前端配置文件（后台访问目录路径、host、port等）
 
+### 待优化、已知Bug
+
+1.切换页面(A containers -> B containers有问题,A containers -> A containers正常)的时候,loading、loaded状态无法捕捉,应该是redux-connect的问题,暂时无法解决  
+2.切换页面scrollTop的问题  
+3.abort请求  
+
 ### 更新日志
 
 **0.5.0（2016-08-26）**  

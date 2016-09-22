@@ -13,7 +13,11 @@ export function deleteOver (promise, parent, x) {
     params = {...params, x};
   }
 
-  promise.then(() => {
-    parent.props.load({params});
+  promise.then((data) => {
+    if (data.status.code == 0) {
+      setTimeout(() => {
+        parent.props.load({params});
+      }, 0)
+    }
   });
 };

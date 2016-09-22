@@ -21,6 +21,7 @@ import { deleteOver } from '../../utils/actionOver';
   { del, load }
 )
 export default class AdminList extends Component {
+  
   render() {
     let
       props = this.props,
