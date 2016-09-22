@@ -4,6 +4,8 @@
 
 ### 前言
 
+blog参考：https://github.com/erikras/react-redux-universal-hot-example  
+
 后端：express + co + mongoose + ...  
 前端：react + redux + react-router + ...  
 线上地址：http://mhbseal.com  
