@@ -8,12 +8,13 @@ import * as detailActions from '../../redux/modules/admin/singlePage';
 import Prompt from '../../components/Prompt';
 import m from '../../utils/moReactUtils';
 import { push } from 'react-router-redux';
+import globalLoading from '../../utils/globalLoading';
 
 let contentEditor;
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(detailActions.load({params: {x: 'singlePage', id: location.query.id}}));
+    return globalLoading(dispatch(detailActions.load({params: {x: 'singlePage', id: location.query.id}})), dispatch);
   }
 }])
 @connect(
@@ -45,13 +46,12 @@ export default class SinglePage extends Component {
   }
   render() {
     let
-      detail = this.props.detail,
-      page;
+      detail = this.props.detail;
 
     if (detail.loadData && detail.loadData.data) {
       let {xData} = detail.loadData.data;
 
-      page = (
+      return (
         <div className="main">
           <table className="table1" ref="form">
             <tbody>
@@ -83,13 +83,9 @@ export default class SinglePage extends Component {
           </table>
         </div>
       )
+    } else {
+      return null
     }
-
-    return (
-      <Prompt {...detail}>
-        {page}
-      </Prompt>
-    )
   }
   handleSubmit(id) {
     let

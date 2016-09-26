@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 import { isLoaded, load } from '../../redux/modules/admin/blogInfo';
 import { asyncConnect } from 'redux-connect';
 import '../layout.scss';
+import Loading from '../../components/Loading';
+import Toast from '../../components/Toast';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -14,11 +16,17 @@ import '../layout.scss';
   }
 }])
 @connect(
-  state => ({blogInfo: state.adminBlogInfo})
+  state => ({
+    blogInfo: state.adminBlogInfo,
+    global: state.global
+  })
 )
 export default class Layout extends Component {
   render() {
-    let blogInfoProps = this.props.blogInfo;
+    let
+      props = this.props,
+      blogInfoProps = props.blogInfo,
+      global = props.global;
 
     if (blogInfoProps.loadData && blogInfoProps.loadData.data) {
       let
@@ -45,6 +53,8 @@ export default class Layout extends Component {
           </header>
           {this.props.children}
           <footer className="footer" dangerouslySetInnerHTML={{__html: blogInfo.copyright}}></footer>
+          <Loading loading={global.loading} />
+          <Toast loading={global.loading} msg={global.toastMsg} />
         </div>
       )
     } else {

@@ -6,10 +6,11 @@ import { editOver } from '../../utils/actionOver';
 import * as authActions from '../../redux/modules/admin/auth';
 import Prompt from '../../components/Prompt';
 import { push } from 'react-router-redux';
+import globalLoading from '../../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
-    return dispatch(authActions.load());
+    return globalLoading(dispatch(authActions.load()), dispatch);
   }
 }])
 @connect(
@@ -24,13 +25,12 @@ export default class Login extends Component {
   }
   render() {
     let
-      auth = this.props.auth,
-      page;
+      auth = this.props.auth;
 
     if (auth.loadData && auth.loadData.data) {
       let {admin} = auth.loadData.data;
-      
-      page = (
+
+      return (
         <div className="main">
           <table className="table1">
             <tbody>
@@ -57,13 +57,9 @@ export default class Login extends Component {
           </table>
         </div>
       )
+    } else {
+      return null
     }
-
-    return (
-      <Prompt {...auth}>
-        {page}
-      </Prompt>
-    )
   }
   handleSubmit() {
     let

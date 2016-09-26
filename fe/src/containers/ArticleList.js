@@ -6,11 +6,11 @@ import { load, addStar } from '../redux/modules/articleList';
 import { create as createStar } from '../redux/modules/articleStar';
 import { asyncConnect } from 'redux-connect';
 import PageList from '../components/PageList';
-import Prompt from '../components/Prompt';
+import globalLoading from '../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(load({params: location.query}));
+    return globalLoading(dispatch(load({params: location.query})), dispatch);
   }
 }])
 @connect(
@@ -24,15 +24,14 @@ export default class ArticleList extends Component {
   render() {
     let
       props = this.props,
-      articleList = props.articleList,
-      page;
+      articleList = props.articleList;
 
     if (articleList.loadData && articleList.loadData.data) {
       let
         {blogInfo} = props.layout.loadData.data,
         {typeOrTagName, articles, pageList} = articleList.loadData.data;
 
-      page = (
+      return (
         <section className="contents">
           <Helmet title={(typeOrTagName ? typeOrTagName + '_' : '') + blogInfo.title}/>
           {articles.map((article, i) => {
@@ -66,13 +65,9 @@ export default class ArticleList extends Component {
           <PageList {...pageList} path='/' />
         </section>
       )
+    } else {
+      return null;
     }
-
-    return (
-      <Prompt {...articleList}>
-        {page}
-      </Prompt>
-    )
   }
   handleStar(id, i) {
     // 点赞功能不管是否成功,直接+1

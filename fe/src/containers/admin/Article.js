@@ -8,12 +8,13 @@ import * as articleActions from '../../redux/modules/admin/article';
 import Prompt from '../../components/Prompt';
 import m from '../../utils/moReactUtils';
 import { push } from 'react-router-redux';
+import globalLoading from '../../utils/globalLoading';
 
 let contentEditor, introEditor;
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(articleActions.load({params: {id: location.query.id}}));
+    return globalLoading(dispatch(articleActions.load({params: {id: location.query.id}})), dispatch);
   }
 }])
 @connect(
@@ -46,13 +47,12 @@ export default class Article extends Component {
   }
   render() {
     let
-      articleProps = this.props.article,
-      page;
+      articleProps = this.props.article;
 
     if (articleProps.loadData && articleProps.loadData.data) {
       let {article, articleTypes, articleTags} = articleProps.loadData.data;
 
-      page = (
+      return (
         <div className="main">
           <table className="table1">
             <tbody>
@@ -116,13 +116,9 @@ export default class Article extends Component {
           </table>
         </div>
       )
+    } else {
+      return null;
     }
-
-    return (
-      <Prompt {...articleProps}>
-        {page}
-      </Prompt>
-    )
   }
   handleSubmit(id) {
     let

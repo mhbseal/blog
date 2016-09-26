@@ -7,10 +7,11 @@ import { editOver } from '../../utils/actionOver';
 import * as detailActions from '../../redux/modules/admin/articleTag';
 import Prompt from '../../components/Prompt';
 import { push } from 'react-router-redux';
+import globalLoading from '../../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(detailActions.load({params: {x: 'articleTag', id: location.query.id}}));
+    return globalLoading(dispatch(detailActions.load({params: {x: 'articleTag', id: location.query.id}})), dispatch);
   }
 }])
 @connect(
@@ -25,13 +26,12 @@ export default class ArticleTag extends Component {
   }
   render() {
     let
-      detail = this.props.detail,
-      page;
+      detail = this.props.detail;
 
     if (detail.loadData && detail.loadData.data) {
       let {xData} = detail.loadData.data;
-      
-      page = (
+
+      return (
         <div className="main">
           <table className="table1">
             <tbody>
@@ -60,13 +60,9 @@ export default class ArticleTag extends Component {
           </table>
         </div>
       )
+    } else {
+      return null;
     }
-
-    return (
-      <Prompt {...detail}>
-        {page}
-      </Prompt>
-    )
   }
   handleSubmit(id) {
     let

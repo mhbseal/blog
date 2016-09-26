@@ -7,10 +7,11 @@ import { asyncConnect } from 'redux-connect';
 import PageList from '../../components/PageList';
 import Prompt from '../../components/Prompt';
 import { deleteOver } from '../../utils/actionOver';
+import globalLoading from '../../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(load({params: {...location.query}}));
+    return globalLoading(dispatch(load({params: {...location.query}})), dispatch);
   }
 }])
 @connect(
@@ -25,14 +26,13 @@ export default class ArticleList extends Component {
     let
       props = this.props,
       articleList = props.articleList,
-      article = props.article,
-      page;
+      article = props.article;
 
     if (articleList.loadData && articleList.loadData.data) {
       let
         {articles, articleTypes, pageList} = articleList.loadData.data;
 
-      page = (
+      return (
         <div className="main admin">
           <Link to={ADMINPATH + 'article'} className="btn">新增</Link>
           <div className="table2_wrap">
@@ -85,13 +85,9 @@ export default class ArticleList extends Component {
           <PageList {...pageList} path={ADMINPATH + 'articleList'} />
         </div>
       )
+    } else {
+      return null;
     }
-
-    return (
-      <Prompt {...articleList}>
-        {page}
-      </Prompt>
-    )
   }
   handleDelete(id) {
     deleteOver(this.props.del({params: {id}}), this);

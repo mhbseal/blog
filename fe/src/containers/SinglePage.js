@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { load } from '../redux/modules/singlePage';
 import { asyncConnect } from 'redux-connect';
-import Prompt from '../components/Prompt';
+import globalLoading from '../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(load({params: location.query}));
+    return globalLoading(dispatch(load({params: location.query})), dispatch);
   }
 }])
 @connect(
@@ -20,15 +20,14 @@ export default class SinglePage extends Component {
   render() {
     let
       props = this.props,
-      singlePageProps = props.singlePage,
-      page;
+      singlePageProps = props.singlePage;
 
     if (singlePageProps.loadData && singlePageProps.loadData.data) {
       let
         {blogInfo} = props.layout.loadData.data,
         singlePage = singlePageProps.loadData.data;
 
-      page = (
+      return (
         <section className="contents">
           <Helmet title={`${singlePage.title}_${blogInfo.title}`}/>
           <article className="detail">
@@ -39,12 +38,8 @@ export default class SinglePage extends Component {
           </article>
         </section>
       )
+    } else {
+      return null;
     }
-
-    return (
-      <Prompt {...singlePageProps}>
-        {page}
-      </Prompt>
-    )
   }
 }

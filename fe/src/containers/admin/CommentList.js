@@ -7,10 +7,11 @@ import { asyncConnect } from 'redux-connect';
 import PageList from '../../components/PageList';
 import Prompt from '../../components/Prompt';
 import { deleteOver } from '../../utils/actionOver';
+import globalLoading from '../../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(load({params: {...location.query, x: 'comment'}}));
+    return globalLoading(dispatch(load({params: {...location.query, x: 'comment'}})), dispatch);
   }
 }])
 @connect(
@@ -25,14 +26,13 @@ export default class CommentList extends Component {
     let
       props = this.props,
       list = props.list,
-      detail = props.detail,
-      page;
+      detail = props.detail;
 
     if (list.loadData && list.loadData.data) {
       let
         {xData, pageList} = list.loadData.data;
 
-      page = (
+      return (
         <div className="main">
           <div className="table2_wrap">
             <table className="table2">
@@ -65,13 +65,9 @@ export default class CommentList extends Component {
           <PageList {...pageList} path={ADMINPATH + 'commentList'} />
         </div>
       )
+    } else {
+      return null
     }
-
-    return (
-      <Prompt {...list}>
-        {page}
-      </Prompt>
-    )
   }
   handleDelete(id) {
     deleteOver(this.props.del({params: {x: 'comment', id}}), this, 'comment');

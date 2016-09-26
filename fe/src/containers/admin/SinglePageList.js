@@ -7,10 +7,11 @@ import { asyncConnect } from 'redux-connect';
 import PageList from '../../components/PageList';
 import Prompt from '../../components/Prompt';
 import { deleteOver } from '../../utils/actionOver';
+import globalLoading from '../../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(load({params: {...location.query, x: 'singlePage'}}));
+    return globalLoading(dispatch(load({params: {...location.query, x: 'singlePage'}})), dispatch);
   }
 }])
 @connect(
@@ -25,14 +26,13 @@ export default class SinglePageList extends Component {
     let
       props = this.props,
       list = props.list,
-      detail = props.detail,
-      page;
+      detail = props.detail;
 
     if (list.loadData && list.loadData.data) {
       let
         {xData, pageList} = list.loadData.data;
 
-      page = (
+      return (
         <div className="main">
           <Link to={ADMINPATH + 'singlePage'} className="btn">新增</Link>
           <div className="table2_wrap">
@@ -64,13 +64,9 @@ export default class SinglePageList extends Component {
           <PageList {...pageList} path={ADMINPATH + 'singlePageList'} />
         </div>
       )
+    } else {
+      return null
     }
-
-    return (
-      <Prompt {...list}>
-        {page}
-      </Prompt>
-    )
   }
   handleDelete(id) {
     deleteOver(this.props.del({params: {x: 'singlePage', id}}), this, 'singlePage');

@@ -8,6 +8,8 @@ import { asyncConnect } from 'redux-connect';
 import classNames from 'classnames';
 import m from '../utils/moReactUtils';
 import './layout.scss';
+import Loading from '../components/Loading';
+import Toast from '../components/Toast';
 
 let timer;
 
@@ -19,7 +21,10 @@ let timer;
   }
 }])
 @connect(
-  state => ({layout: state.layout}),
+  state => ({
+    layout: state.layout,
+    global: state.global
+  }),
   { push }
 )
 export default class Layout extends Component {
@@ -44,7 +49,7 @@ export default class Layout extends Component {
     m(window).off('scroll', this.handleScroll);
   }
   render() {
-    let layout = this.props.layout;
+    let { layout, global } = this.props;
 
     if (layout.loadData && layout.loadData.data) {
       let
@@ -93,6 +98,8 @@ export default class Layout extends Component {
             </aside>
           </div>
           <footer className="footer" dangerouslySetInnerHTML={{__html: blogInfo.copyright}}></footer>
+          <Loading loading={global.loading} />
+          <Toast loading={global.loading} msg={global.toastMsg} />
         </div>
       )
     } else {

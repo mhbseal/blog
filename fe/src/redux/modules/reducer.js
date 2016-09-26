@@ -26,6 +26,8 @@ import adminUser from './admin/user';
 import adminComment from './admin/comment';
 import adminLink from './admin/link';
 import adminSinglePage from './admin/singlePage';
+// 其他
+import global from './global';
 
 export default combineReducers({
   routing: routerReducer,
@@ -54,5 +56,6 @@ export default combineReducers({
   adminUser,
   adminComment,
   adminLink,
-  adminSinglePage
+  adminSinglePage,
+  global
 });

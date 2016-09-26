@@ -9,10 +9,11 @@ import formatForm from '../utils/formatForm';
 import { create as createComment } from '../redux/modules/comment';
 import { create as createStar } from '../redux/modules/articleStar';
 import Prompt from '../components/Prompt';
+import globalLoading from '../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
-    return dispatch(load({params: location.query}))
+    return globalLoading(dispatch(load({params: location.query})), dispatch);
   }
 }])
 @connect(
@@ -32,15 +33,14 @@ export default class Article extends Component {
     let
       props = this.props,
       articleProps = props.article,
-      comment = props.comment || {},
-      page;
+      comment = props.comment || {};
 
     if (articleProps.loadData && articleProps.loadData.data) {
       let
         {blogInfo} = props.layout.loadData.data,
         {article, comments, commenter} = articleProps.loadData.data;
 
-      page = (
+      return (
         <section className="contents">
           <Helmet title={`${article.title}_${article.type.name}_${blogInfo.title}`}/>
           <article className="detail">
@@ -114,13 +114,9 @@ export default class Article extends Component {
           </section>
         </section>
       )
+    } else {
+      return null;
     }
-
-    return (
-      <Prompt {...articleProps}>
-        {page}
-      </Prompt>
-    )
   }
   handleSubmit(article) {
     let
