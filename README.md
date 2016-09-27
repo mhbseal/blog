@@ -1,7 +1,5 @@
 # Blog
 
-[![build status](https://img.shields.io/travis/mhbseal/blog/master.svg?style=flat-square)](https://travis-ci.org/mhbseal/blog)
-
 ### 前言
 
 blog参考：https://github.com/erikras/react-redux-universal-hot-example  

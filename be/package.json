@@ -9,8 +9,7 @@
     "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.api --watch --log-date-format 'YYYY-MM-DD HH:mm:ss'",
     "data.dev": "bin/scp.data.dev.sh && bin/tar.data.dev.sh && bin/mongorestore.dev.sh",
     "data.prod": "bin/mongodump.prod.sh && bin/tar.data.prod.sh",
-    "log.dev": "bin/scp.log.dev.sh",
-    "lint": "eslint ./"
+    "log.dev": "bin/scp.log.dev.sh"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -24,7 +23,6 @@
     "multer": "^1.2.0"
   },
   "devDependencies": {
-    "eslint": "^3.2.2",
     "piping": "^0.3.2"
   },
   "engines": {
