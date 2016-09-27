@@ -9,7 +9,7 @@
     "build.prod": "webpack --verbose --colors --display-error-details --config ./build/webpack.config.prod",
     "upload.dev": "bin/scp.upload.dev.sh && bin/tar.upload.dev.sh",
     "upload.prod": "bin/tar.upload.prod.sh",
-    "log.dev": "bin/scp.upload.log.dev.sh"
+    "log.dev": "bin/scp.log.dev.sh"
   },
   "dependencies": {
     "classnames": "^2.2.5",
