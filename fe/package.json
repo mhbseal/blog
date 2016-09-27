@@ -7,9 +7,9 @@
     "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.render --watch --log-date-format 'YYYY-MM-DD HH:mm:ss'",
     "build.dev": "webpack --verbose --colors --display-error-details --config ./build/webpack.config.dev",
     "build.prod": "webpack --verbose --colors --display-error-details --config ./build/webpack.config.prod",
-    "source.dev": "bin/scp.dev.sh && bin/tar.dev.sh",
-    "source.prod": "bin/tar.prod.sh",
-    "log.dev": "bin/scp.log.dev.sh"
+    "upload.dev": "bin/scp.upload.dev.sh && bin/tar.upload.dev.sh",
+    "upload.prod": "bin/tar.upload.prod.sh",
+    "log.dev": "bin/scp.upload.log.dev.sh"
   },
   "dependencies": {
     "classnames": "^2.2.5",
