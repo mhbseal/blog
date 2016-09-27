@@ -42,6 +42,7 @@ blog参考：https://github.com/erikras/react-redux-universal-hot-example
 
 1.切换页面scrollTop的问题  
 2.abort请求  
+3.immaculate.js的引入
 
 ### 更新日志
 

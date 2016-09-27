@@ -3,8 +3,8 @@
   "scripts": {
     "start": "bin/server.js",
     "watch": "node ./build/webpack.dev.server",
-    "pm2.start": "NODE_ENV=production pm2 start ./bin/server.js --name blog.render --watch",
-    "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.render --watch",
+    "pm2.start": "NODE_ENV=production pm2 start ./bin/server.js --name blog.render --watch --log-date-format 'YYYY-MM-DD HH:mm:ss'",
+    "pm2.reload": "NODE_ENV=production pm2 reload ./bin/server.js --name blog.render --watch --log-date-format 'YYYY-MM-DD HH:mm:ss'",
     "build.dev": "webpack --verbose --colors --display-error-details --config ./build/webpack.config.dev",
     "build.prod": "webpack --verbose --colors --display-error-details --config ./build/webpack.config.prod",
     "source.dev": "bin/scp.dev.sh && bin/tar.dev.sh",
