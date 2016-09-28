@@ -3,6 +3,7 @@ import createCURD from '../../../helpers/createCURD';
 const LOGIN = 'admin/auth/LOGIN';
 const LOGIN_SUCCESS = 'admin/auth/LOGIN_SUCCESS';
 const LOGIN_FAIL = 'admin/auth/LOGIN_FAIL';
+const LOGIN_CLEAR = 'admin/auth/LOGIN_CLEAR';
 const LOGOUT = 'admin/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'admin/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'admin/auth/LOGOUT_FAIL';
@@ -35,6 +36,13 @@ export default function reducer(state = { loaded: false }, action = {}) {
           loginData: null,
           loginError: action.error
         };
+      case LOGIN_CLEAR:
+        let a = {...state};
+        delete a.logining;
+        delete a.logined;
+        delete a.loginData;
+        delete a.loginError;
+        return a;
       case LOGOUT:
         return {
           ...state,
@@ -65,7 +73,13 @@ export default function reducer(state = { loaded: false }, action = {}) {
 export { load }
 
 export function isLoaded(globalState) {
-  return globalState.adminAuth && globalState.adminAuth.loaded;
+  return globalState.adminAuth && globalState.adminAuth.loadData && globalState.adminAuth.loadData.data && globalState.adminAuth.loadData.data.admin && globalState.adminAuth.loadData.data.admin.id;
+}
+
+export function clearLogin() {
+  return {
+    type: LOGIN_CLEAR
+  };
 }
 
 export function login(params) {

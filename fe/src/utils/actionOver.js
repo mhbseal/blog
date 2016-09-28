@@ -6,18 +6,10 @@ export function editOver (promise, parent, url) {
   });
 };
 
-export function deleteOver (promise, parent, x) {
-  let params = parent.props.location.query;
-
-  if (x) {
-    params = {...params, x};
-  }
-
+export function deleteOver (promise, parent) {
   promise.then((data) => {
     if (data.status.code == 0) {
-      setTimeout(() => {
-        parent.props.load({params});
-      }, 0)
+      parent.props.replace(location.pathname + location.search + location.hash);
     }
   });
 };

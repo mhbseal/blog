@@ -23,7 +23,7 @@ module.exports = function (app) {
         res.json({
           status: {
             code: 1,
-            msg: '登陆验证失败'
+            msg: '登陆失败'
           }
         });
       }

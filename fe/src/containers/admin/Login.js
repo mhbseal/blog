@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import formatForm from '../../utils/formatForm';
 import { editOver } from '../../utils/actionOver';
-import * as authActions from '../../redux/modules/admin/auth';
+import { login, load } from '../../redux/modules/admin/auth';
 import Prompt from '../../components/Prompt';
 import { push } from 'react-router-redux';
 import globalLoading from '../../utils/globalLoading';
 
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
-    return globalLoading(dispatch(authActions.load()), dispatch);
+    return globalLoading(dispatch(load()), dispatch);
   }
 }])
 @connect(
   state => ({
     auth: state.adminAuth
   }),
-  { ...authActions, push }
+  { login, push }
 )
 export default class Login extends Component {
   state = {

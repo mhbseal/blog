@@ -19,7 +19,7 @@ module.exports = function (app) {
       F.co(function *() {
         var fileName = req.file.filename;
         res.send(JSON.stringify({ // umeditor只接受Content-Type: 'text/html'
-          url: C.resourceFixUrl + '/upload/' + fileName,
+          url: C.resourceFixUrl + '/upload/article/' + fileName,
           title: fileName,
           state: "SUCCESS"
         }));

@@ -38,13 +38,12 @@ blog参考：https://github.com/erikras/react-redux-universal-hot-example
 
 ### 待优化、已知Bug
 
-1.切换页面scrollTop的问题  
-2.abort请求  
-3.immaculate.js的引入
+1.abort请求  
+2.immaculate.js的引入
 
 ### 更新日志
 
-**0.5.0（2016-08-26）**  
+**0.5.0（2016-09-28）**  
 基于工程，前后端代码彻底分离，升级react，babel及其相应pkg。
 
 1.blog前后端代码彻底分离fe/be  

@@ -8,6 +8,7 @@ import PageList from '../../components/PageList';
 import Prompt from '../../components/Prompt';
 import { deleteOver } from '../../utils/actionOver';
 import globalLoading from '../../utils/globalLoading';
+import { replace } from 'react-router-redux';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, location}) => {
@@ -19,7 +20,7 @@ import globalLoading from '../../utils/globalLoading';
     articleList: state.adminArticleList,
     article: state.adminArticle
   }),
-  { del, load }
+  { del, load, replace }
 )
 export default class ArticleList extends Component {
   render() {
@@ -74,13 +75,13 @@ export default class ArticleList extends Component {
                     <td>
                       <Link to={ADMINPATH + 'article'} query={{id: article._id}}>编辑</Link>&nbsp;&nbsp;
                       <a href="javascript:void(0)" onClick={this.handleDelete.bind(this, article._id)}>删除</a>
-                      <Prompt loadData={article.deleteData} loading={article.deleteing} loadError={article.deleteError} loadingMsg="删除中..." />
                     </td>
                   </tr>
                 )
               })}
               </tbody>
             </table>
+            <Prompt loadData={article.deleteData} loading={article.deleteing} loadError={article.deleteError} loadingMsg="删除中..." />
           </div>
           <PageList {...pageList} path={ADMINPATH + 'articleList'} />
         </div>
