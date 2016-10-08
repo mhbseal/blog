@@ -4,17 +4,8 @@ module.exports = function (app) {
     .post(function (req, res) {
       F.co(function *() {
         var article = yield M.article.findOneAndUpdate({_id: req.query.id, enabled: true}, {$inc: {stars: 1}}).populate('type tags');
-        // 校验文章id是否存在
-        if (!article) {
-          return res.json({
-            status: {
-              code: 3,
-              msg: '找不到相应的文章'
-            }
-          });
-        }
 
-        res.json((a) ?
+        res.json((article) ?
           {
             status: {
               code: 0,
@@ -26,6 +17,6 @@ module.exports = function (app) {
                 msg: '点赞失败'
             }
           });
-      })
+      }, res)
     })
 };

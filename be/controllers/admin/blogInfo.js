@@ -14,7 +14,7 @@ module.exports = function (app) {
             blogInfo: (yield M.blogInfo.findOne()) || {}
           }
         });
-      })
+      }, res)
     })
     .put(function (req, res) {
       F.co(function *() {
@@ -30,7 +30,7 @@ module.exports = function (app) {
               msg: '更新失败'
             }
           });
-      })
+      }, res)
     })
     .post(function (req, res) {
       F.co(function *() {
@@ -46,6 +46,6 @@ module.exports = function (app) {
               msg: '新增失败'
             }
           });
-      })
+      }, res)
     })
 };

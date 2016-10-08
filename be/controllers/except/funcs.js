@@ -11,7 +11,7 @@ funcs = {
   // 格式化日期
   date: require('mo2js').date,
   // wrap co
-  co: function(success) {
+  co: function(success, res) {
     co(success).catch(function (err) {
       // 统一服务错误处理
       res.status(500);

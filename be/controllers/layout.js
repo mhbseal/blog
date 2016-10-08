@@ -26,6 +26,6 @@ module.exports = function (app) {
             articleTags: articleTags
           }
         });
-      })
+      }, res)
     })
 };

@@ -25,7 +25,7 @@ module.exports = function (app) {
             articleTags: articleTags
           }
         });
-      })
+      }, res)
     })
     .delete(function (req, res) {
       F.co(function *() {
@@ -42,7 +42,7 @@ module.exports = function (app) {
               msg: '删除失败'
             }
           });
-      })
+      }, res)
     })
     .put(function (req, res) {
       F.co(function *() {
@@ -61,7 +61,7 @@ module.exports = function (app) {
                 msg: '更新失败'
             }
           });
-      })
+      }, res)
     })
     .post(function (req, res) {
       F.co(function *() {
@@ -80,6 +80,6 @@ module.exports = function (app) {
                 msg: '新增失败'
             }
           });
-      })
+      }, res)
     })
 };

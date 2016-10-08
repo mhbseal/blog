@@ -32,6 +32,6 @@ module.exports = function (app) {
             commenter: req.session.admin || req.session.user || {}
           }
         });
-      })
+      }, res)
     })
 };

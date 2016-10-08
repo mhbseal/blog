@@ -61,6 +61,6 @@ module.exports = function (app) {
           status: status,
           data: data
         })
-      })
+      }, res)
     })
 };

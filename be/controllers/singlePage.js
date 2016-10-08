@@ -10,6 +10,6 @@ module.exports = function (app) {
           },
           data: (yield M.singlePage.findOne({'path': req.query.path})) || {}
         });
-      })
+      }, res)
     })
 };
