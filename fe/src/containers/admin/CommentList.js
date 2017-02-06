@@ -53,7 +53,7 @@ export default class CommentList extends Component {
                     <td>{x.time}</td>
                     <td>{x.content.slice(0, 40) + (x.content.length > 40 ? '...' : '')}</td>
                     <td>
-                      <Link to='/article' query={{id: x.article.id}}>回复</Link>&nbsp;&nbsp;
+                      <Link to='/article' query={{id: x.articleId}}>回复</Link>&nbsp;&nbsp;
                       <a href="javascript:void(0)" onClick={this.handleDelete.bind(this, x._id)}>删除</a>
                       </td>
                   </tr>
