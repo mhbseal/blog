@@ -26,7 +26,3 @@ var
   };
 
 module.exports = config;
-
-
-
-

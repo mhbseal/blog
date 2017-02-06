@@ -66,7 +66,7 @@ module.exports = function (app) {
 
         if (x === 'admin') {
           body.password = F.encrypt(body.password);
-          body.img = '/upload/img/mo.jpg';
+          body.img = C.resourceFixUrl + '/upload/img/mo.jpg';
         }
 
         res.json((yield M[x].create(body)) ?

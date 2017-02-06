@@ -98,12 +98,12 @@ export default class Article extends Component {
               </tr>
               <tr>
                 <td>内容：</td>
-                <td><textarea ref="content" className="form-control"></textarea></td>
+                <td><textarea ref="content" className="form-control" /></td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
                 <td>
-                  <a href="javascript:void(0)" onClick={this.handleSubmit.bind(this, {id: article._id, typePath: article.type.path})} className="btn">发表评论</a>&nbsp;&nbsp;
+                  <a href="javascript:void(0)" onClick={this.handleSubmit.bind(this, article._id)} className="btn">发表评论</a>&nbsp;&nbsp;
                   <Prompt data={comment.editData} loading={comment.editing} error={comment.editError} loadingMsg="提交中..." className='inline'>
                     <Alert validateMsg={this.state.validateMsg} />
                   </Prompt>
@@ -118,7 +118,7 @@ export default class Article extends Component {
       return null;
     }
   }
-  handleSubmit(article) {
+  handleSubmit(articleId) {
     let
       data = formatForm(this, [
         {
@@ -139,7 +139,7 @@ export default class Article extends Component {
 
     // 提交
     if (data) {
-      props.createComment({ data: {...data, article} }).then((data) => {
+      props.createComment({ data: {...data, articleId} }).then((data) => {
         if (data.status.code == 0) {
           this.refs.content.value = '';
           props.insertComment(data.data);

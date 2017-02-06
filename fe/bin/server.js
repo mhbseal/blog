@@ -11,14 +11,15 @@ var
 
 require('babel-register')(babelConfig); // babel registration (runtime transpilation for node)
 
-if (__DEVELOPMENT__) {
-  if (!require('piping')({
-      hook: true,
-      ignore: /(\/\.|~$|\.json|\.scss$)/i
-    })) {
-    return;
-  }
-}
+// // 这里服务器端渲染的情况下,开发模式开启可以热更新,一般情况下无需打开
+// if (__DEVELOPMENT__) {
+//   if (!require('piping')({
+//       hook: true,
+//       ignore: /(\/\.|~$|\.json|\.scss$)/i
+//     })) {
+//     return;
+//   }
+// }
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../build/webpack.isomorphic.tools'))

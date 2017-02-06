@@ -1,9 +1,6 @@
 module.exports = function (Schema) {
   return {
-    article: {
-      id: Schema.Types.ObjectId,
-      typePath: String
-    },
+    articleId: Schema.Types.ObjectId,
     user: {
       type: Schema.Types.ObjectId,
       ref: 'user'

@@ -21,7 +21,7 @@ var
       controller: path.resolve(beRoot, 'controllers'),
       resource: path.resolve(beRoot, '../fe/resource')
     },
-    resourceFixUrl: '', // 静态资源web访问修正路径
+    resourceFixUrl: 'http://localhost:3004', // 静态资源web访问修正路径
     exceptFolder: 'except' // model 和 controller 中read dir排除的目录名称
   };
 

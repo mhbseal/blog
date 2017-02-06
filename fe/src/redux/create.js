@@ -25,8 +25,10 @@ export default function createStore(history, client, data) {
   const store = finalCreateStore(reducer, data);
 
   if (__DEVELOPMENT__ && module.hot) {
+    // Enable Webpack hot module replacement for reducers
     module.hot.accept('./modules/reducer', () => {
-      store.replaceReducer(reducer);
+      const nextRootReducer = require('./modules/reducer');
+      store.replaceReducer(nextRootReducer);
     });
   }
 

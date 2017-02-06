@@ -18,7 +18,7 @@ module.exports = function (app) {
           });
         }
         // 点评
-        comments = yield M.comment.find({'article.id': article._id}).sort({_id: -1}).populate('user admin');
+        comments = yield M.comment.find({'articleId': article._id}).sort({_id: -1}).populate('user admin');
 
         // 模板渲染
         res.json({

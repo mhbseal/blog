@@ -16,7 +16,7 @@ module.exports = function (app) {
           user = (yield M.user.findOne({
               email: body.email
             })) || (yield M.user.create({
-              img: '/upload/img/user.jpg',
+              img: C.resourceFixUrl + '/upload/img/user.jpg',
               name: body.name,
               email: body.email
             }))
@@ -54,7 +54,7 @@ module.exports = function (app) {
         } else {
           status = {
             code: 1,
-            msg: '网络错误，请重试！'
+            msg: '评论失败！'
           }
         }
         res.json({

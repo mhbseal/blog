@@ -81,7 +81,7 @@ module.exports = function (app) {
         pageList.pageCount = Math.ceil(pageList.rowCount / pageList.size);
         // 遍历文章，从评论的表中取相应的评论总数
         for (var article of articles) {
-          article._doc.commentCount = yield M.comment.count({'article.id': article._id});
+          article._doc.commentCount = yield M.comment.count({'articleId': article._id});
         }
         // 模板渲染
         res.json({
