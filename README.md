@@ -7,6 +7,7 @@ blog参考：https://github.com/erikras/react-redux-universal-hot-example
 后端：express + co + mongoose + ...  
 前端：react + redux + react-router + ...  
 线上地址：http://mhbseal.com  
+app版下载地址：https://pan.baidu.com/s/1skP4nu9
 
 ### 准备
 
@@ -14,7 +15,7 @@ blog参考：https://github.com/erikras/react-redux-universal-hot-example
 
 ### 运行
     
-    git clone https://github.com/mhbseal/blog  // 仓库
+    git clone https://github.com/mhbseal/blog.git  // 仓库
     // 后端be
     cd be && npm install  // 安装
     npm start  // 启动
@@ -42,6 +43,9 @@ blog参考：https://github.com/erikras/react-redux-universal-hot-example
 2.immaculate.js的引入
 
 ### 更新日志
+
+**0.6.0（2017-02-13）**  
+适配blog的react-native版
 
 **0.5.0（2016-09-28）**  
 基于工程，前后端代码彻底分离，升级react，babel及其相应pkg。
