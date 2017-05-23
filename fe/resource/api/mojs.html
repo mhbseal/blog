@@ -178,7 +178,7 @@
 <body>
 <div id="sidebar" class="interface">
   <a class="toc_title" href="#">
-    mojs <span class="version">(0.2.4)</span>
+    mojs <span class="version">(0.2.5)</span>
   </a>
   <ul class="toc_section">
     <li>» <a href="http://github.com/mhbseal/mojs">gitbub repository</a></li>
@@ -186,6 +186,52 @@
   <a class="toc_title" href="#">
     introduction
   </a>
+  
+    <a class="toc_title" href="#Cookie">Cookie</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#Cookie_Cookie">Cookie</a></li>
+      
+    
+      
+      <li>- <a href="#Cookie_set">set</a></li>
+      
+    
+      
+      <li>- <a href="#Cookie_get">get</a></li>
+      
+    
+      
+      <li>- <a href="#Cookie_remove">remove</a></li>
+      
+    
+    </ul>
+  
+    <a class="toc_title" href="#IdCard">IdCard</a>
+    <ul class="toc_section">
+    
+      
+      <li>- <a href="#IdCard_IdCard">IdCard</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_checkCode">checkCode</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_checkBirth">checkBirth</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_getBirth">getBirth</a></li>
+      
+    
+      
+      <li>- <a href="#IdCard_getSex">getSex</a></li>
+      
+    
+    </ul>
   
     <a class="toc_title" href="#common">common</a>
     <ul class="toc_section">
@@ -276,29 +322,12 @@
     
     </ul>
   
-    <a class="toc_title" href="#Cookie">Cookie</a>
-    <ul class="toc_section">
-    
-      
-      <li>- <a href="#Cookie_Cookie">Cookie</a></li>
-      
-    
-      
-      <li>- <a href="#Cookie_set">set</a></li>
-      
-    
-      
-      <li>- <a href="#Cookie_get">get</a></li>
-      
-    
-      
-      <li>- <a href="#Cookie_remove">remove</a></li>
-      
-    
-    </ul>
-  
     <a class="toc_title" href="#date">date</a>
     <ul class="toc_section">
+    
+      
+      <li>- <a href="#date_get">get</a></li>
+      
     
       
       <li>- <a href="#date_format">format</a></li>
@@ -351,31 +380,6 @@
     
       
       <li>- <a href="#es5_reduceRight">reduceRight</a></li>
-      
-    
-    </ul>
-  
-    <a class="toc_title" href="#IdCard">IdCard</a>
-    <ul class="toc_section">
-    
-      
-      <li>- <a href="#IdCard_IdCard">IdCard</a></li>
-      
-    
-      
-      <li>- <a href="#IdCard_checkCode">checkCode</a></li>
-      
-    
-      
-      <li>- <a href="#IdCard_checkBirth">checkBirth</a></li>
-      
-    
-      
-      <li>- <a href="#IdCard_getBirth">getBirth</a></li>
-      
-    
-      
-      <li>- <a href="#IdCard_getSex">getSex</a></li>
       
     
     </ul>
@@ -519,6 +523,197 @@
   </p>
   <p>mojs，一个javascript常用方法库，包含了浏览器中对storage、cookie的操作封装，e5 super，date日期处理，身份证、url中元素校验解析，及一些其他常用的方法集合（正则、extend、继承、类等...）。<br /><br />源码采用AMD书写，以webpack打包，karma+jasmine单元测试，UMD格式输出。</p>
   <div id="documentation">
+    
+      <h2 id="Cookie">Cookie</h2>
+      <p>操作cookie的方法</p>
+      
+      
+      
+      
+        <p id="Cookie_Cookie">
+          <b class="header">Cookie</b><code>new Cookie(options)</code>
+          <br>
+          构造函数
+        </p>
+        
+<pre>
+@param {object} options
+  - isRaw {boolean} 是否原生字符（不转码）, 默认为false
+  - isJson {boolean} 是否str-&gt;json, 默认为false</pre>
+        
+        
+        <pre>var
+  cookie = new Cookie(),
+  cookie2 = new Cookie({isRaw: true, isJson: true});</pre>
+        
+        
+      
+      
+      
+        <p id="Cookie_set">
+          <b class="header">set</b><code>cookie.set(name, value[, options])</code>
+          <br>
+          设置cookie
+        </p>
+        
+<pre>
+@param {string} name
+@param {..} value
+@param {obj} options
+  - expires {number|string} 失效时长,单位 ‘天’, 默认为Session
+  - path    {string} 路径,path只能设置当前path的子path, 默认为当前path
+  - domain  {string} 域,domain只能设置当前domain的子domain, 默认为当前domain
+  - secure  {boolean} 安全策略,只有https下能设置 ture or false, 默认为false</pre>
+        
+        
+        <pre>cookie.set(&#x27;user&#x27;, &#x27;mo&#x27;);
+cookie2.set(&#x27;user2&#x27;, {a: &#x27;mojs&#x27;, b: &#x27;modoc&#x27;}, {expires: 1});</pre>
+        
+        
+      
+      
+      
+        <p id="Cookie_get">
+          <b class="header">get</b><code>cookie.get(name)</code>
+          <br>
+          读取cookie
+        </p>
+        
+<pre>
+@param {string} cookie的name
+@return {..} cookie的value</pre>
+        
+        
+        <pre>cookie.get(&#x27;user&#x27;) =&gt; &#x27;mo&#x27;
+cookie2.get(&#x27;user2&#x27;) =&gt; {a: &#x27;mojs&#x27;, b: &#x27;modoc&#x27;}</pre>
+        
+        
+      
+      
+      
+        <p id="Cookie_remove">
+          <b class="header">remove</b><code>cookie.remove(name)</code>
+          <br>
+          删除cookie
+        </p>
+        
+<pre>
+@param {string} cookie的name</pre>
+        
+        
+        <pre>cookie.remove(&#x27;user&#x27;)</pre>
+        
+        
+      
+      
+    
+      <h2 id="IdCard">IdCard</h2>
+      <p>身份证的校验以及从从身份证号码中获取一些信息，例如出生日期，性别</p>
+      
+      
+      <pre>身份证规则
+=====================================================================
+身份证15位编码规则 -- dddddd yymmdd xx p
+dddddd : 地区码
+yymmdd : 出生年月日
+xx     : 顺序类编码，无法确定
+p      : 性别，奇数为男，偶数为女
+
+身份证18位编码规则 -- dddddd yyyymmdd xxx y
+dddddd   : 地区码
+yyyymmdd : 出生年月日
+xxx      : 顺序类编码，无法确定，奇数为男，偶数为女
+y        : 校验码，该位数值可通过前17位计算获得
+
+18位号码加权因子为          : WI = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1]
+校验位集合                  : CODE = [1, 0, &#x27;x&#x27;, 9, 8, 7, 6, 5, 4, 3, 2]
+校验位index计算公式         : index = mod(∑(ai×Wi), 11)
+=====================================================================</pre>
+      
+      
+      
+        <p id="IdCard_IdCard">
+          <b class="header">IdCard</b><code>new IdCard(num)</code>
+          <br>
+          构造函数
+        </p>
+        
+<pre>
+@param {string} 身份证号,这里必须是string格式,因为身份证号超出了js的整数精度范围</pre>
+        
+        
+        <pre>var idCard = new IdCard(&#x27;610125198711037137&#x27;);</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_checkCode">
+          <b class="header">checkCode</b><code></code>
+          <br>
+          验证校验位,针对18位
+        </p>
+        
+<pre>
+@return {boolean} </pre>
+        
+        
+        <pre>idCard.checkCode() =&gt; true</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_checkBirth">
+          <b class="header">checkBirth</b><code></code>
+          <br>
+          验证出生日期
+        </p>
+        
+<pre>
+@return {boolean} </pre>
+        
+        
+        <pre>idCard.checkBirth() =&gt; true</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_getBirth">
+          <b class="header">getBirth</b><code></code>
+          <br>
+          获取出生日期
+        </p>
+        
+<pre>
+@return {object} 返回对象
+  - year  {number}
+  - month {number}
+  - day   {number}</pre>
+        
+        
+        <pre>idCard.getBirth() =&gt; {year: &#x27;1987&#x27;, month: &#x27;11&#x27;, day: &#x27;03&#x27;}</pre>
+        
+        
+      
+      
+      
+        <p id="IdCard_getSex">
+          <b class="header">getSex</b><code></code>
+          <br>
+          获取性别
+        </p>
+        
+<pre>
+@return {string} </pre>
+        
+        
+        <pre>idCard.getSex() =&gt; &#x27;男&#x27;</pre>
+        
+        
+      
+      
     
       <h2 id="common">common</h2>
       <p>一些底层的方法</p>
@@ -854,89 +1049,6 @@ c.baseClass(A, B) =&gt; A继承B</pre>
       
       
     
-      <h2 id="Cookie">Cookie</h2>
-      <p>操作cookie的方法</p>
-      
-      
-      
-      
-        <p id="Cookie_Cookie">
-          <b class="header">Cookie</b><code>new Cookie(options)</code>
-          <br>
-          构造函数
-        </p>
-        
-<pre>
-@param {object} options
-  - isRaw {boolean} 是否原生字符（不转码）, 默认为false
-  - isJson {boolean} 是否str-&gt;json, 默认为false</pre>
-        
-        
-        <pre>var
-  cookie = new Cookie(),
-  cookie2 = new Cookie({isRaw: true, isJson: true});</pre>
-        
-        
-      
-      
-      
-        <p id="Cookie_set">
-          <b class="header">set</b><code>cookie.set(name, value[, options])</code>
-          <br>
-          设置cookie
-        </p>
-        
-<pre>
-@param {string} name
-@param {..} value
-@param {obj} options
-  - expires {number|string} 失效时长,单位 ‘天’, 默认为Session
-  - path    {string} 路径,path只能设置当前path的子path, 默认为当前path
-  - domain  {string} 域,domain只能设置当前domain的子domain, 默认为当前domain
-  - secure  {boolean} 安全策略,只有https下能设置 ture or false, 默认为false</pre>
-        
-        
-        <pre>cookie.set(&#x27;user&#x27;, &#x27;mo&#x27;);
-cookie2.set(&#x27;user2&#x27;, {a: &#x27;mojs&#x27;, b: &#x27;modoc&#x27;}, {expires: 1});</pre>
-        
-        
-      
-      
-      
-        <p id="Cookie_get">
-          <b class="header">get</b><code>cookie.get(name)</code>
-          <br>
-          读取cookie
-        </p>
-        
-<pre>
-@param {string} cookie的name
-@return {..} cookie的value</pre>
-        
-        
-        <pre>cookie.get(&#x27;user&#x27;) =&gt; &#x27;mo&#x27;
-cookie2.get(&#x27;user2&#x27;) =&gt; {a: &#x27;mojs&#x27;, b: &#x27;modoc&#x27;}</pre>
-        
-        
-      
-      
-      
-        <p id="Cookie_remove">
-          <b class="header">remove</b><code>cookie.remove(name)</code>
-          <br>
-          删除cookie
-        </p>
-        
-<pre>
-@param {string} cookie的name</pre>
-        
-        
-        <pre>cookie.remove(&#x27;user&#x27;)</pre>
-        
-        
-      
-      
-    
       <h2 id="date">date</h2>
       <p>日期格式化、计算</p>
       
@@ -948,6 +1060,23 @@ cookie2.get(&#x27;user2&#x27;) =&gt; {a: &#x27;mojs&#x27;, b: &#x27;modoc&#x27;}
   birthday5 = 562941040500, // 时间戳(number/string)
   birthday6 = new Date(&#x27;1987&#x27;, &#x27;10&#x27;, &#x27;03&#x27;, &#x27;20&#x27;, &#x27;30&#x27;, &#x27;40&#x27;, &#x27;500&#x27;); // Date实例</pre>
       
+      
+      
+      
+        <p id="date_get">
+          <b class="header">get</b><code>date.get(date)</code>
+          <br>
+          获取非Date类型
+        </p>
+        
+<pre>
+@param {number|string|date} 非Date类型的date
+@return {Date} Date</pre>
+        
+        
+        <pre>date.get(&#x27;1987/11/03 21:30:40&#x27;) =&gt; Tue Nov 03 1987 21:30:40 GMT+0800 (CST)</pre>
+        
+        
       
       
       
@@ -1181,114 +1310,6 @@ indexOf,lastIndexOf,reduce,reduceRight可以应用到类数组</p>
       
       
     
-      <h2 id="IdCard">IdCard</h2>
-      <p>身份证的校验以及从从身份证号码中获取一些信息，例如出生日期，性别</p>
-      
-      
-      <pre>身份证规则
-=====================================================================
-身份证15位编码规则 -- dddddd yymmdd xx p
-dddddd : 地区码
-yymmdd : 出生年月日
-xx     : 顺序类编码，无法确定
-p      : 性别，奇数为男，偶数为女
-
-身份证18位编码规则 -- dddddd yyyymmdd xxx y
-dddddd   : 地区码
-yyyymmdd : 出生年月日
-xxx      : 顺序类编码，无法确定，奇数为男，偶数为女
-y        : 校验码，该位数值可通过前17位计算获得
-
-18位号码加权因子为          : WI = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1]
-校验位集合                  : CODE = [1, 0, &#x27;x&#x27;, 9, 8, 7, 6, 5, 4, 3, 2]
-校验位index计算公式         : index = mod(∑(ai×Wi), 11)
-=====================================================================</pre>
-      
-      
-      
-        <p id="IdCard_IdCard">
-          <b class="header">IdCard</b><code>new IdCard(num)</code>
-          <br>
-          构造函数
-        </p>
-        
-<pre>
-@param {string} 身份证号,这里必须是string格式,因为身份证号超出了js的整数精度范围</pre>
-        
-        
-        <pre>var idCard = new IdCard(&#x27;610125198711037137&#x27;);</pre>
-        
-        
-      
-      
-      
-        <p id="IdCard_checkCode">
-          <b class="header">checkCode</b><code></code>
-          <br>
-          验证校验位,针对18位
-        </p>
-        
-<pre>
-@return {boolean} </pre>
-        
-        
-        <pre>idCard.checkCode() =&gt; true</pre>
-        
-        
-      
-      
-      
-        <p id="IdCard_checkBirth">
-          <b class="header">checkBirth</b><code></code>
-          <br>
-          验证出生日期
-        </p>
-        
-<pre>
-@return {boolean} </pre>
-        
-        
-        <pre>idCard.checkBirth() =&gt; true</pre>
-        
-        
-      
-      
-      
-        <p id="IdCard_getBirth">
-          <b class="header">getBirth</b><code></code>
-          <br>
-          获取出生日期
-        </p>
-        
-<pre>
-@return {object} 返回对象
-  - year  {number}
-  - month {number}
-  - day   {number}</pre>
-        
-        
-        <pre>idCard.getBirth() =&gt; {year: &#x27;1987&#x27;, month: &#x27;11&#x27;, day: &#x27;03&#x27;}</pre>
-        
-        
-      
-      
-      
-        <p id="IdCard_getSex">
-          <b class="header">getSex</b><code></code>
-          <br>
-          获取性别
-        </p>
-        
-<pre>
-@return {string} </pre>
-        
-        
-        <pre>idCard.getSex() =&gt; &#x27;男&#x27;</pre>
-        
-        
-      
-      
-    
       <h2 id="objectPath">objectPath</h2>
       <p>读取或设置object path下的value</p>
       
@@ -1340,24 +1361,7 @@ objectPath.get(obj, &#x27;a.b.e&#x27;) =&gt; &#x27;mojs&#x27;</pre>
       <p>解析url</p>
       
       
-      <pre>url注解
-=====================================================================
-
-http://username:password&amp;#64;www.example.com:80/path/file.name?query=string#anchor
-|__|   |______| |______| |_____________||_||___||________||___________||_____|
- |        |        |            |       |   |         |         |        |
-protocol user   password      host  port directory  file      query   anchor
-      |_______________|                   |_____________|
-              |                                 |
-           userInfo                           path
-     |___________________________________||_________________________________|
-                       |                                   |
-                   authority                          relative
-|___________________________________________________________________________|
-                                        |
-                                      source
-
-=====================================================================</pre>
+      <pre>url注解(注释中&amp;#64;代表</pre>
       
       
       
@@ -1724,7 +1728,7 @@ rules.isIp(..) // IP地址</pre>
       <h2 id="LocalStore">LocalStore</h2>
       <p>AbstractStore的子类</p>
       
-      <pre>var store = new AbstractStore({
+      <pre>var store = new LocalStore({
   key: &#x27;USER&#x27;
 })</pre>
       
@@ -1734,7 +1738,7 @@ rules.isIp(..) // IP地址</pre>
       <h2 id="SessionStore">SessionStore</h2>
       <p>AbstractStore的子类</p>
       
-      <pre>var store = new AbstractStore({
+      <pre>var store = new SessionStore({
   key: &#x27;USER&#x27;
 })</pre>
       
