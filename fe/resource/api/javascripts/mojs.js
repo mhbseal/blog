@@ -1,5 +1,5 @@
 /*!
- * mo.js v0.2.5
+ * mo.js v0.2.6
  * http://mhbseal.com/api/mojs.html
  * (c) 2014-2017 Mu Haibao
  */

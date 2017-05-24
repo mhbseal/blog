@@ -178,7 +178,7 @@
 <body>
 <div id="sidebar" class="interface">
   <a class="toc_title" href="#">
-    mojs <span class="version">(0.2.5)</span>
+    mojs <span class="version">(0.2.6)</span>
   </a>
   <ul class="toc_section">
     <li>» <a href="http://github.com/mhbseal/mojs">gitbub repository</a></li>
@@ -1358,10 +1358,27 @@ objectPath.get(obj, &#x27;a.b.e&#x27;) =&gt; &#x27;mojs&#x27;</pre>
       
     
       <h2 id="ParseUrl">ParseUrl</h2>
-      <p>解析url</p>
+      <p>解析url (注释中&#64;代表at符号,由于modoc生成文档用到at符号)</p>
       
       
-      <pre>url注解(注释中&amp;#64;代表</pre>
+      <pre>url注解
+=====================================================================
+
+http://username:password&amp;#64;www.example.com:80/path/file.name?query=string#anchor
+|__|   |______| |______| |_____________||_||___||________||___________||_____|
+ |        |        |            |       |   |         |         |        |
+protocol user   password      host  port directory  file      query   anchor
+      |_______________|                   |_____________|
+              |                                 |
+           userInfo                           path
+     |___________________________________||_________________________________|
+                       |                                   |
+                   authority                          relative
+|___________________________________________________________________________|
+                                        |
+                                      source
+
+=====================================================================</pre>
       
       
       
@@ -1587,9 +1604,9 @@ rules.isIp(..) // IP地址</pre>
         <pre>var store = new AbstractStore({
   proxy: new AbstractStorage({
     storage: window.localStorage
-  })
+  }),
   key: &#x27;USER&#x27;
-}))</pre>
+})</pre>
         
         
       
