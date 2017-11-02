@@ -7,7 +7,7 @@ app版：https://github.com/mhbseal/blog-react-native
 
 后端：express + co + mongoose + ...  
 前端：react + redux + react-router + ...  
-线上地址：http://mhbseal.com  
+~~线上地址：http://mhbseal.com~~~  
 app线上下载地址：https://pan.baidu.com/s/1skP4nu9
 
 ### 准备
